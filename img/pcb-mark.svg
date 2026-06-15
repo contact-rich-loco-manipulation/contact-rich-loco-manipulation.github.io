@@ -4,7 +4,7 @@
   <defs>
     <linearGradient id="bg" x1="8" y1="8" x2="88" y2="88" gradientUnits="userSpaceOnUse">
       <stop offset="0" stop-color="#172033"/>
-      <stop offset="1" stop-color="#466f66"/>
+      <stop offset="1" stop-color="#2f5f98"/>
     </linearGradient>
     <linearGradient id="accent" x1="20" y1="20" x2="76" y2="76" gradientUnits="userSpaceOnUse">
       <stop offset="0" stop-color="#c4895d"/>
