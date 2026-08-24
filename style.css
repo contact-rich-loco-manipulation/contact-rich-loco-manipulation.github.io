@@ -261,6 +261,10 @@ a:hover {
 	align-items: center;
 }
 
+.page-hero .hero-grid.hero-grid-single {
+	grid-template-columns: minmax(0, 1fr);
+}
+
 .hero:not(.page-hero) .hero-grid {
 	grid-template-columns: 1fr;
 }
@@ -461,39 +465,6 @@ a:hover {
 
 .portrait-strip-all-speakers img {
 	grid-column: span 1;
-}
-
-.stat-grid {
-	display: grid;
-	grid-template-columns: repeat(2, minmax(0, 1fr));
-	gap: 0.75rem;
-	margin-top: 1.2rem;
-}
-
-.stat-card {
-	padding: 1rem;
-	border-radius: 18px;
-	background: var(--white);
-	border: 1px solid rgba(16, 32, 51, 0.08);
-}
-
-.stat-value {
-	font-family: "Sora", sans-serif;
-	font-size: 1.8rem;
-	font-weight: 700;
-	line-height: 1;
-	color: var(--ink-950);
-}
-
-.stat-label {
-	display: block;
-	margin-top: 0.35rem;
-	font-family: "IBM Plex Mono", monospace;
-	font-size: 0.74rem;
-	text-transform: uppercase;
-	letter-spacing: 0.08em;
-	color: var(--ink-700);
-	line-height: 1.45;
 }
 
 .section {
@@ -806,6 +777,25 @@ a:hover {
 	text-wrap: balance;
 }
 
+.profile-link {
+	color: inherit;
+	text-decoration: none;
+}
+
+.profile-link::after {
+	content: "\2197";
+	display: inline-block;
+	margin-left: 0.35rem;
+	font-family: "IBM Plex Mono", monospace;
+	font-size: 0.7em;
+	color: var(--copper-500);
+	transition: transform 0.2s ease;
+}
+
+.profile-link:hover::after {
+	transform: translate(2px, -2px);
+}
+
 .speaker-affiliation,
 .person-meta,
 .tiny-copy {
@@ -946,7 +936,7 @@ a:hover {
 
 .organizer-grid {
 	display: grid;
-	grid-template-columns: repeat(3, minmax(0, 1fr));
+	grid-template-columns: repeat(4, minmax(0, 1fr));
 	gap: 1rem;
 }
 
@@ -970,6 +960,15 @@ a:hover {
 	height: 100%;
 	object-fit: cover;
 	object-position: center top;
+}
+
+.person-avatar--uncropped {
+	background: #d7ddda;
+}
+
+.person-avatar--uncropped img {
+	object-fit: contain;
+	object-position: center;
 }
 
 .avatar-initials {
@@ -1441,10 +1440,6 @@ a:hover {
 		font-size: 1.28rem;
 	}
 
-	.stat-grid {
-		grid-template-columns: 1fr;
-	}
-
 	.person-avatar {
 		width: 100%;
 		height: auto;
@@ -1495,7 +1490,4 @@ a:hover {
 		font-size: clamp(1.55rem, 8vw, 1.95rem);
 	}
 
-	.stat-value {
-		font-size: 1.55rem;
-	}
 }
