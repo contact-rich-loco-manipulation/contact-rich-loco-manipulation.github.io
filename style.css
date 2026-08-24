@@ -1163,10 +1163,6 @@ a:hover {
 		grid-template-columns: minmax(0, 1.08fr) minmax(280px, 0.92fr);
 	}
 
-	.speaker-grid {
-		grid-template-columns: repeat(3, minmax(0, 1fr));
-	}
-
 	.organizer-grid {
 		grid-template-columns: repeat(2, minmax(0, 1fr));
 	}
