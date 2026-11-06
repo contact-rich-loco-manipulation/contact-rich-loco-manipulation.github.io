@@ -13,7 +13,7 @@
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 	<link rel="stylesheet" href="style.css">
 </head>
-<body>
+<body class="home-page">
 	<nav class="navbar navbar-expand-lg fixed-top site-nav">
 		<div class="site-shell">
 			<a class="navbar-brand brand-lockup" href="index.html">
@@ -24,12 +24,13 @@
 				</span>
 			</a>
 			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#siteNav" aria-controls="siteNav" aria-expanded="false" aria-label="Toggle navigation">
-				<i class="fas fa-bars"></i>
+				<span>Menu</span>
 			</button>
 			<div class="collapse navbar-collapse" id="siteNav">
 				<ul class="navbar-nav ml-auto align-items-lg-center">
 					<li class="nav-item"><a class="nav-link active" href="index.html">Home</a></li>
 					<li class="nav-item"><a class="nav-link" href="program/index.html">Program</a></li>
+					<li class="nav-item"><a class="nav-link" href="program/index.html#accepted-papers" data-papers-nav>Papers</a></li>
 					<li class="nav-item"><a class="nav-link" href="call/index.html">Call for Papers</a></li>
 					<li class="nav-item"><a class="nav-link" href="attend/index.html">Attend</a></li>
 					<li class="nav-item"><a class="nav-link" href="organizers/index.html">Organizers</a></li>
@@ -44,28 +45,21 @@
 		</video>
 		<div class="site-shell hero-inner">
 			<div class="hero-grid">
-				<div class="hero-copy" data-reveal>
+				<div class="hero-copy">
 					<p class="eyebrow">CoRL 2026 Workshop</p>
 					<h1 class="hero-title">Open Problems in Contact-Rich Loco-Manipulation</h1>
-					<p class="hero-summary">
-						A half-day workshop focused on how robots decide, sense, and control contact while moving through the world, spanning prehensile and non-prehensile skills.
-					</p>
-					<div class="hero-meta">
-						<span class="meta-chip"><i class="fa-solid fa-location-dot"></i> Austin, Texas, USA</span>
-						<span class="meta-chip"><i class="fa-regular fa-calendar"></i> November 12, 2026</span>
-						<span class="meta-chip"><i class="fa-regular fa-clock"></i> 2:00&ndash;6:00 PM</span>
-						<span class="meta-chip"><i class="fa-solid fa-people-arrows"></i> Afternoon in-person workshop</span>
-						<span class="meta-chip"><i class="fa-solid fa-file-lines"></i> <span>Author notification: <strong>October 31, 2026</strong></span></span>
-						<span class="meta-chip"><i class="fa-solid fa-file-circle-check"></i> <span>Camera-ready deadline: <strong>November 7, 2026 (AoE)</strong></span></span>
-					</div>
-					<p class="hero-summary"><strong>Review schedule update.</strong> Due to the high volume of submissions, we are allowing additional time to complete the review process. Author notifications have been moved to <strong>October 31, 2026</strong>. The camera-ready deadline is now <strong>November 7, 2026 (AoE)</strong>, giving authors one week to revise their papers. Thank you for your patience.</p>
+					<p class="hero-summary">How should robots choose, sense, and control contact while moving through the world?</p>
+					<p class="event-details"><span>November 12, 2026</span><span>2:00&ndash;6:00 PM CST</span></p>
+					<p class="event-venue">JW Marriott Austin <span>&middot; Room 205</span></p>
 					<div class="button-row">
-						<a class="button-link light" href="https://openreview.net/group?id=robot-learning.org/CoRL/2026/Workshop/Contact-Rich_Loco-Manipulation" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-arrow-up-right-from-square"></i> Submit on OpenReview</a>
+						<a class="button-link light" href="program/index.html#schedule">View program </a>
+						<a class="button-link secondary" href="program/index.html#accepted-papers">Accepted papers</a>
 					</div>
+					<a class="hero-text-link" href="workshop.ics" download>Add to calendar</a>
 				</div>
 			</div>
 		</div>
-		</header>
+	</header>
 
 	<main>
 		<section class="section decorated-theme-section">
@@ -109,7 +103,7 @@
 						<div class="card-icon"><i class="fa-solid fa-person-running"></i></div>
 						<h3 class="card-title">Whole-body coordination under contact</h3>
 						<p class="card-text">
-							Contacts involving a robot's arms, legs, torso, or base&mdash;as well as objects and the environment&mdash;affect balance, mobility, force regulation, and task success.
+							Contacts involving a robot's arms, legs, torso, or base, as well as objects and the environment, affect balance, mobility, force regulation, and task success.
 						</p>
 					</article>
 					<article class="info-card" data-reveal>
@@ -138,7 +132,7 @@
 		</section>
 
 		<section class="section decorated-speaker-section" id="speakers">
-			<img class="speaker-section-figure" src="decoration/spot-chair-ground.png" alt="" aria-hidden="true">
+
 			<div class="site-shell">
 				<div class="section-header">
 					<div>
@@ -151,7 +145,6 @@
 						<div class="speaker-body">
 							<h3 class="speaker-name"><a class="profile-link" href="https://web.engr.oregonstate.edu/~afern/" target="_blank" rel="noopener noreferrer">Alan Fern</a></h3>
 							<p class="speaker-affiliation">Oregon State University</p>
-							<p class="speaker-talk">Robot learning, planning, reinforcement learning, and decision making under uncertainty.</p>
 						</div>
 					</article>
 
@@ -160,7 +153,6 @@
 						<div class="speaker-body">
 							<h3 class="speaker-name"><a class="profile-link" href="https://pangtao.xyz/" target="_blank" rel="noopener noreferrer">Tao Pang</a></h3>
 							<p class="speaker-affiliation">Robotics and AI Institute</p>
-							<p class="speaker-talk">Contact-rich manipulation, planning, control, and robust physical interaction.</p>
 						</div>
 					</article>
 
@@ -170,7 +162,6 @@
 						<div class="speaker-body">
 							<h3 class="speaker-name"><a class="profile-link" href="https://people.csail.mit.edu/pulkitag/" target="_blank" rel="noopener noreferrer">Pulkit Agrawal</a></h3>
 							<p class="speaker-affiliation">MIT</p>
-							<p class="speaker-talk">Robot learning, legged mobility, manipulation, and sim-to-real transfer.</p>
 						</div>
 					</article>
 
@@ -178,21 +169,21 @@
 						<img class="speaker-photo" src="img/speakers/emo-todorov-supplied.png" alt="Emo Todorov">
 						<div class="speaker-body">
 							<h3 class="speaker-name"><a class="profile-link" href="https://roboti.us/lab/index.html" target="_blank" rel="noopener noreferrer">Emo Todorov</a></h3>
-							<p class="speaker-affiliation">Roboti and University of Washington</p>
-							<p class="speaker-talk">Optimal control, physics simulation, contact dynamics, and robot movement.</p>
+							<p class="speaker-affiliation">University of Washington and Roboti</p>
 						</div>
 					</article>
 				</div>
 			</div>
 		</section>
 
-		<section class="section section-alt decorated-format-section">
+		<section class="section section-alt decorated-format-section" id="workshop-format">
 			<img class="format-section-figure" src="decoration/manipulator-ground.png" alt="" aria-hidden="true">
 			<div class="site-shell">
 				<div class="section-header">
 					<div>
 						<h2 class="section-title">Workshop Format</h2>
 					</div>
+					<a class="text-link" href="program/index.html#schedule">Full schedule <span aria-hidden="true">&rarr;</span></a>
 				</div>
 				<div class="card-grid">
 					<article class="detail-card" data-reveal>
@@ -203,7 +194,7 @@
 					<article class="detail-card" data-reveal>
 						<div class="card-icon"><i class="fa-regular fa-images"></i></div>
 						<h3 class="card-title">Lightning talks and posters</h3>
-						<p class="card-text">Accepted workshop papers will be introduced through short spotlights and then discussed in an interactive poster session.</p>
+						<p class="card-text">Four selected papers will be introduced through five-minute spotlight talks. Accepted workshop papers will be discussed in an interactive poster session.</p>
 					</article>
 					<article class="detail-card" data-reveal>
 						<div class="card-icon"><i class="fa-solid fa-people-group"></i></div>
@@ -214,45 +205,17 @@
 			</div>
 		</section>
 
-		<section class="section">
-			<div class="site-shell">
-				<div class="section-header">
-					<div>
-						<h2 class="section-title">Call for Papers</h2>
-					</div>
+		<section class="section venue-section" id="join-us">
+			<div class="site-shell venue-invitation">
+				<div class="venue-invitation-copy">
+					<p class="section-kicker">Join us in Austin</p>
+					<h2 class="section-title">See you in Room 205.</h2>
+					<p>JW Marriott Austin &middot; November 12 &middot; 2:00&ndash;6:00 PM CST</p>
+					<p class="venue-countdown" data-workshop-countdown hidden></p>
 				</div>
-				<div class="split-grid">
-					<div class="detail-card" data-reveal>
-						<h3 class="card-title">Short workshop papers</h3>
-						<p class="card-text">
-							We invite 2&ndash;4 page workshop papers on contact-rich loco-manipulation, including new results, early-stage ideas, benchmark proposals, position papers, open problems, negative results, and failure analyses.
-						</p>
-						<p class="card-text"><strong>Review schedule update.</strong> Due to the high volume of submissions, we are allowing additional time to complete the review process. Author notifications have been moved to <strong>October 31, 2026</strong>. The camera-ready deadline is now <strong>November 7, 2026 (AoE)</strong>, giving authors one week to revise their papers. Thank you for your patience.</p>
-						<p class="card-text"><strong>Appendices are allowed.</strong> We generally expect submissions to be 2&ndash;4 pages, excluding references, without an appendix. If an appendix is particularly important for your work, you may include one. We encourage keeping the main paper self-contained within the four-page limit.</p>
-						<p class="card-text">Submissions will undergo single-blind review.</p>
-						<p class="card-text"><strong>This workshop is non-archival.</strong> Accepted papers will be posted on this website.</p>
-						<div class="pill-row" style="margin-top: 1rem;">
-							<span class="topic-pill">Prehensile and non-prehensile skills</span>
-							<span class="topic-pill">Whole-body control</span>
-							<span class="topic-pill">Contact-mode representations</span>
-							<span class="topic-pill">Multimodal sensing</span>
-							<span class="topic-pill">Sim-to-real transfer</span>
-						</div>
-						<div class="button-row">
-							<a class="button-link primary" href="https://openreview.net/group?id=robot-learning.org/CoRL/2026/Workshop/Contact-Rich_Loco-Manipulation" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-arrow-up-right-from-square"></i> Submit on OpenReview</a>
-							<a class="button-link light" href="call/index.html"><i class="fa-solid fa-file-lines"></i> Submission details</a>
-						</div>
-					</div>
-					<div class="callout-card" data-reveal>
-						<h3 class="card-title" style="color: rgba(255,255,255,0.72);">Audience</h3>
-						<p class="card-text">
-							Researchers across robot learning, locomotion, manipulation, control, perception, planning, and benchmarking are welcome. We especially encourage late-stage PhD students, postdoctoral researchers, and others early in their careers to participate and present their work.
-						</p>
-						<div class="button-row">
-							<a class="button-link secondary" href="attend/index.html"><i class="fa-solid fa-users"></i> Audience and venue</a>
-							<a class="button-link secondary" href="organizers/index.html"><i class="fa-solid fa-address-card"></i> Meet organizers</a>
-						</div>
-					</div>
+				<div class="venue-invitation-actions">
+					<a class="button-link primary" href="attend/index.html">Plan your visit </a>
+					<a class="hero-text-link" href="workshop.ics" download>Add to calendar</a>
 				</div>
 			</div>
 		</section>
@@ -260,7 +223,7 @@
 
 	<footer class="site-footer">
 		<div class="site-shell footer-inner">
-			<p class="footer-note">Our CoRL 2026 workshop will be held from 2:00&ndash;6:00 PM at JW Marriott Austin on November 12, 2026.</p>
+			<p class="footer-note">Our CoRL 2026 workshop will be held from 2:00&ndash;6:00 PM in Room 205 at JW Marriott Austin on November 12, 2026.</p>
 			<div class="person-links">
 				<a class="micro-link" href="program/index.html">Program</a>
 				<a class="micro-link" href="call/index.html">Call for papers</a>

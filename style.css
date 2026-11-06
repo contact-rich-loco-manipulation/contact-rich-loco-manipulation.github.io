@@ -14,8 +14,8 @@
 	--copper-400: #c4895d;
 	--sky-100: #dceaf7;
 	--white: #ffffff;
-	--shadow-soft: 0 18px 45px rgba(8, 17, 29, 0.09);
-	--shadow-strong: 0 28px 70px rgba(8, 17, 29, 0.18);
+	--shadow-soft: 0 6px 24px rgba(8, 17, 29, 0.045);
+	--shadow-strong: 0 14px 40px rgba(8, 17, 29, 0.1);
 	--radius-lg: 28px;
 	--radius-md: 20px;
 	--radius-sm: 14px;
@@ -36,10 +36,7 @@ html {
 body {
 	margin: 0;
 	font-family: "IBM Plex Sans", sans-serif;
-	background:
-		linear-gradient(135deg, rgba(47, 95, 152, 0.13), transparent 26%),
-		linear-gradient(225deg, rgba(166, 109, 67, 0.12), transparent 28%),
-		linear-gradient(180deg, #f4f2ec 0%, #fcfbf8 36%, #eee9df 100%);
+	background: #faf9f6;
 	color: var(--ink-900);
 	line-height: 1.65;
 	overflow-x: hidden;
@@ -144,7 +141,7 @@ a:hover {
 	text-transform: uppercase;
 	color: var(--ink-700);
 	padding: 0.75rem 0.9rem !important;
-	border-radius: 999px;
+	border-radius: 8px;
 	min-height: 44px;
 	display: inline-flex;
 	align-items: center;
@@ -347,7 +344,7 @@ a:hover {
 	align-items: center;
 	gap: 0.55rem;
 	padding: 0.55rem 0.8rem;
-	border-radius: 999px;
+	border-radius: 10px;
 	background: rgba(255, 255, 255, 0.12);
 	border: 1px solid rgba(255, 255, 255, 0.14);
 	color: rgba(255, 255, 255, 0.9);
@@ -371,7 +368,7 @@ a:hover {
 	justify-content: center;
 	gap: 0.55rem;
 	padding: 0.92rem 1.25rem;
-	border-radius: 999px;
+	border-radius: 10px;
 	font-family: "IBM Plex Mono", monospace;
 	font-size: 0.78rem;
 	font-weight: 500;
@@ -389,9 +386,9 @@ a:hover {
 }
 
 .button-link.primary {
-	background: linear-gradient(135deg, var(--copper-500), var(--copper-400));
+	background: var(--blue-500);
 	color: var(--white);
-	box-shadow: 0 18px 34px rgba(166, 109, 67, 0.26);
+	box-shadow: none;
 }
 
 .button-link.secondary {
@@ -472,9 +469,7 @@ a:hover {
 }
 
 .section.section-alt {
-	background: rgba(255, 255, 255, 0.58);
-	border-top: 1px solid rgba(16, 32, 51, 0.05);
-	border-bottom: 1px solid rgba(16, 32, 51, 0.05);
+	background: transparent;
 }
 
 .decorated-theme-section,
@@ -783,7 +778,7 @@ a:hover {
 }
 
 .profile-link::after {
-	content: "\2197";
+	content: none;
 	display: inline-block;
 	margin-left: 0.35rem;
 	font-family: "IBM Plex Mono", monospace;
@@ -823,6 +818,53 @@ a:hover {
 	font-size: 0.7rem;
 	text-transform: uppercase;
 	letter-spacing: 0.06em;
+}
+
+.paper-list {
+	margin: 0;
+	padding: 0 clamp(1rem, 3vw, 2rem) 0 clamp(3rem, 6vw, 4rem);
+	list-style-type: decimal;
+	background: rgba(255, 255, 255, 0.9);
+	border: 1px solid rgba(16, 32, 51, 0.08);
+	border-radius: var(--radius-md);
+	box-shadow: var(--shadow-soft);
+}
+
+#accepted-papers {
+	scroll-margin-top: calc(var(--nav-height) + 1rem);
+}
+
+.paper-item {
+	padding: 1.35rem 0 1.35rem 0.4rem;
+	border-bottom: 1px solid rgba(16, 32, 51, 0.08);
+}
+
+.paper-item:last-child {
+	border-bottom: 0;
+}
+
+.paper-item::marker {
+	font-family: "IBM Plex Mono", monospace;
+	font-size: 0.95rem;
+	font-weight: 500;
+	color: var(--blue-500);
+}
+
+.paper-title {
+	margin: 0;
+	font-family: "Sora", sans-serif;
+	font-size: clamp(1rem, 1.5vw, 1.12rem);
+	line-height: 1.5;
+	color: var(--ink-950);
+	overflow-wrap: anywhere;
+}
+
+.paper-authors {
+	margin: 0.45rem 0 0;
+	color: var(--ink-700);
+	font-size: 0.95rem;
+	line-height: 1.7;
+	overflow-wrap: anywhere;
 }
 
 .schedule-table {
@@ -892,6 +934,81 @@ a:hover {
 }
 
 .schedule-event-note {
+	color: var(--ink-700);
+	overflow-wrap: anywhere;
+}
+
+.schedule-student-group {
+	background: rgba(220, 234, 247, 0.2);
+	box-shadow: inset 3px 0 var(--blue-500);
+}
+
+.schedule-student-group .schedule-row {
+	background: transparent;
+}
+
+.schedule-student-group .schedule-student-heading {
+	background: rgba(47, 95, 152, 0.07);
+}
+
+.schedule-student-heading .schedule-event-title {
+	margin: 0;
+	font-size: 1.05rem;
+}
+
+.schedule-student-talk {
+	align-items: start;
+	border-top: 0;
+	padding-top: 1.15rem;
+	padding-bottom: 1.15rem;
+}
+
+.schedule-student-talk + .schedule-student-talk {
+	border-top: 1px solid rgba(16, 32, 51, 0.06);
+}
+
+.student-speaker-details {
+	display: grid;
+	grid-template-columns: 1.9rem minmax(0, 1fr);
+	gap: 0.8rem;
+	align-items: start;
+}
+
+.student-speaker-number {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 1.9rem;
+	height: 1.9rem;
+	border: 1px solid rgba(47, 95, 152, 0.18);
+	border-radius: 50%;
+	background: var(--white);
+	font-family: "IBM Plex Mono", monospace;
+	font-size: 0.78rem;
+	font-weight: 500;
+	color: var(--blue-500);
+}
+
+.student-speaker-header {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	gap: 0.35rem 0.65rem;
+	min-height: 1.9rem;
+}
+
+.student-speaker-name {
+	margin: 0;
+	font-family: "Sora", sans-serif;
+	font-size: 0.98rem;
+	line-height: 1.4;
+	color: var(--ink-950);
+}
+
+.student-speaker-paper {
+	margin: 0.35rem 0 0;
+	font-size: 0.95rem;
+	line-height: 1.55;
 	color: var(--ink-700);
 	overflow-wrap: anywhere;
 }
@@ -1404,6 +1521,10 @@ a:hover {
 		grid-column: 1 / -1;
 	}
 
+	.schedule-student-talk {
+		row-gap: 0.8rem;
+	}
+
 	.organizer-card > div:not(.person-avatar) {
 		padding: 1rem;
 	}
@@ -1516,4 +1637,1049 @@ a:hover {
 		font-size: clamp(1.55rem, 8vw, 1.95rem);
 	}
 
+}
+
+/* A compact event header and practical navigation. */
+body {
+	padding-top: var(--nav-height);
+}
+
+.hero {
+	margin-top: 0;
+	padding: 4rem 0;
+}
+
+.page-hero {
+	padding: 2.8rem 0;
+}
+
+.page-title {
+	max-width: 26ch;
+	font-size: clamp(2rem, 3.4vw, 3rem);
+	line-height: 1.15;
+}
+
+.home-hero {
+	min-height: 660px;
+}
+
+.event-details {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 0.35rem 1.3rem;
+	margin: 1.6rem 0 0;
+	color: var(--white);
+	font-size: 1rem;
+}
+
+.event-venue {
+	margin: 0.4rem 0 0;
+	color: rgba(255, 255, 255, 0.85);
+	font-size: 1rem;
+}
+
+.event-venue span {
+	color: var(--white);
+	font-weight: 600;
+}
+
+.hero-text-link {
+	display: inline-flex;
+	align-items: center;
+	gap: 0.5rem;
+	margin-top: 1.2rem;
+	color: rgba(255, 255, 255, 0.85);
+	font-size: 0.9rem;
+}
+
+.hero-text-link:hover {
+	color: var(--white);
+}
+
+.overview-layout, .visit-layout {
+	display: grid;
+	grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
+	gap: clamp(2rem, 6vw, 5rem);
+}
+
+.overview-layout .section-title {
+	max-width: 17ch;
+	line-height: 1.2;
+}
+
+.copy-stack {
+	font-size: 1.05rem;
+}
+
+.speaker-photo {
+	aspect-ratio: 1;
+}
+
+.visit-banner {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	justify-content: space-between;
+	gap: 1.5rem;
+	padding: 2.2rem;
+	border: 1px solid var(--sand-200);
+	border-radius: var(--radius-md);
+	background: var(--white);
+}
+
+.visit-banner p:last-child {
+	margin: 1rem 0 0;
+	color: var(--ink-700);
+}
+
+.text-link {
+	display: inline-flex;
+	align-items: center;
+	gap: 0.5rem;
+	padding: 0;
+	border: 0;
+	background: transparent;
+	color: var(--blue-500);
+	font: inherit;
+	font-weight: 500;
+	cursor: pointer;
+}
+
+.text-link:hover {
+	color: var(--ink-950);
+}
+
+.venue-details {
+	margin: 1.8rem 0 0;
+}
+
+.venue-details > div {
+	display: grid;
+	grid-template-columns: 80px minmax(0, 1fr);
+	gap: 1rem;
+	padding: 0.9rem 0;
+	border-bottom: 1px solid var(--sand-100);
+}
+
+.venue-details dt {
+	color: var(--ink-700);
+	font-weight: 400;
+}
+
+.venue-details dd {
+	margin: 0;
+	color: var(--ink-950);
+	font-weight: 500;
+}
+
+.visit-info {
+	align-self: start;
+	padding: 2rem;
+}
+
+.visit-links {
+	display: grid;
+	gap: 1rem;
+	margin-top: 1.5rem;
+	padding-top: 1.5rem;
+	border-top: 1px solid var(--sand-100);
+}
+
+.schedule-actions {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 0.8rem 1.5rem;
+	margin: 0 0 1.3rem;
+	font-size: 0.9rem;
+}
+
+#schedule, #speakers {
+	scroll-margin-top: calc(var(--nav-height) + 1rem);
+}
+
+.paper-search {
+	max-width: 620px;
+	margin-bottom: 1.7rem;
+}
+
+.paper-search label {
+	display: block;
+	margin-bottom: 0.5rem;
+	color: var(--ink-700);
+	font-size: 0.9rem;
+	font-weight: 500;
+}
+
+.paper-search-field {
+	display: flex;
+	align-items: center;
+	gap: 0.8rem;
+	min-height: 50px;
+	padding: 0.7rem 1rem;
+	border: 1px solid var(--sand-200);
+	border-radius: 10px;
+	background: var(--white);
+	color: var(--ink-600);
+}
+
+.paper-search-field:focus-within {
+	border-color: var(--blue-500);
+	box-shadow: 0 0 0 3px rgba(47, 95, 152, 0.12);
+}
+
+.paper-search input {
+	width: 100%;
+	min-width: 0;
+	padding: 0;
+	border: 0;
+	outline: none;
+	background: transparent;
+	color: var(--ink-950);
+	font: inherit;
+}
+
+.paper-search-status {
+	margin: 0.65rem 0 0;
+	font-size: 0.9rem;
+	color: var(--ink-700);
+}
+
+.author-checklist {
+	max-width: 840px;
+	padding-left: 1.25rem;
+}
+
+.author-checklist li {
+	padding: 0 0 1rem 0.4rem;
+	color: var(--ink-700);
+}
+
+.author-checklist strong {
+	color: var(--ink-950);
+}
+
+
+
+.print-heading {
+	display: none;
+}
+
+[hidden] {
+	display: none !important;
+}
+
+:focus-visible {
+	outline: 3px solid var(--blue-400);
+	outline-offset: 4px;
+}
+
+@media (max-width: 991px) {
+	.site-nav .brand-lockup {
+		flex: 1 1 0%;
+		max-width: calc(100% - 3.5rem);
+	}
+
+	.brand-title {
+		white-space: normal;
+		line-height: 1.2;
+	}
+
+	.home-hero {
+		min-height: 580px;
+	}
+
+	.overview-layout, .visit-layout {
+		grid-template-columns: 1fr;
+		gap: 1.6rem;
+	}
+
+}
+
+@media (max-width: 767px) {
+	.hero, .page-hero {
+		padding: 2.5rem 0;
+	}
+
+	.home-hero {
+		min-height: 0;
+		padding: 3rem 0;
+	}
+
+	.visit-banner, .visit-info {
+		padding: 1.3rem;
+	}
+
+	.event-details {
+		font-size: 0.95rem;
+	}
+
+}
+
+@media (prefers-reduced-motion: reduce) {
+	html {
+		scroll-behavior: auto;
+	}
+
+	*, *::before, *::after {
+		transition: none !important;
+		animation: none !important;
+	}
+
+}
+
+@media print {
+	@page {
+		size: A4;
+		margin: 12mm;
+	}
+
+	body.program-page {
+		padding: 0;
+		background: white;
+		color: black;
+		font-size: 10pt;
+	}
+
+	.program-page .site-nav, .program-page .hero, .program-page .site-footer, .program-page main > section:not(#schedule), .program-page .schedule-actions {
+		display: none !important;
+	}
+
+	.program-page .print-heading {
+		display: block;
+		margin-bottom: 1rem;
+	}
+
+	.program-page .print-heading h1 {
+		font-size: 18pt;
+		line-height: 1.25;
+	}
+
+	.program-page #schedule {
+		padding: 0;
+		border: 0;
+		background: white;
+	}
+
+	.program-page .site-shell {
+		width: 100%;
+	}
+
+	.program-page #schedule .section-header {
+		display: none;
+	}
+
+	.program-page .schedule-table {
+		border-radius: 0;
+		box-shadow: none;
+	}
+
+	.program-page .schedule-table-head, .program-page .schedule-row {
+		display: grid;
+		grid-template-columns: 112px 55px minmax(0, 1fr);
+		gap: 0.5rem;
+		padding: 0.5rem;
+		background: white !important;
+		color: black;
+	}
+
+	.program-page .schedule-table-head {
+		font-size: 7.5pt;
+		letter-spacing: 0.02em;
+	}
+
+	.program-page .schedule-row {
+		break-inside: avoid;
+	}
+
+	.program-page .schedule-event {
+		grid-column: auto;
+	}
+
+	.program-page .schedule-event-title, .program-page .student-speaker-name {
+		font-size: 10pt;
+	}
+
+	.program-page .student-speaker-paper, .program-page .schedule-event-note {
+		font-size: 9pt;
+	}
+
+	.program-page .schedule-student-group {
+		background: white;
+		box-shadow: none;
+	}
+
+	.program-page .schedule-time, .program-page .schedule-duration {
+		font-size: 8pt;
+		letter-spacing: 0;
+		color: black;
+	}
+
+	.program-page .schedule-duration {
+		background: transparent;
+		padding: 0;
+	}
+
+	.program-page .student-speaker-details {
+		grid-template-columns: 1.2rem minmax(0, 1fr);
+		gap: 0.4rem;
+	}
+
+	.program-page .student-speaker-number {
+		width: 1.2rem;
+		height: 1.2rem;
+		border: 0;
+		color: black;
+	}
+
+	.program-page .student-speaker-header {
+		min-height: 1.2rem;
+	}
+
+}
+
+/* Preserve the call and its announcements as a visible workshop record. */
+#call-for-papers,
+#submission-guidelines,
+#announcements,
+#accepted-authors {
+	scroll-margin-top: calc(var(--nav-height) + 1rem);
+}
+
+.call-history-link {
+	margin: 1.3rem 0 0;
+}
+
+.call-venue {
+	align-self: start;
+	padding: 2rem;
+}
+
+.call-venue .section-kicker {
+	color: rgba(255, 255, 255, 0.72);
+}
+
+.call-venue .card-title {
+	font-size: clamp(1.6rem, 2.4vw, 2rem);
+	line-height: 1.2;
+}
+
+.announcement-list {
+	max-width: 1000px;
+	margin: 0.8rem 0 0 0.35rem;
+	padding: 0;
+	list-style: none;
+}
+
+.announcement-item {
+	position: relative;
+	display: grid;
+	grid-template-columns: 165px minmax(0, 1fr);
+	gap: 1.8rem;
+	padding: 0 0 2rem 1.6rem;
+	border-left: 1px solid var(--sand-200);
+}
+
+.announcement-item:last-child {
+	padding-bottom: 0;
+}
+
+.announcement-item::before {
+	content: "";
+	position: absolute;
+	top: 0.4rem;
+	left: -5px;
+	width: 9px;
+	height: 9px;
+	border: 1px solid var(--blue-500);
+	border-radius: 50%;
+	background: var(--white);
+}
+
+.announcement-date {
+	padding-top: 0.2rem;
+	font-family: "IBM Plex Mono", monospace;
+	font-size: 0.76rem;
+	color: var(--ink-700);
+}
+
+.announcement-copy h3 {
+	margin: 0 0 0.6rem;
+	font-family: "Sora", sans-serif;
+	font-size: 1.08rem;
+	line-height: 1.4;
+	color: var(--ink-950);
+}
+
+.announcement-copy p {
+	margin: 0;
+	color: var(--ink-700);
+}
+
+@media (max-width: 767px) {
+	.announcement-item {
+		grid-template-columns: minmax(0, 1fr);
+		gap: 0.4rem;
+		padding-left: 1.2rem;
+	}
+
+	.call-venue {
+		padding: 1.3rem;
+	}
+}
+
+@media (min-width: 992px) and (max-width: 1199px) {
+	.site-nav .nav-link {
+		padding: 0.7rem 0.55rem !important;
+		font-size: 0.72rem;
+		letter-spacing: 0.04em;
+	}
+
+	.brand-lockup {
+		gap: 0.65rem;
+	}
+
+	.brand-mark {
+		width: 42px;
+		height: 42px;
+	}
+
+	.brand-title {
+		font-size: 0.95rem;
+	}
+
+	.brand-overline {
+		font-size: 0.62rem;
+	}
+}
+
+/* Homepage composition; the workshop copy and original illustrations stay intact. */
+.home-page .section:not(.decorated-theme-section) {
+	padding: 5.5rem 0;
+}
+
+.home-page .home-hero {
+	min-height: 690px;
+	padding: 5rem 0;
+}
+
+.home-page .hero-title {
+	max-width: 23ch;
+	font-size: clamp(3rem, 5vw, 4.8rem);
+	letter-spacing: -0.04em;
+	line-height: 1.08;
+}
+
+.home-page .hero-summary {
+	max-width: 56ch;
+}
+
+/* Workshop Theme matches the deployed site, including its page gradient. */
+.home-page .decorated-theme-section {
+	background:
+		linear-gradient(135deg, rgba(47, 95, 152, 0.13), transparent 26%) 0 -690px / 100% 4220px no-repeat,
+		linear-gradient(225deg, rgba(166, 109, 67, 0.12), transparent 28%) 0 -690px / 100% 4220px no-repeat,
+		linear-gradient(180deg, #f4f2ec 0%, #fcfbf8 36%, #eee9df 100%) 0 -690px / 100% 4220px no-repeat;
+	border-bottom: 1px solid rgba(16, 32, 51, 0.05);
+}
+
+.home-page .decorated-theme-section .copy-stack {
+	font-size: 1rem;
+}
+
+/* Workshop Format sits on a soft tint, and the arm stands on its bottom edge. */
+.home-page .decorated-format-section {
+	background: #f3efe8;
+	border-top: 1px solid rgba(16, 32, 51, 0.06);
+	border-bottom: 1px solid rgba(16, 32, 51, 0.06);
+}
+
+.home-page .format-section-figure {
+	top: auto;
+	right: max(0.75rem, calc((80vw - var(--shell-width)) / 2 - 13rem));
+	bottom: -2px;
+	z-index: 0;
+	opacity: 0.2;
+	transform: none;
+}
+
+.home-page #workshop-format .detail-card {
+	background: var(--white);
+}
+
+/* Core Challenges and Workshop Format cards keep the deployed shadow. */
+.home-page .info-card,
+.home-page .detail-card {
+	box-shadow: 0 18px 45px rgba(8, 17, 29, 0.09);
+}
+
+.home-page .speaker-card {
+	border: 0;
+	border-radius: 0;
+	background: transparent;
+	box-shadow: none;
+}
+
+.home-page .speaker-photo {
+	border-radius: 18px;
+}
+
+.home-page .speaker-body {
+	padding: 1.2rem 0 0;
+}
+
+.venue-invitation {
+	position: relative;
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	justify-content: space-between;
+	gap: 2rem;
+	padding: clamp(1.7rem, 4vw, 3.5rem);
+	border-radius: 24px;
+	border: 1px solid var(--sand-200);
+	background: var(--white);
+	color: var(--ink-900);
+}
+
+.venue-invitation .section-kicker {
+	color: var(--blue-500);
+}
+
+.venue-invitation .section-title {
+	color: var(--ink-950);
+	line-height: 1.15;
+}
+
+.venue-invitation-copy > p:not(.section-kicker) {
+	margin: 1rem 0 0;
+	color: var(--ink-700);
+}
+
+[data-workshop-countdown] {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: baseline;
+	gap: 0.15rem 0.35rem;
+}
+
+.venue-invitation .venue-countdown {
+	margin-top: 1.25rem;
+	font-size: 1.05rem;
+	font-weight: 500;
+	color: var(--ink-950);
+}
+
+.countdown-part {
+	display: inline-flex;
+	flex-direction: column;
+	align-items: center;
+}
+
+.countdown-value,
+.countdown-colon {
+	font-family: "Sora", sans-serif;
+	font-weight: 700;
+	line-height: 1.1;
+	font-variant-numeric: tabular-nums;
+}
+
+.countdown-value {
+	min-width: 1.5em;
+	text-align: center;
+}
+
+.venue-countdown .countdown-value,
+.venue-countdown .countdown-colon {
+	font-size: 2rem;
+	color: var(--ink-950);
+}
+
+.countdown-colon {
+	opacity: 0.45;
+}
+
+.countdown-unit {
+	margin-top: 0.3rem;
+	font-family: "IBM Plex Sans", sans-serif;
+	font-size: 0.9rem;
+	font-weight: 400;
+	line-height: 1.2;
+	color: var(--ink-700);
+}
+
+.countdown-suffix {
+	margin-left: 0.5rem;
+	font-family: "IBM Plex Sans", sans-serif;
+	font-size: 1.05rem;
+	font-weight: 500;
+	color: var(--ink-700);
+}
+
+.journey-countdown {
+	justify-content: flex-end;
+}
+
+.venue-invitation-actions {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: 1rem;
+}
+
+.venue-invitation-actions .hero-text-link {
+	margin: 0;
+}
+
+/* Keep the call legible, with dates and navigation outside the title block. */
+.call-page .call-hero {
+	padding: 3.5rem 0;
+}
+
+.call-page .call-hero .hero-copy {
+	max-width: 960px;
+}
+
+.call-page .call-hero .page-title {
+	max-width: 28ch;
+	font-size: clamp(2.2rem, 3.6vw, 3.1rem);
+	letter-spacing: -0.025em;
+}
+
+.call-status {
+	margin: 1.5rem 0 0;
+	font-size: 0.9rem;
+	color: var(--sky-100);
+}
+
+.call-section-nav {
+	position: sticky;
+	top: var(--nav-height);
+	z-index: 100;
+	background: rgba(250, 248, 243, 0.98);
+	border-bottom: 1px solid var(--sand-200);
+}
+
+.call-section-nav .site-shell {
+	display: flex;
+	gap: 2rem;
+	overflow-x: auto;
+}
+
+.call-section-nav a {
+	flex: 0 0 auto;
+	padding: 1rem 0;
+	color: var(--ink-700);
+	font-size: 0.9rem;
+	font-weight: 500;
+	white-space: nowrap;
+}
+
+.call-section-nav a:hover {
+	color: var(--blue-500);
+}
+
+.call-page main > section {
+	scroll-margin-top: calc(var(--nav-height) + 5rem);
+}
+
+.call-page #announcements .section-header {
+	margin-bottom: 2.5rem;
+}
+
+.call-page .topic-card,
+.call-page .detail-card {
+	box-shadow: none;
+}
+
+.submission-layout {
+	display: grid;
+	grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr);
+	gap: 1.2rem;
+	align-items: start;
+}
+
+.submission-layout > .detail-card,
+.submission-side > .detail-card {
+	padding: 1.7rem;
+}
+
+.submission-side {
+	display: grid;
+	gap: 1.2rem;
+}
+
+.submission-layout .card-list li + li {
+	margin-top: 0.75rem;
+}
+
+.call-page #accepted-authors {
+	padding-top: 1rem;
+	padding-bottom: 3rem;
+}
+
+.call-page #accepted-authors > .site-shell {
+	padding: 1.7rem;
+	border-left: 3px solid var(--blue-500);
+	border-radius: 0 14px 14px 0;
+	background: rgba(220, 234, 247, 0.4);
+}
+
+.call-page #accepted-authors .section-title {
+	font-size: 1.4rem;
+}
+
+.call-page #accepted-authors .author-checklist {
+	max-width: none;
+	margin-bottom: 0;
+}
+
+.call-page #accepted-authors .tiny-copy {
+	margin-bottom: 0;
+}
+
+/* Calendar progress uses Austin's date and refreshes while the page is open. */
+.journey-panel {
+	padding: clamp(1.4rem, 3vw, 2.5rem);
+	border: 1px solid var(--sand-200);
+	border-radius: 22px;
+	background: rgba(255, 255, 255, 0.8);
+}
+
+.journey-header {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	justify-content: space-between;
+	gap: 1rem;
+}
+
+.journey-header .section-title {
+	font-size: clamp(1.7rem, 2.7vw, 2.3rem);
+	line-height: 1.2;
+}
+
+.journey-countdown-group {
+	text-align: right;
+}
+
+.journey-countdown {
+	margin: 0;
+	font-family: "Sora", sans-serif;
+	font-size: clamp(1.4rem, 2.4vw, 2rem);
+	font-weight: 700;
+	line-height: 1.3;
+	color: var(--blue-500);
+}
+
+.journey-caption {
+	margin: 0.4rem 0 0;
+	color: var(--ink-700);
+	font-size: 0.85rem;
+}
+
+.journey-live {
+	margin-top: 3.5rem;
+}
+
+.journey-track {
+	position: relative;
+	height: 8px;
+}
+
+.journey-progress {
+	appearance: none;
+	-webkit-appearance: none;
+	display: block;
+	width: 100%;
+	height: 8px;
+	border: 0;
+	border-radius: 99px;
+	background: var(--sand-100);
+	color: var(--blue-500);
+	overflow: hidden;
+}
+
+.journey-progress::-webkit-progress-bar {
+	border-radius: 99px;
+	background: var(--sand-100);
+}
+
+.journey-progress::-webkit-progress-value {
+	border-radius: 99px;
+	background: var(--blue-500);
+}
+
+.journey-progress::-moz-progress-bar {
+	border-radius: 99px;
+	background: var(--blue-500);
+}
+
+.journey-today {
+	position: absolute;
+	bottom: 1.1rem;
+	left: clamp(3.6rem, var(--journey-progress), calc(100% - 3.6rem));
+	transform: translateX(-50%);
+	font-family: "IBM Plex Mono", monospace;
+	font-size: 0.72rem;
+	white-space: nowrap;
+	color: var(--blue-500);
+}
+
+.journey-marker {
+	position: absolute;
+	top: -3px;
+	left: var(--journey-progress);
+	width: 14px;
+	height: 14px;
+	border: 3px solid var(--white);
+	border-radius: 50%;
+	background: var(--blue-500);
+	box-shadow: 0 0 0 1px var(--blue-500);
+	transform: translateX(-50%);
+}
+
+.journey-endpoints {
+	display: flex;
+	justify-content: space-between;
+	gap: 1rem;
+	margin-top: 0.7rem;
+	font-family: "IBM Plex Mono", monospace;
+	font-size: 0.7rem;
+	color: var(--ink-600);
+}
+
+.journey-milestones {
+	display: grid;
+	grid-template-columns: repeat(5, minmax(0, 1fr));
+	gap: 1.3rem;
+	margin: 2rem 0 0;
+	padding: 1.7rem 0 0;
+	border-top: 1px solid var(--sand-100);
+	list-style: none;
+}
+
+.journey-milestones li {
+	padding-top: 0.4rem;
+	border-top: 2px solid transparent;
+}
+
+.journey-milestones time {
+	font-family: "IBM Plex Mono", monospace;
+	font-size: 0.9rem;
+	font-weight: 500;
+	color: var(--ink-950);
+}
+
+.journey-milestones h3 {
+	margin: 0.6rem 0 0.4rem;
+	font-family: "IBM Plex Sans", sans-serif;
+	font-size: 0.95rem;
+	font-weight: 600;
+	line-height: 1.4;
+	color: var(--ink-950);
+}
+
+.journey-milestones p {
+	margin: 0;
+	font-size: 0.8rem;
+	color: var(--ink-700);
+}
+
+.journey-milestones .is-next {
+	border-top-color: var(--blue-500);
+}
+
+.milestone-status {
+	display: inline-block;
+	margin-top: 0.7rem;
+	font-family: "IBM Plex Mono", monospace;
+	font-size: 0.66rem;
+	color: var(--ink-600);
+}
+
+.is-next .milestone-status,
+.is-current .milestone-status {
+	color: var(--blue-500);
+}
+
+@media (max-width: 991px) {
+	.journey-milestones {
+		grid-template-columns: repeat(3, minmax(0, 1fr));
+	}
+}
+
+@media (max-width: 767px) {
+	.home-page .section:not(.decorated-theme-section) {
+		padding: 3.5rem 0;
+	}
+
+	.home-page .home-hero {
+		min-height: 0;
+		padding: 3rem 0;
+	}
+
+	.home-page .hero-title {
+		max-width: none;
+		font-size: clamp(2.25rem, 9.4vw, 3rem);
+	}
+
+	.submission-layout {
+		grid-template-columns: minmax(0, 1fr);
+	}
+
+	.venue-invitation-actions {
+		align-items: flex-start;
+	}
+
+	.call-page .call-hero {
+		padding: 2.5rem 0;
+	}
+
+	.call-section-nav .site-shell {
+		gap: 1.5rem;
+	}
+
+	.journey-countdown-group {
+		text-align: left;
+	}
+
+	.journey-milestones {
+		grid-template-columns: repeat(2, minmax(0, 1fr));
+		gap: 1.2rem;
+	}
+
+	.journey-milestones li:last-child {
+		grid-column: 1 / -1;
+	}
+}
+
+/* Plain controls, an editorial type hierarchy, and one warm page surface. */
+.site-nav .navbar-toggler {
+	min-width: 52px;
+	min-height: 42px;
+	padding: 0.65rem 0.7rem;
+	font-family: "IBM Plex Mono", monospace;
+	font-size: 0.72rem;
+	line-height: 1;
+	letter-spacing: 0.04em;
+}
+
+.venue-invitation .hero-text-link {
+	color: var(--blue-500);
+}
+
+.venue-invitation .hero-text-link:hover {
+	color: var(--ink-950);
+}
+
+@media (max-width: 991px) {
+	.site-nav .brand-lockup {
+		max-width: calc(100% - 4.3rem);
+	}
+}
+
+@media (max-width: 767px) {
+	.journey-countdown {
+		justify-content: flex-start;
+	}
 }

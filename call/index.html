@@ -3,17 +3,17 @@
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-	<meta name="description" content="Call for contributed papers for the CoRL 2026 workshop Open Problems in Contact-Rich Loco-Manipulation.">
+	<meta name="description" content="Call for papers, submission guidelines, and announcement history for the CoRL 2026 workshop Open Problems in Contact-Rich Loco-Manipulation.">
 	<title>Call for Papers | Contact-Rich Loco-Manipulation</title>
 	<link rel="icon" href="../img/pcb-mark.svg" type="image/svg+xml">
 	<link rel="preconnect" href="https://fonts.googleapis.com">
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 	<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&amp;family=IBM+Plex+Sans:wght@400;500;600&amp;family=Sora:wght@500;700&amp;display=swap" rel="stylesheet">
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
 	<link rel="stylesheet" href="../style.css">
 </head>
-<body>
+<body class="call-page">
 	<nav class="navbar navbar-expand-lg fixed-top site-nav">
 		<div class="site-shell">
 			<a class="navbar-brand brand-lockup" href="../index.html">
@@ -24,12 +24,13 @@
 				</span>
 			</a>
 			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#siteNav" aria-controls="siteNav" aria-expanded="false" aria-label="Toggle navigation">
-				<i class="fas fa-bars"></i>
+				<span>Menu</span>
 			</button>
 			<div class="collapse navbar-collapse" id="siteNav">
 				<ul class="navbar-nav ml-auto align-items-lg-center">
 					<li class="nav-item"><a class="nav-link" href="../index.html">Home</a></li>
 					<li class="nav-item"><a class="nav-link" href="../program/index.html">Program</a></li>
+					<li class="nav-item"><a class="nav-link" href="../program/index.html#accepted-papers" data-papers-nav>Papers</a></li>
 					<li class="nav-item"><a class="nav-link active" href="index.html">Call for Papers</a></li>
 					<li class="nav-item"><a class="nav-link" href="../attend/index.html">Attend</a></li>
 					<li class="nav-item"><a class="nav-link" href="../organizers/index.html">Organizers</a></li>
@@ -38,57 +39,137 @@
 		</div>
 	</nav>
 
-	<header class="hero page-hero">
+	<header class="hero page-hero call-hero">
 		<div class="site-shell hero-inner">
-			<div class="hero-grid">
-				<div class="hero-copy" data-reveal>
-					<p class="eyebrow">Call for Papers</p>
-					<h1 class="page-title">Contributed papers on contact-rich loco-manipulation</h1>
-					<p class="page-summary">
-						We invite short workshop papers on robot learning, perception, planning, control, and benchmarking for contact-rich loco-manipulation across prehensile and non-prehensile skills.
-					</p>
-					<div class="hero-meta">
-						<span class="meta-chip"><i class="fa-solid fa-file-lines"></i> 2&ndash;4 page workshop papers</span>
-						<span class="meta-chip"><i class="fa-regular fa-images"></i> Posters and selected spotlights</span>
-						<span class="meta-chip"><i class="fa-regular fa-calendar"></i> <span>Author notification: October 31, 2026</span></span>
-						<span class="meta-chip"><i class="fa-solid fa-file-circle-check"></i> <span>Camera-ready deadline: November 7, 2026 (AoE)</span></span>
-					</div>
-					<p class="page-summary"><strong>Review schedule update.</strong> Due to the high volume of submissions, we are allowing additional time to complete the review process. Author notifications have been moved to <strong>October 31, 2026</strong>. The camera-ready deadline is now <strong>November 7, 2026 (AoE)</strong>, giving authors one week to revise their papers. Thank you for your patience.</p>
-					<div class="button-row">
-						<a class="button-link light" href="https://openreview.net/group?id=robot-learning.org/CoRL/2026/Workshop/Contact-Rich_Loco-Manipulation" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-arrow-up-right-from-square"></i> Submit on OpenReview</a>
-					</div>
-				</div>
-				<aside class="hero-panel" data-reveal>
-					<h2 class="panel-title">Timeline</h2>
-					<div class="timeline" style="margin-top: 1rem;">
-						<div class="timeline-item">
-							<div class="timeline-date">OpenReview</div>
-							<div class="timeline-copy"><strong>Submission portal available</strong><span>Authors can access the workshop venue and submit through OpenReview.</span></div>
-						</div>
-						<div class="timeline-item">
-							<div class="timeline-date">October 15, 2026</div>
-							<div class="timeline-copy"><strong>Paper submission deadline (AoE)</strong><span>Extended from <s>October 8</s>. Short papers will be reviewed for relevance, clarity, novelty, and discussion value.</span></div>
-						</div>
-						<div class="timeline-item">
-							<div class="timeline-date">October 31, 2026</div>
-							<div class="timeline-copy"><strong>Author notification</strong><span>Decisions and reviews are released to authors on OpenReview.</span></div>
-						</div>
-						<div class="timeline-item">
-							<div class="timeline-date">November 7, 2026</div>
-							<div class="timeline-copy"><strong>Camera-ready deadline (AoE)</strong><span>Accepted authors have one week after notification to revise and upload the final version of their paper.</span></div>
-						</div>
-						<div class="timeline-item">
-							<div class="timeline-date">November 12, 2026</div>
-							<div class="timeline-copy"><strong>Workshop day &middot; 2:00&ndash;6:00 PM</strong><span>Accepted authors present through spotlights and posters at CoRL 2026.</span></div>
-						</div>
-					</div>
-				</aside>
+			<div class="hero-copy">
+				<p class="eyebrow">Call for Papers</p>
+				<h1 class="page-title">Contributed papers on contact-rich loco-manipulation</h1>
+				<p class="page-summary">We invited short workshop papers on robot learning, perception, planning, control, and benchmarking for contact-rich loco-manipulation across prehensile and non-prehensile skills.</p>
+				<p class="call-status">Submissions closed &middot; October 15, 2026 (AoE)</p>
+				<a class="hero-text-link" href="https://openreview.net/group?id=robot-learning.org/CoRL/2026/Workshop/Contact-Rich_Loco-Manipulation" target="_blank" rel="noopener noreferrer">OpenReview venue </a>
 			</div>
 		</div>
 	</header>
+	<nav class="call-section-nav" aria-label="Call for Papers sections">
+		<div class="site-shell">
+			<a href="#key-dates">Key dates</a>
+			<a href="#submission-guidelines">Guidelines</a>
+			<a href="#topics">Topics</a>
+			<a href="#announcements">Announcements</a>
+		</div>
+	</nav>
 
 	<main>
-		<section class="section">
+		<section class="section journey-section" id="key-dates" data-workshop-journey aria-labelledby="journey-heading">
+			<div class="site-shell">
+				<div class="journey-panel">
+					<div class="journey-header">
+						<div>
+							<p class="section-kicker">Key dates</p>
+							<h2 class="section-title" id="journey-heading">Road to the workshop</h2>
+						</div>
+						<div class="journey-countdown-group">
+							<p class="journey-countdown" data-workshop-countdown hidden></p>
+							<p class="journey-caption" data-journey-caption hidden></p>
+						</div>
+					</div>
+					<div class="journey-live" data-journey-live hidden>
+						<div class="journey-track">
+							<progress class="journey-progress" max="100" value="0" aria-label="Progress from the submission deadline to workshop day"></progress>
+							<span class="journey-today" data-journey-today hidden></span>
+							<span class="journey-marker" data-journey-marker aria-hidden="true" hidden></span>
+						</div>
+						<div class="journey-endpoints"><span>October 15</span><span>November 12, 2026</span></div>
+					</div>
+					<ol class="journey-milestones" role="list" aria-label="Workshop milestones">
+						<li data-milestone-date="2026-10-15" data-deadline-end="2026-10-16T12:00:00Z">
+							<time datetime="2026-10-15">Oct 15</time>
+							<h3>Submission deadline</h3>
+							<p>AoE &middot; Extended from October 8</p>
+							<span class="milestone-status" data-milestone-status hidden></span>
+						</li>
+						<li data-milestone-date="2026-10-31">
+							<time datetime="2026-10-31">Oct 31</time>
+							<h3>Author notification</h3>
+							<p>Decisions and reviews on OpenReview</p>
+							<span class="milestone-status" data-milestone-status hidden></span>
+						</li>
+						<li data-milestone-date="2026-11-07" data-deadline-end="2026-11-08T12:00:00Z">
+							<time datetime="2026-11-07">Nov 7</time>
+							<h3>Camera-ready deadline</h3>
+							<p>AoE &middot; Final revised papers due</p>
+							<span class="milestone-status" data-milestone-status hidden></span>
+						</li>
+						<li data-milestone-date="2026-11-09" data-range-end="2026-11-12">
+							<time datetime="2026-11-09">Nov 9&ndash;11</time>
+							<h3>Main conference</h3>
+							<p>CoRL 2026 &middot; Austin, Texas</p>
+							<span class="milestone-status" data-milestone-status hidden></span>
+						</li>
+						<li data-milestone-date="2026-11-12" data-deadline-end="2026-11-13T00:00:00Z" data-workshop-milestone>
+							<time datetime="2026-11-12">Nov 12</time>
+							<h3>Workshop day</h3>
+							<p>2:00&ndash;6:00 PM CST &middot; Room 205</p>
+							<span class="milestone-status" data-milestone-status hidden></span>
+						</li>
+					</ol>
+				</div>
+			</div>
+		</section>
+
+		<section class="section" id="accepted-authors">
+<div class="site-shell">
+<div class="section-header"><h2 class="section-title">Accepted paper checklist</h2></div>
+<ul class="author-checklist">
+<li><strong>Upload your camera-ready paper by November 7 (AoE).</strong> Use the workshop author portal on OpenReview.</li>
+<li><strong>Prepare for the poster session.</strong> Four selected papers also have five-minute student spotlight talks; see the program for the speaking order.</li>
+<li><strong>Meet us in Room 205, JW Marriott Austin.</strong> The workshop is on November 12, 2:00–6:00 PM CST.</li>
+</ul>
+<p class="tiny-copy">This workshop is non-archival. Submission format and review guidelines are preserved below for reference.</p>
+</div>
+</section>
+
+		<section class="section section-alt" id="submission-guidelines">
+			<div class="site-shell">
+				<div class="section-header"><h2 class="section-title">Submission guidelines</h2></div>
+				<div class="submission-layout">
+					<article class="detail-card" data-reveal>
+
+						<h3 class="card-title">Submission format</h3>
+						<ul class="card-list">
+							<li><strong>Appendices are allowed.</strong> We generally expect submissions to be 2&ndash;4 pages, excluding references, without an appendix. If an appendix is particularly important for your work, you may include one. We encourage keeping the main paper self-contained within the four-page limit.</li>
+							<li>Use the standard two-column <a href="https://conferences.ieeeauthorcenter.ieee.org/write-your-paper/authoring-tools-and-templates/" target="_blank" rel="noopener noreferrer">IEEE conference paper template (LaTeX or Word)</a>.</li>
+							<li>New results, work in progress, benchmark proposals, position papers, open problems, negative results, and failure analyses are welcome.</li>
+							<li>Submit through the <a href="https://openreview.net/group?id=robot-learning.org/CoRL/2026/Workshop/Contact-Rich_Loco-Manipulation" target="_blank" rel="noopener noreferrer">workshop venue on OpenReview</a>.</li>
+							<li>Submission deadline: October 15, 2026 (AoE), extended from <s>October 8</s>. Notification: October 31, 2026. Camera-ready: November 7, 2026 (AoE).</li>
+						</ul>
+					</article>
+					<div class="submission-side">
+						<article class="detail-card" data-reveal>
+
+						<h3 class="card-title">Review process</h3>
+						<ul class="card-list">
+							<li>Review will be single-blind: reviewers will see author identities, while reviewer identities will remain anonymous to authors.</li>
+							<li>Each submission will receive at least two reviews from the program committee.</li>
+							<li>Selection will emphasize relevance, clarity, novelty, technical quality, and potential to stimulate discussion.</li>
+						</ul>
+					</article>
+						<article class="detail-card" data-reveal>
+
+						<h3 class="card-title">Presentation and recognition</h3>
+						<ul class="card-list">
+							<li>Accepted papers will be presented as posters, with a subset selected for short spotlight talks.</li>
+							<li><strong>This workshop is non-archival.</strong> Accepted papers will be posted on this website.</li>
+							<li>A best workshop paper will be announced during the closing session.</li>
+							<li>Selected authors may be invited to contribute to the post-workshop open-problems report.</li>
+						</ul>
+					</article>
+					</div>
+				</div>
+			</div>
+		</section>
+
+		<section class="section" id="topics">
 			<div class="site-shell">
 				<div class="section-header">
 					<div>
@@ -100,77 +181,40 @@
 				</div>
 				<div class="topic-grid">
 					<article class="topic-card" data-reveal>
-						<div class="topic-icon"><i class="fa-solid fa-hand"></i></div>
+
 						<p class="topic-kicker">Contact choices</p>
 						<h3 class="topic-title">Modes, transitions, and affordances</h3>
 						<p class="topic-text">How robots represent, select, and switch between grasping, pushing, dragging, bracing, pivoting, pinning, and environment-assisted contact.</p>
 					</article>
 					<article class="topic-card" data-reveal>
-						<div class="topic-icon"><i class="fa-solid fa-person-running"></i></div>
+
 						<p class="topic-kicker">Whole-body control</p>
 						<h3 class="topic-title">Forceful interaction while moving</h3>
 						<p class="topic-text">Locomotion and manipulation policies that coordinate balance, mobility, contact forces, dexterity, and recovery for legged, humanoid, and mobile robots.</p>
 					</article>
 					<article class="topic-card" data-reveal>
-						<div class="topic-icon"><i class="fa-solid fa-eye"></i></div>
+
 						<p class="topic-kicker">Sensing</p>
 						<h3 class="topic-title">Contact and object state estimation</h3>
 						<p class="topic-text">Fusion of vision, proprioception, tactile sensing, force feedback, and action history to reason about slip, mass, friction, geometry, and hidden state.</p>
 					</article>
 					<article class="topic-card" data-reveal>
-						<div class="topic-icon"><i class="fa-solid fa-brain"></i></div>
+
 						<p class="topic-kicker">Learning</p>
 						<h3 class="topic-title">Structured policies and representations</h3>
 						<p class="topic-text">Action spaces, latent contact abstractions, planner-generated data, foundation models, and hybrid model-based or learning-based approaches.</p>
 					</article>
 					<article class="topic-card" data-reveal>
-						<div class="topic-icon"><i class="fa-solid fa-shuffle"></i></div>
+
 						<p class="topic-kicker">Transfer</p>
 						<h3 class="topic-title">Generalization across bodies and tasks</h3>
 						<p class="topic-text">Methods that transfer across quadrupeds, humanoids, wheeled bases, arms, hands, object families, terrain, and hardware constraints.</p>
 					</article>
 					<article class="topic-card" data-reveal>
-						<div class="topic-icon"><i class="fa-solid fa-chart-simple"></i></div>
+
 						<p class="topic-kicker">Evaluation</p>
 						<h3 class="topic-title">Benchmarks, metrics, and failure modes</h3>
 						<p class="topic-text">Datasets, tasks, protocols, negative results, and metrics for robustness, safety, contact efficiency, energy, recoverability, and sim-to-real transfer.</p>
-					</article>
-				</div>
-			</div>
-		</section>
-
-		<section class="section section-alt">
-			<div class="site-shell">
-				<div class="card-grid">
-					<article class="detail-card" data-reveal>
-						<div class="card-icon"><i class="fa-solid fa-file-circle-check"></i></div>
-						<h3 class="card-title">Submission format</h3>
-						<ul class="card-list">
-							<li><strong>Appendices are allowed.</strong> We generally expect submissions to be 2&ndash;4 pages, excluding references, without an appendix. If an appendix is particularly important for your work, you may include one. We encourage keeping the main paper self-contained within the four-page limit.</li>
-							<li>Use the standard two-column <a href="https://conferences.ieeeauthorcenter.ieee.org/write-your-paper/authoring-tools-and-templates/" target="_blank" rel="noopener noreferrer">IEEE conference paper template (LaTeX or Word)</a>.</li>
-							<li>New results, work in progress, benchmark proposals, position papers, open problems, negative results, and failure analyses are welcome.</li>
-							<li>Submit through the <a href="https://openreview.net/group?id=robot-learning.org/CoRL/2026/Workshop/Contact-Rich_Loco-Manipulation" target="_blank" rel="noopener noreferrer">workshop venue on OpenReview</a>.</li>
-							<li>Submission deadline: October 15, 2026 (AoE), extended from <s>October 8</s>. Notification: October 31, 2026. Camera-ready: November 7, 2026 (AoE).</li>
-						</ul>
-					</article>
-					<article class="detail-card" data-reveal>
-						<div class="card-icon"><i class="fa-solid fa-magnifying-glass-chart"></i></div>
-						<h3 class="card-title">Review process</h3>
-						<ul class="card-list">
-							<li>Review will be single-blind: reviewers will see author identities, while reviewer identities will remain anonymous to authors.</li>
-							<li>Each submission will receive at least two reviews from the program committee.</li>
-							<li>Selection will emphasize relevance, clarity, novelty, technical quality, and potential to stimulate discussion.</li>
-						</ul>
-					</article>
-					<article class="detail-card" data-reveal>
-						<div class="card-icon"><i class="fa-solid fa-trophy"></i></div>
-						<h3 class="card-title">Presentation and recognition</h3>
-						<ul class="card-list">
-							<li>Accepted papers will be presented as posters, with a subset selected for short spotlight talks.</li>
-							<li><strong>This workshop is non-archival.</strong> Accepted papers will be posted on this website.</li>
-							<li>A best workshop paper will be announced during the closing session.</li>
-							<li>Selected authors may be invited to contribute to the post-workshop open-problems report.</li>
-						</ul>
 					</article>
 				</div>
 			</div>
@@ -191,11 +235,63 @@
 							Accepted papers, slides, and the post-workshop open-problems report will be hosted on this website for open access.
 						</p>
 						<div class="button-row">
-							<a class="button-link secondary" href="../program/index.html"><i class="fa-solid fa-microphone-lines"></i> See program</a>
-							<a class="button-link secondary" href="mailto:temes021@umn.edu"><i class="fa-solid fa-envelope"></i> Contact the organizers</a>
+							<a class="button-link secondary" href="../program/index.html">See program</a>
+							<a class="button-link secondary" href="mailto:temes021@umn.edu">Contact the organizers</a>
 						</div>
 					</div>
 				</div>
+			</div>
+		</section>
+
+		<section class="section section-alt" id="announcements" aria-labelledby="announcements-heading">
+			<div class="site-shell">
+				<div class="section-header">
+					<h2 class="section-title" id="announcements-heading">Announcements</h2>
+				</div>
+				<ol class="announcement-list" role="list">
+					<li class="announcement-item">
+						<time class="announcement-date" datetime="2026-10-31">October 31, 2026</time>
+						<div class="announcement-copy">
+							<h3>Review schedule update</h3>
+							<p>Due to the high volume of submissions, we are allowing additional time to complete the review process. Author notifications have been moved to <strong>October 31, 2026</strong>. The camera-ready deadline is now <strong>November 7, 2026 (AoE)</strong>, giving authors one week to revise their papers. Thank you for your patience.</p>
+						</div>
+					</li>
+					<li class="announcement-item">
+						<time class="announcement-date" datetime="2026-10-16">October 16, 2026</time>
+						<div class="announcement-copy">
+							<h3>Notification and camera-ready dates updated</h3>
+							<p>Author notification was moved to October 27, 2026, and the camera-ready deadline to November 1, 2026 (AoE). These dates were subsequently revised in the October 31 announcement.</p>
+						</div>
+					</li>
+					<li class="announcement-item">
+						<time class="announcement-date" datetime="2026-10-09">October 9, 2026</time>
+						<div class="announcement-copy">
+							<h3>Paper submission deadline extended</h3>
+							<p>In response to requests from authors, we have extended the paper submission deadline to <strong>October 15, 2026 (AoE)</strong> (previously October 8).</p>
+						</div>
+					</li>
+					<li class="announcement-item">
+						<time class="announcement-date" datetime="2026-10-08">October 8, 2026</time>
+						<div class="announcement-copy">
+							<h3>Appendix policy and non-archival status clarified</h3>
+							<p><strong>Appendices are allowed.</strong> We generally expect submissions to be 2–4 pages, excluding references, without an appendix. If an appendix is particularly important for your work, you may include one. We encourage keeping the main paper self-contained within the four-page limit. <strong>This workshop is non-archival.</strong> Accepted papers will be posted on this website.</p>
+						</div>
+					</li>
+					<li class="announcement-item">
+						<time class="announcement-date" datetime="2026-10-06">October 6, 2026</time>
+						<div class="announcement-copy">
+							<h3>Review process and paper availability clarified</h3>
+							<p>Review will be single-blind: reviewers will see author identities, while reviewer identities will remain anonymous to authors. Accepted papers will be posted on the workshop website.</p>
+						</div>
+					</li>
+					<li class="announcement-item">
+						<time class="announcement-date" datetime="2026-09-23">September 23, 2026</time>
+						<div class="announcement-copy">
+							<h3>Original submission timeline announced</h3>
+							<p>The original dates were October 8, 2026 (AoE) for submissions, October 22, 2026 for author notification, and October 27, 2026 (AoE) for camera-ready papers. Later changes are preserved in the announcements above.</p>
+						</div>
+					</li>
+				</ol>
 			</div>
 		</section>
 	</main>

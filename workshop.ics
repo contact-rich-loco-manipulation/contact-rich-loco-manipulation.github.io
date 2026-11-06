@@ -1,0 +1,19 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Contact-Rich Loco-Manipulation//CoRL 2026 Workshop//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:corl2026-contact-rich-loco-manipulation@contact-rich-loco-manipulation.
+ github.io
+DTSTAMP:20261106T100058Z
+DTSTART:20261112T200000Z
+DTEND:20261113T000000Z
+SUMMARY:Open Problems in Contact-Rich Loco-Manipulation
+LOCATION:Room 205\, JW Marriott Austin\, 110 E 2nd St\, Austin\, TX 78701
+DESCRIPTION:CoRL 2026 workshop. November 12\, 2026\, 2:00–6:00 PM CST. In
+ vited talks\, student spotlights\, posters\, and panel discussion.\nProgra
+ m: https://contact-rich-loco-manipulation.github.io/program/index.html
+URL:https://contact-rich-loco-manipulation.github.io/program/index.html
+END:VEVENT
+END:VCALENDAR
