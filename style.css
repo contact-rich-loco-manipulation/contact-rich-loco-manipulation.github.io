@@ -1,21 +1,23 @@
 :root {
-	--ink-950: #0d1321;
-	--ink-900: #172033;
-	--ink-800: #25364f;
-	--ink-700: #43536b;
-	--ink-600: #6d7889;
-	--sand-50: #faf8f3;
-	--sand-100: #eee9df;
-	--sand-200: #ded6c8;
-	--sand-300: #cbbda7;
-	--blue-500: #2f5f98;
-	--blue-400: #5f8fc4;
-	--copper-500: #a66d43;
-	--copper-400: #c4895d;
-	--sky-100: #dceaf7;
+	--ink-950: #21150e;
+	--ink-900: #2e2118;
+	--ink-800: #44352a;
+	--ink-700: #5e4e42;
+	--ink-600: #80705f;
+	--sand-50: #fdf8f1;
+	--sand-100: #f4e9dc;
+	--sand-200: #e6d7c5;
+	--sand-300: #d3bfa8;
+	/* Taken from the CoRL 2026 logo. */
+	--accent-700: #a34900;
+	--accent-500: #bf5700;
+	--accent-400: #e07b24;
+	--accent-100: #fde6d2;
+	--teal-500: #37677d;
+	--coral-400: #f07078;
 	--white: #ffffff;
-	--shadow-soft: 0 6px 24px rgba(8, 17, 29, 0.045);
-	--shadow-strong: 0 14px 40px rgba(8, 17, 29, 0.1);
+	--shadow-soft: 0 6px 24px rgba(70, 35, 10, 0.045);
+	--shadow-strong: 0 14px 40px rgba(70, 35, 10, 0.1);
 	--radius-lg: 28px;
 	--radius-md: 20px;
 	--radius-sm: 14px;
@@ -36,7 +38,7 @@ html {
 body {
 	margin: 0;
 	font-family: "IBM Plex Sans", sans-serif;
-	background: #faf9f6;
+	background: #fdfaf5;
 	color: var(--ink-900);
 	line-height: 1.65;
 	overflow-x: hidden;
@@ -48,12 +50,12 @@ img {
 }
 
 a {
-	color: var(--blue-500);
+	color: var(--accent-700);
 	transition: color 0.25s ease, opacity 0.25s ease;
 }
 
 a:hover {
-	color: var(--copper-500);
+	color: var(--teal-500);
 	text-decoration: none;
 }
 
@@ -64,10 +66,10 @@ a:hover {
 
 .site-nav {
 	min-height: 72px;
-	background: rgba(250, 248, 243, 0.92);
+	background: rgba(253, 248, 241, 0.92);
 	backdrop-filter: blur(18px);
-	border-bottom: 1px solid rgba(16, 32, 51, 0.08);
-	box-shadow: 0 14px 40px rgba(8, 17, 29, 0.08);
+	border-bottom: 1px solid rgba(70, 40, 20, 0.08);
+	box-shadow: 0 14px 40px rgba(70, 35, 10, 0.08);
 }
 
 .site-nav .site-shell {
@@ -87,13 +89,6 @@ a:hover {
 	min-width: 0;
 	flex: 1 1 auto;
 	max-width: 100%;
-}
-
-.brand-mark {
-	width: 48px;
-	height: 48px;
-	border-radius: 14px;
-	box-shadow: 0 16px 34px rgba(16, 32, 51, 0.18);
 }
 
 .brand-copy {
@@ -150,11 +145,11 @@ a:hover {
 .site-nav .nav-link:hover,
 .site-nav .nav-link.active {
 	color: var(--ink-950);
-	background: rgba(16, 32, 51, 0.06);
+	background: rgba(70, 40, 20, 0.06);
 }
 
 .site-nav .navbar-toggler {
-	border: 1px solid rgba(16, 32, 51, 0.14);
+	border: 1px solid rgba(70, 40, 20, 0.14);
 	padding: 0.45rem 0.7rem;
 	border-radius: 14px;
 	color: var(--ink-900);
@@ -168,9 +163,9 @@ a:hover {
 
 .site-nav .navbar-toggler:hover,
 .site-nav .navbar-toggler:focus {
-	background: rgba(16, 32, 51, 0.06);
-	border-color: rgba(16, 32, 51, 0.22);
-	box-shadow: 0 0 0 3px rgba(47, 95, 152, 0.16);
+	background: rgba(70, 40, 20, 0.06);
+	border-color: rgba(70, 40, 20, 0.22);
+	box-shadow: 0 0 0 3px rgba(191, 87, 0, 0.16);
 	outline: none;
 }
 
@@ -386,7 +381,7 @@ a:hover {
 }
 
 .button-link.primary {
-	background: var(--blue-500);
+	background: var(--accent-500);
 	color: var(--white);
 	box-shadow: none;
 }
@@ -407,7 +402,7 @@ a:hover {
 	position: relative;
 	padding: 1.4rem;
 	border-radius: 30px;
-	background: rgba(250, 248, 243, 0.94);
+	background: rgba(253, 248, 241, 0.94);
 	box-shadow: var(--shadow-strong);
 	min-width: 0;
 }
@@ -417,7 +412,7 @@ a:hover {
 	align-items: center;
 	padding: 0.34rem 0.65rem;
 	border-radius: 999px;
-	background: rgba(16, 32, 51, 0.08);
+	background: rgba(70, 40, 20, 0.08);
 	color: var(--ink-900);
 	font-family: "IBM Plex Mono", monospace;
 	font-size: 0.7rem;
@@ -453,7 +448,7 @@ a:hover {
 	aspect-ratio: 4 / 5;
 	object-fit: cover;
 	border-radius: 18px;
-	border: 2px solid rgba(16, 32, 51, 0.08);
+	border: 2px solid rgba(70, 40, 20, 0.08);
 }
 
 .portrait-strip-all-speakers {
@@ -548,7 +543,7 @@ a:hover {
 	font-size: 0.76rem;
 	text-transform: uppercase;
 	letter-spacing: 0.16em;
-	color: var(--copper-500);
+	color: var(--teal-500);
 	margin: 0 0 0.65rem;
 }
 
@@ -606,7 +601,7 @@ a:hover {
 .agenda-card,
 .callout-card {
 	background: rgba(255, 255, 255, 0.86);
-	border: 1px solid rgba(16, 32, 51, 0.08);
+	border: 1px solid rgba(70, 40, 20, 0.08);
 	border-radius: var(--radius-md);
 	box-shadow: var(--shadow-soft);
 }
@@ -626,7 +621,7 @@ a:hover {
 	display: inline-flex;
 	align-items: center;
 	justify-content: center;
-	background: linear-gradient(135deg, rgba(47, 95, 152, 0.16), rgba(196, 137, 93, 0.22));
+	background: linear-gradient(135deg, rgba(191, 87, 0, 0.16), rgba(240, 112, 120, 0.22));
 	color: var(--ink-950);
 	font-size: 1rem;
 	margin-bottom: 0.95rem;
@@ -665,7 +660,7 @@ a:hover {
 	padding: 0.95rem 1rem;
 	border-radius: 18px;
 	background: rgba(255, 255, 255, 0.84);
-	border: 1px solid rgba(16, 32, 51, 0.08);
+	border: 1px solid rgba(70, 40, 20, 0.08);
 	font-weight: 500;
 	color: var(--ink-900);
 }
@@ -682,7 +677,7 @@ a:hover {
 	min-height: 100%;
 	padding: 1.25rem;
 	background: rgba(255, 255, 255, 0.88);
-	border: 1px solid rgba(23, 32, 51, 0.08);
+	border: 1px solid rgba(191, 87, 0, 0.08);
 	border-radius: var(--radius-md);
 	box-shadow: var(--shadow-soft);
 }
@@ -692,7 +687,7 @@ a:hover {
 	position: absolute;
 	inset: 0 0 auto;
 	height: 4px;
-	background: linear-gradient(90deg, var(--blue-500), var(--copper-400));
+	background: linear-gradient(90deg, var(--accent-500), var(--coral-400));
 }
 
 .topic-icon {
@@ -703,8 +698,8 @@ a:hover {
 	align-items: center;
 	justify-content: center;
 	margin: 0.45rem 0 1rem;
-	background: rgba(47, 95, 152, 0.12);
-	color: var(--blue-500);
+	background: rgba(191, 87, 0, 0.12);
+	color: var(--accent-700);
 }
 
 .topic-kicker {
@@ -713,7 +708,7 @@ a:hover {
 	font-size: 0.7rem;
 	text-transform: uppercase;
 	letter-spacing: 0.1em;
-	color: var(--copper-500);
+	color: var(--teal-500);
 }
 
 .topic-title {
@@ -746,7 +741,7 @@ a:hover {
 	aspect-ratio: 4 / 4.7;
 	object-fit: cover;
 	object-position: center top;
-	background: linear-gradient(135deg, #dfe9f6, #f4ede3);
+	background: linear-gradient(135deg, #fde6d2, #f4e9dc);
 }
 
 .speaker-body {
@@ -759,7 +754,7 @@ a:hover {
 	font-size: 0.72rem;
 	text-transform: uppercase;
 	letter-spacing: 0.09em;
-	color: var(--copper-500);
+	color: var(--teal-500);
 }
 
 .speaker-name,
@@ -783,7 +778,7 @@ a:hover {
 	margin-left: 0.35rem;
 	font-family: "IBM Plex Mono", monospace;
 	font-size: 0.7em;
-	color: var(--copper-500);
+	color: var(--teal-500);
 	transition: transform 0.2s ease;
 }
 
@@ -802,7 +797,7 @@ a:hover {
 .speaker-talk {
 	margin-top: 0.85rem;
 	padding-top: 0.85rem;
-	border-top: 1px solid rgba(16, 32, 51, 0.08);
+	border-top: 1px solid rgba(70, 40, 20, 0.08);
 	color: var(--ink-800);
 	overflow-wrap: anywhere;
 }
@@ -812,7 +807,7 @@ a:hover {
 	margin-top: 0.75rem;
 	padding: 0.38rem 0.6rem;
 	border-radius: 999px;
-	background: rgba(16, 32, 51, 0.06);
+	background: rgba(70, 40, 20, 0.06);
 	color: var(--ink-700);
 	font-family: "IBM Plex Mono", monospace;
 	font-size: 0.7rem;
@@ -825,7 +820,7 @@ a:hover {
 	padding: 0 clamp(1rem, 3vw, 2rem) 0 clamp(3rem, 6vw, 4rem);
 	list-style-type: decimal;
 	background: rgba(255, 255, 255, 0.9);
-	border: 1px solid rgba(16, 32, 51, 0.08);
+	border: 1px solid rgba(70, 40, 20, 0.08);
 	border-radius: var(--radius-md);
 	box-shadow: var(--shadow-soft);
 }
@@ -836,7 +831,7 @@ a:hover {
 
 .paper-item {
 	padding: 1.35rem 0 1.35rem 0.4rem;
-	border-bottom: 1px solid rgba(16, 32, 51, 0.08);
+	border-bottom: 1px solid rgba(70, 40, 20, 0.08);
 }
 
 .paper-item:last-child {
@@ -847,7 +842,7 @@ a:hover {
 	font-family: "IBM Plex Mono", monospace;
 	font-size: 0.95rem;
 	font-weight: 500;
-	color: var(--blue-500);
+	color: var(--accent-700);
 }
 
 .paper-title {
@@ -872,7 +867,7 @@ a:hover {
 	width: 100%;
 	border-radius: 22px;
 	background: rgba(255, 255, 255, 0.9);
-	border: 1px solid rgba(16, 32, 51, 0.08);
+	border: 1px solid rgba(70, 40, 20, 0.08);
 	box-shadow: var(--shadow-soft);
 }
 
@@ -881,7 +876,7 @@ a:hover {
 	grid-template-columns: 170px 100px minmax(0, 1fr);
 	gap: 1rem;
 	padding: 1rem 1.2rem;
-	background: linear-gradient(135deg, rgba(23, 32, 51, 0.96), rgba(47, 95, 152, 0.88));
+	background: linear-gradient(135deg, rgba(191, 87, 0, 0.96), rgba(191, 87, 0, 0.88));
 	color: var(--white);
 	font-family: "IBM Plex Mono", monospace;
 	font-size: 0.78rem;
@@ -895,17 +890,17 @@ a:hover {
 	gap: 1rem;
 	align-items: center;
 	padding: 1rem 1.2rem;
-	border-top: 1px solid rgba(16, 32, 51, 0.08);
+	border-top: 1px solid rgba(70, 40, 20, 0.08);
 }
 
 .schedule-row:nth-child(even) {
-	background: rgba(243, 238, 230, 0.45);
+	background: rgba(250, 238, 224, 0.45);
 }
 
 .schedule-time {
 	font-family: "IBM Plex Mono", monospace;
 	font-size: 0.78rem;
-	color: var(--copper-500);
+	color: var(--teal-500);
 	letter-spacing: 0.06em;
 	font-weight: 500;
 	white-space: nowrap;
@@ -915,8 +910,8 @@ a:hover {
 	width: fit-content;
 	padding: 0.28rem 0.55rem;
 	border-radius: 999px;
-	background: rgba(47, 95, 152, 0.09);
-	color: var(--blue-500);
+	background: rgba(191, 87, 0, 0.09);
+	color: var(--accent-700);
 	font-family: "IBM Plex Mono", monospace;
 	font-size: 0.72rem;
 	font-weight: 500;
@@ -939,8 +934,8 @@ a:hover {
 }
 
 .schedule-student-group {
-	background: rgba(220, 234, 247, 0.2);
-	box-shadow: inset 3px 0 var(--blue-500);
+	background: rgba(253, 230, 210, 0.2);
+	box-shadow: inset 3px 0 var(--accent-500);
 }
 
 .schedule-student-group .schedule-row {
@@ -948,7 +943,7 @@ a:hover {
 }
 
 .schedule-student-group .schedule-student-heading {
-	background: rgba(47, 95, 152, 0.07);
+	background: rgba(191, 87, 0, 0.07);
 }
 
 .schedule-student-heading .schedule-event-title {
@@ -964,7 +959,7 @@ a:hover {
 }
 
 .schedule-student-talk + .schedule-student-talk {
-	border-top: 1px solid rgba(16, 32, 51, 0.06);
+	border-top: 1px solid rgba(70, 40, 20, 0.06);
 }
 
 .student-speaker-details {
@@ -980,13 +975,13 @@ a:hover {
 	justify-content: center;
 	width: 1.9rem;
 	height: 1.9rem;
-	border: 1px solid rgba(47, 95, 152, 0.18);
+	border: 1px solid rgba(191, 87, 0, 0.18);
 	border-radius: 50%;
 	background: var(--white);
 	font-family: "IBM Plex Mono", monospace;
 	font-size: 0.78rem;
 	font-weight: 500;
-	color: var(--blue-500);
+	color: var(--accent-700);
 }
 
 .student-speaker-header {
@@ -1038,7 +1033,7 @@ a:hover {
 	gap: 1rem;
 	align-items: start;
 	padding-bottom: 0.85rem;
-	border-bottom: 1px solid rgba(16, 32, 51, 0.08);
+	border-bottom: 1px solid rgba(70, 40, 20, 0.08);
 }
 
 .agenda-item:last-child {
@@ -1049,7 +1044,7 @@ a:hover {
 .agenda-time {
 	font-family: "IBM Plex Mono", monospace;
 	font-size: 0.78rem;
-	color: var(--copper-500);
+	color: var(--teal-500);
 	text-transform: uppercase;
 	letter-spacing: 0.06em;
 }
@@ -1083,8 +1078,8 @@ a:hover {
 	aspect-ratio: 4 / 4.45;
 	border-radius: 0;
 	overflow: hidden;
-	background: linear-gradient(135deg, rgba(47, 95, 152, 0.22), rgba(196, 137, 93, 0.26));
-	box-shadow: inset 0 0 0 1px rgba(16, 32, 51, 0.06);
+	background: linear-gradient(135deg, rgba(191, 87, 0, 0.22), rgba(240, 112, 120, 0.26));
+	box-shadow: inset 0 0 0 1px rgba(70, 40, 20, 0.06);
 }
 
 .person-avatar img {
@@ -1118,15 +1113,15 @@ a:hover {
 }
 
 .tone-blue {
-	background: linear-gradient(135deg, rgba(47, 95, 152, 0.25), rgba(220, 234, 247, 0.95));
+	background: linear-gradient(135deg, rgba(191, 87, 0, 0.25), rgba(253, 230, 210, 0.95));
 }
 
 .tone-copper {
-	background: linear-gradient(135deg, rgba(166, 109, 67, 0.25), rgba(235, 210, 188, 0.95));
+	background: linear-gradient(135deg, rgba(240, 112, 120, 0.25), rgba(253, 222, 200, 0.95));
 }
 
 .tone-ink {
-	background: linear-gradient(135deg, rgba(23, 32, 51, 0.18), rgba(220, 234, 247, 0.95));
+	background: linear-gradient(135deg, rgba(191, 87, 0, 0.18), rgba(253, 230, 210, 0.95));
 }
 
 .person-links {
@@ -1163,7 +1158,7 @@ a:hover {
 .topic-pill {
 	padding: 0.6rem 0.85rem;
 	border-radius: 999px;
-	background: rgba(16, 32, 51, 0.06);
+	background: rgba(70, 40, 20, 0.06);
 	color: var(--ink-900);
 	font-family: "IBM Plex Mono", monospace;
 	font-size: 0.76rem;
@@ -1183,7 +1178,7 @@ a:hover {
 	padding: 1rem 1.1rem;
 	border-radius: 18px;
 	background: rgba(255, 255, 255, 0.88);
-	border: 1px solid rgba(16, 32, 51, 0.08);
+	border: 1px solid rgba(70, 40, 20, 0.08);
 }
 
 .timeline-date {
@@ -1191,7 +1186,7 @@ a:hover {
 	font-size: 0.76rem;
 	text-transform: uppercase;
 	letter-spacing: 0.08em;
-	color: var(--copper-500);
+	color: var(--teal-500);
 }
 
 .timeline-copy strong {
@@ -1215,7 +1210,7 @@ a:hover {
 	padding: 1rem 1.1rem;
 	border-radius: 18px;
 	background: rgba(255, 255, 255, 0.86);
-	border: 1px solid rgba(16, 32, 51, 0.08);
+	border: 1px solid rgba(70, 40, 20, 0.08);
 	box-shadow: var(--shadow-soft);
 	color: var(--ink-900);
 }
@@ -1229,7 +1224,7 @@ a:hover {
 
 .callout-card {
 	background:
-		linear-gradient(135deg, rgba(23, 32, 51, 0.95), rgba(47, 95, 152, 0.9));
+		linear-gradient(135deg, rgba(191, 87, 0, 0.95), rgba(191, 87, 0, 0.9));
 	color: var(--white);
 }
 
@@ -1256,7 +1251,7 @@ a:hover {
 	justify-content: space-between;
 	gap: 1rem;
 	padding-top: 1.3rem;
-	border-top: 1px solid rgba(16, 32, 51, 0.08);
+	border-top: 1px solid rgba(70, 40, 20, 0.08);
 }
 
 .footer-note {
@@ -1384,8 +1379,8 @@ a:hover {
 		margin-top: 0.35rem;
 		padding: 0.45rem;
 		border-radius: 20px;
-		background: rgba(250, 248, 243, 0.98);
-		border: 1px solid rgba(16, 32, 51, 0.08);
+		background: rgba(253, 248, 241, 0.98);
+		border: 1px solid rgba(70, 40, 20, 0.08);
 		box-shadow: var(--shadow-soft);
 		max-height: calc(100vh - var(--nav-height) - 1rem);
 		overflow-y: auto;
@@ -1557,11 +1552,6 @@ a:hover {
 }
 
 @media (max-width: 575px) {
-	.brand-mark {
-		width: 42px;
-		height: 42px;
-	}
-
 	.brand-title {
 		font-size: 1rem;
 	}
@@ -1739,7 +1729,7 @@ body {
 	padding: 0;
 	border: 0;
 	background: transparent;
-	color: var(--blue-500);
+	color: var(--accent-700);
 	font: inherit;
 	font-weight: 500;
 	cursor: pointer;
@@ -1823,8 +1813,8 @@ body {
 }
 
 .paper-search-field:focus-within {
-	border-color: var(--blue-500);
-	box-shadow: 0 0 0 3px rgba(47, 95, 152, 0.12);
+	border-color: var(--accent-500);
+	box-shadow: 0 0 0 3px rgba(191, 87, 0, 0.12);
 }
 
 .paper-search input {
@@ -1869,7 +1859,7 @@ body {
 }
 
 :focus-visible {
-	outline: 3px solid var(--blue-400);
+	outline: 3px solid var(--accent-400);
 	outline-offset: 4px;
 }
 
@@ -2090,7 +2080,7 @@ body {
 	left: -5px;
 	width: 9px;
 	height: 9px;
-	border: 1px solid var(--blue-500);
+	border: 1px solid var(--accent-500);
 	border-radius: 50%;
 	background: var(--white);
 }
@@ -2138,11 +2128,6 @@ body {
 		gap: 0.65rem;
 	}
 
-	.brand-mark {
-		width: 42px;
-		height: 42px;
-	}
-
 	.brand-title {
 		font-size: 0.95rem;
 	}
@@ -2176,10 +2161,10 @@ body {
 /* Workshop Theme matches the deployed site, including its page gradient. */
 .home-page .decorated-theme-section {
 	background:
-		linear-gradient(135deg, rgba(47, 95, 152, 0.13), transparent 26%) 0 -690px / 100% 4220px no-repeat,
-		linear-gradient(225deg, rgba(166, 109, 67, 0.12), transparent 28%) 0 -690px / 100% 4220px no-repeat,
-		linear-gradient(180deg, #f4f2ec 0%, #fcfbf8 36%, #eee9df 100%) 0 -690px / 100% 4220px no-repeat;
-	border-bottom: 1px solid rgba(16, 32, 51, 0.05);
+		linear-gradient(135deg, rgba(191, 87, 0, 0.13), transparent 26%) 0 -690px / 100% 4220px no-repeat,
+		linear-gradient(225deg, rgba(240, 112, 120, 0.12), transparent 28%) 0 -690px / 100% 4220px no-repeat,
+		linear-gradient(180deg, #fbf3e9 0%, #fefbf6 36%, #f6ecdf 100%) 0 -690px / 100% 4220px no-repeat;
+	border-bottom: 1px solid rgba(70, 40, 20, 0.05);
 }
 
 .home-page .decorated-theme-section .copy-stack {
@@ -2188,9 +2173,9 @@ body {
 
 /* Workshop Format sits on a soft tint, and the arm stands on its bottom edge. */
 .home-page .decorated-format-section {
-	background: #f3efe8;
-	border-top: 1px solid rgba(16, 32, 51, 0.06);
-	border-bottom: 1px solid rgba(16, 32, 51, 0.06);
+	background: #fbeee1;
+	border-top: 1px solid rgba(70, 40, 20, 0.06);
+	border-bottom: 1px solid rgba(70, 40, 20, 0.06);
 }
 
 .home-page .format-section-figure {
@@ -2209,7 +2194,7 @@ body {
 /* Core Challenges and Workshop Format cards keep the deployed shadow. */
 .home-page .info-card,
 .home-page .detail-card {
-	box-shadow: 0 18px 45px rgba(8, 17, 29, 0.09);
+	box-shadow: 0 18px 45px rgba(70, 35, 10, 0.09);
 }
 
 .home-page .speaker-card {
@@ -2242,7 +2227,7 @@ body {
 }
 
 .venue-invitation .section-kicker {
-	color: var(--blue-500);
+	color: var(--accent-700);
 }
 
 .venue-invitation .section-title {
@@ -2348,14 +2333,14 @@ body {
 .call-status {
 	margin: 1.5rem 0 0;
 	font-size: 0.9rem;
-	color: var(--sky-100);
+	color: #dceaf7;
 }
 
 .call-section-nav {
 	position: sticky;
 	top: var(--nav-height);
 	z-index: 100;
-	background: rgba(250, 248, 243, 0.98);
+	background: rgba(253, 248, 241, 0.98);
 	border-bottom: 1px solid var(--sand-200);
 }
 
@@ -2375,7 +2360,7 @@ body {
 }
 
 .call-section-nav a:hover {
-	color: var(--blue-500);
+	color: var(--accent-700);
 }
 
 .call-page main > section {
@@ -2419,9 +2404,9 @@ body {
 
 .call-page #accepted-authors > .site-shell {
 	padding: 1.7rem;
-	border-left: 3px solid var(--blue-500);
+	border-left: 3px solid var(--accent-500);
 	border-radius: 0 14px 14px 0;
-	background: rgba(220, 234, 247, 0.4);
+	background: rgba(253, 230, 210, 0.4);
 }
 
 .call-page #accepted-authors .section-title {
@@ -2468,7 +2453,7 @@ body {
 	font-size: clamp(1.4rem, 2.4vw, 2rem);
 	font-weight: 700;
 	line-height: 1.3;
-	color: var(--blue-500);
+	color: var(--accent-700);
 }
 
 .journey-caption {
@@ -2495,7 +2480,7 @@ body {
 	border: 0;
 	border-radius: 99px;
 	background: var(--sand-100);
-	color: var(--blue-500);
+	color: var(--accent-700);
 	overflow: hidden;
 }
 
@@ -2506,12 +2491,12 @@ body {
 
 .journey-progress::-webkit-progress-value {
 	border-radius: 99px;
-	background: var(--blue-500);
+	background: var(--accent-500);
 }
 
 .journey-progress::-moz-progress-bar {
 	border-radius: 99px;
-	background: var(--blue-500);
+	background: var(--accent-500);
 }
 
 .journey-today {
@@ -2522,7 +2507,7 @@ body {
 	font-family: "IBM Plex Mono", monospace;
 	font-size: 0.72rem;
 	white-space: nowrap;
-	color: var(--blue-500);
+	color: var(--accent-700);
 }
 
 .journey-marker {
@@ -2533,8 +2518,8 @@ body {
 	height: 14px;
 	border: 3px solid var(--white);
 	border-radius: 50%;
-	background: var(--blue-500);
-	box-shadow: 0 0 0 1px var(--blue-500);
+	background: var(--accent-500);
+	box-shadow: 0 0 0 1px var(--accent-500);
 	transform: translateX(-50%);
 }
 
@@ -2586,7 +2571,7 @@ body {
 }
 
 .journey-milestones .is-next {
-	border-top-color: var(--blue-500);
+	border-top-color: var(--accent-500);
 }
 
 .milestone-status {
@@ -2599,7 +2584,7 @@ body {
 
 .is-next .milestone-status,
 .is-current .milestone-status {
-	color: var(--blue-500);
+	color: var(--accent-700);
 }
 
 @media (max-width: 991px) {
@@ -2665,7 +2650,7 @@ body {
 }
 
 .venue-invitation .hero-text-link {
-	color: var(--blue-500);
+	color: var(--accent-700);
 }
 
 .venue-invitation .hero-text-link:hover {
@@ -2681,5 +2666,72 @@ body {
 @media (max-width: 767px) {
 	.journey-countdown {
 		justify-content: flex-start;
+	}
+}
+
+/* Top bar: workshop name, a dividing line, then the CoRL logo. */
+.site-nav .brand-lockup {
+	flex: 0 1 auto;
+	margin-right: 0;
+}
+
+.corl-logo-link {
+	display: block;
+	flex: 0 0 auto;
+	padding-left: 1.1rem;
+	border-left: 1px solid var(--sand-200);
+}
+
+.corl-logo {
+	width: auto;
+	height: 36px;
+}
+
+@media (max-width: 1199px) {
+	.corl-logo-link {
+		padding-left: 0.85rem;
+	}
+
+	.corl-logo {
+		height: 30px;
+	}
+}
+
+@media (max-width: 991px) {
+	.site-nav .brand-lockup {
+		flex: 0 1 auto;
+		max-width: none;
+	}
+}
+
+@media (max-width: 575px) {
+	.site-nav .site-shell {
+		column-gap: 0.5rem;
+	}
+
+	.site-nav .brand-lockup {
+		max-width: 10rem;
+	}
+
+	.brand-overline {
+		display: none;
+	}
+
+	.brand-title {
+		font-size: 0.96rem;
+	}
+
+	.corl-logo-link {
+		padding-left: 0.6rem;
+	}
+
+	.corl-logo {
+		height: 24px;
+	}
+}
+
+@media (max-width: 339px) {
+	.corl-logo-link {
+		display: none;
 	}
 }
