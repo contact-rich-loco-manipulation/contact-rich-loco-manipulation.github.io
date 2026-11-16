@@ -2735,3 +2735,378 @@ body {
 		display: none;
 	}
 }
+
+/* Organizers page: thanks to everyone who helped.
+   Four columns; each column's accent takes one color of the talk-card ribbon on the home page. */
+/* heading on the left, the message on the right */
+.thanks-intro {
+	display: grid;
+	grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.4fr);
+	gap: 1.5rem 3rem;
+	align-items: end;
+	margin-bottom: 2.2rem;
+}
+
+.thanks-kicker {
+	margin: 0 0 0.7rem;
+	font-family: "IBM Plex Mono", monospace;
+	font-size: 0.76rem;
+	letter-spacing: 0.18em;
+	text-transform: uppercase;
+	color: var(--teal-500);
+}
+
+.thanks-heading .section-title {
+	font-size: clamp(2.3rem, 4.4vw, 3.6rem);
+}
+
+.thanks-accent {
+	background: linear-gradient(90deg, var(--accent-500), var(--coral-400));
+	-webkit-background-clip: text;
+	background-clip: text;
+	color: transparent;
+}
+
+.thanks-message {
+	position: relative;
+	padding-left: 1.6rem;
+}
+
+.thanks-message::before {
+	content: "";
+	position: absolute;
+	left: 0;
+	top: 0.3rem;
+	bottom: 0.3rem;
+	width: 3px;
+	border-radius: 3px;
+	background: linear-gradient(180deg, var(--accent-500), var(--coral-400), var(--teal-500));
+}
+
+.thanks-message p {
+	margin: 0;
+	font-size: 1.12rem;
+	line-height: 1.7;
+	color: var(--ink-800);
+}
+
+/* a soft highlighter stroke on the words that matter */
+.thanks-mark {
+	padding: 0;
+	background: none;
+	color: var(--accent-700);
+	font-weight: 500;
+}
+
+.thanks-message .thanks-close {
+	margin-top: 0.7rem;
+	font-family: "Sora", sans-serif;
+	font-size: 1.18rem;
+	font-weight: 600;
+	color: var(--ink-950);
+}
+
+.thanks-message .thanks-sign {
+	margin-top: 0.9rem;
+	font-family: "IBM Plex Mono", monospace;
+	font-size: 0.74rem;
+	letter-spacing: 0.12em;
+	text-transform: uppercase;
+	color: var(--ink-600);
+}
+
+@media (max-width: 767.98px) {
+	.thanks-intro {
+		grid-template-columns: minmax(0, 1fr);
+	}
+
+	.thanks-message p {
+		font-size: 1.02rem;
+	}
+}
+
+.thanks-card {
+	position: relative;
+	overflow: hidden;
+	padding: 2.1rem 2.1rem 1.9rem;
+	background: rgba(255, 255, 255, 0.88);
+	border: 1px solid rgba(70, 40, 20, 0.08);
+	border-radius: var(--radius-md);
+	box-shadow: var(--shadow-soft);
+}
+
+.thanks-card::before {
+	content: "";
+	position: absolute;
+	inset: 0 0 auto;
+	height: 4px;
+	background: linear-gradient(90deg, #a34900, #e07b24 30%, #f07078 60%, #37677d);
+}
+
+.thanks-list {
+	--c1: #bf5700;
+	--c2: #e07b24;
+	--c3: #f07078;
+	--c4: #37677d;
+	display: grid;
+	grid-template-columns: repeat(4, minmax(0, 1fr));
+	gap: 0.55rem 1.4rem;
+	margin: 0;
+	padding: 0;
+	list-style: none;
+}
+
+.thanks-person {
+	--bar: var(--c1);
+	position: relative;
+	display: flex;
+	flex-direction: column;
+	min-width: 0;
+	padding: 0.55rem 0.7rem 0.6rem 0.95rem;
+	border-radius: 8px;
+	line-height: 1.25;
+	transition: background 0.25s ease;
+}
+
+.thanks-person::before {
+	content: "";
+	position: absolute;
+	left: 0;
+	top: 0.7rem;
+	bottom: 0.7rem;
+	width: 2px;
+	border-radius: 2px;
+	background: var(--bar);
+	opacity: 0.55;
+	transition: opacity 0.25s ease;
+}
+
+.thanks-person:nth-child(4n + 2) { --bar: var(--c2); }
+.thanks-person:nth-child(4n + 3) { --bar: var(--c3); }
+.thanks-person:nth-child(4n + 4) { --bar: var(--c4); }
+
+.thanks-person:hover {
+	background: rgba(191, 87, 0, 0.05);
+}
+
+.thanks-person:hover::before {
+	opacity: 1;
+}
+
+.thanks-name {
+	font-size: 1rem;
+	color: var(--ink-950);
+}
+
+.thanks-first {
+	font-weight: 400;
+	color: var(--ink-700);
+}
+
+.thanks-last {
+	font-family: "Sora", sans-serif;
+	font-weight: 600;
+}
+
+.thanks-affil {
+	margin-top: 0.22rem;
+	font-size: 0.82rem;
+	color: var(--teal-500);
+	overflow-wrap: anywhere;
+}
+
+@media (max-width: 991.98px) {
+	.thanks-list {
+		grid-template-columns: repeat(2, minmax(0, 1fr));
+	}
+
+	.thanks-person:nth-child(n) { --bar: var(--c1); }
+	.thanks-person:nth-child(2n) { --bar: var(--c4); }
+}
+
+@media (max-width: 575.98px) {
+	.thanks-card {
+		padding: 1.5rem 1rem 1.2rem;
+	}
+
+	.thanks-list {
+		gap: 0.35rem 0.6rem;
+	}
+
+	.thanks-name {
+		font-size: 0.94rem;
+	}
+
+	.thanks-affil {
+		font-size: 0.76rem;
+	}
+}
+
+.thanks-link {
+	text-decoration: none;
+}
+
+.thanks-link .thanks-last {
+	white-space: nowrap;
+	background-image: linear-gradient(90deg, var(--accent-500), var(--coral-400));
+	background-size: 0% 1.5px;
+	background-position: 0 100%;
+	background-repeat: no-repeat;
+	transition: background-size 0.3s ease, color 0.2s ease;
+}
+
+.thanks-link .thanks-last::after {
+	content: "\2197";
+	margin-left: 0.3rem;
+	font-size: 0.78em;
+	color: var(--teal-500);
+	opacity: 0.45;
+	transition: opacity 0.2s ease, transform 0.2s ease;
+	display: inline-block;
+}
+
+.thanks-link:hover .thanks-last,
+.thanks-link:focus-visible .thanks-last {
+	color: var(--accent-700);
+	background-size: 100% 1.5px;
+}
+
+.thanks-link:hover .thanks-last::after,
+.thanks-link:focus-visible .thanks-last::after {
+	opacity: 1;
+	transform: translate(1px, -1px);
+}
+
+.thanks-link:focus-visible {
+	outline: none;
+	border-radius: 4px;
+	box-shadow: 0 0 0 3px rgba(191, 87, 0, 0.22);
+}
+
+/* institutional thanks: the Minnesota Robotics Institute */
+.thanks-support {
+	position: relative;
+	display: grid;
+	grid-template-columns: minmax(0, 300px) minmax(0, 1fr);
+	gap: 1.4rem 2.6rem;
+	align-items: center;
+	margin-top: 1.4rem;
+	padding: 1.7rem 2.1rem;
+	background: rgba(255, 255, 255, 0.88);
+	border: 1px solid rgba(70, 40, 20, 0.08);
+	border-radius: var(--radius-md);
+	box-shadow: var(--shadow-soft);
+}
+
+.thanks-support-logo {
+	display: block;
+	padding-right: 2.6rem;
+	border-right: 1px solid rgba(70, 40, 20, 0.1);
+}
+
+.thanks-support-logo img {
+	width: 100%;
+	height: auto;
+	transition: transform 0.25s ease;
+}
+
+.thanks-support-logo:hover img {
+	transform: scale(1.02);
+}
+
+.thanks-support-copy .thanks-kicker {
+	margin-bottom: 0.45rem;
+}
+
+.thanks-support-copy p:last-child {
+	margin: 0;
+	font-size: 1.05rem;
+	line-height: 1.65;
+	color: var(--ink-800);
+}
+
+.thanks-support-copy a {
+	font-weight: 600;
+	color: var(--ink-950);
+	text-decoration: none;
+	background-image: linear-gradient(90deg, var(--accent-500), var(--coral-400));
+	background-size: 100% 1.5px;
+	background-position: 0 100%;
+	background-repeat: no-repeat;
+}
+
+.thanks-support-copy a:hover {
+	color: var(--accent-700);
+}
+
+@media (max-width: 767.98px) {
+	.thanks-support {
+		grid-template-columns: minmax(0, 1fr);
+		padding: 1.4rem 1.2rem;
+	}
+
+	.thanks-support-logo {
+		max-width: 260px;
+		padding: 0 0 1.2rem;
+		border-right: 0;
+		border-bottom: 1px solid rgba(70, 40, 20, 0.1);
+	}
+}
+
+/* A short gradient line under section titles (Workshop Theme, Core Challenges, Invited Speakers, Student Talks) */
+.accent-title::after {
+	content: "";
+	display: block;
+	width: 64px;
+	height: 3px;
+	margin-top: 0.85rem;
+	border-radius: 3px;
+	background: linear-gradient(90deg, var(--accent-500), var(--coral-400), var(--teal-500));
+}
+
+.theme-mark {
+	padding: 0;
+	background: none;
+	color: var(--accent-700);
+	font-weight: 500;
+}
+
+/* Core Challenges and Invited Speakers: a gradient line slides along the card on hover */
+.info-card,
+.speaker-card {
+	position: relative;
+	overflow: hidden;
+	transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.info-card::after,
+.speaker-card::after {
+	content: "";
+	position: absolute;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	height: 3px;
+	background: linear-gradient(90deg, var(--accent-500), var(--coral-400), var(--teal-500));
+	transform: scaleX(0);
+	transform-origin: left;
+	transition: transform 0.4s ease;
+}
+
+.info-card:hover,
+.speaker-card:hover {
+	box-shadow: var(--shadow-strong);
+}
+
+.info-card:hover::after,
+.speaker-card:hover::after {
+	transform: scaleX(1);
+}
+
+.speaker-card .speaker-affiliation {
+	color: var(--teal-500);
+}
+
+.speaker-card .profile-link:hover {
+	color: var(--accent-700);
+}
