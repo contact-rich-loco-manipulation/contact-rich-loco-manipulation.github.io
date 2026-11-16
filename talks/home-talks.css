@@ -8,15 +8,43 @@
 
 /* ------------------------------------------------------------ talk picker */
 /* Four cards, one ribbon: each card's band is a slice of the same gradient, so together they read as one strip. */
+/* The deck: the selected talk sits in the middle and larger, its neighbours either side,
+   the remaining talk peeks from behind. A soft band underneath groups the four. */
+.talk-deck {
+	--card-w: 340px;
+	--step: 345px;
+	position: relative;
+	margin-top: 0.6rem;
+	padding: 2.6rem 0 1.6rem;
+}
+
+.talk-deck::before {
+	content: "";
+	position: absolute;
+	inset: 0 -2rem;
+	z-index: 0;
+	border-radius: 28px;
+	background:
+		radial-gradient(ellipse 50% 70% at 50% 45%, rgba(240, 112, 120, 0.1), transparent 70%),
+		linear-gradient(180deg, rgba(244, 233, 220, 0.6), rgba(244, 233, 220, 0.15));
+	pointer-events: none;
+}
+
 .talk-picks {
 	--talk-ribbon: linear-gradient(90deg, #a34900 0%, #e07b24 28%, #f07078 52%, #9a6b86 74%, #37677d 100%);
-	display: grid;
-	grid-template-columns: repeat(4, minmax(0, 1fr));
-	gap: 1rem;
+	position: relative;
+	z-index: 1;
+	min-height: 360px;
 }
 
 .talk-pick {
-	position: relative;
+	position: absolute;
+	top: 0;
+	left: 50%;
+	width: var(--card-w);
+	z-index: 1;
+	transform: translateX(-50%) scale(0.72);
+	transform-origin: 50% 50%;
 	display: flex;
 	flex-direction: column;
 	padding: 0;
@@ -29,11 +57,37 @@
 	border-radius: 8px;
 	box-shadow: 0 18px 36px -18px rgba(50, 50, 93, 0.22), 0 10px 20px -14px rgba(0, 0, 0, 0.18);
 	cursor: pointer;
-	transition: transform 0.3s ease, box-shadow 0.3s ease;
+	transition: transform 0.6s cubic-bezier(0.2, 0.75, 0.25, 1), opacity 0.45s ease, box-shadow 0.3s ease, filter 0.3s ease;
 }
 
-.talk-pick:hover {
-	transform: translateY(-3px);
+.talk-pick[data-pos="center"] {
+	z-index: 4;
+	transform: translateX(-50%) scale(1);
+}
+
+.talk-pick[data-pos="left"] {
+	z-index: 3;
+	transform: translateX(calc(-50% - var(--step))) scale(0.86);
+}
+
+.talk-pick[data-pos="right"] {
+	z-index: 3;
+	transform: translateX(calc(-50% + var(--step))) scale(0.86);
+}
+
+.talk-pick[data-pos="far"] {
+	z-index: 2;
+	opacity: 0.55;
+	transform: translateX(calc(-50% + var(--step) * 1.42)) scale(0.72);
+}
+
+.talk-pick:not([data-pos="center"]) {
+	filter: saturate(0.85);
+}
+
+.talk-pick:not([data-pos="center"]):hover {
+	opacity: 1;
+	filter: none;
 	box-shadow: 0 30px 60px -18px rgba(50, 50, 93, 0.28), 0 18px 36px -18px rgba(0, 0, 0, 0.25);
 }
 
@@ -193,8 +247,7 @@
 }
 
 .talk-pick[aria-selected="true"] {
-	transform: translateY(-3px);
-	box-shadow: 0 0 0 2px rgba(240, 112, 120, 0.45), 0 30px 60px -18px rgba(50, 50, 93, 0.3);
+	box-shadow: 0 0 0 2px rgba(240, 112, 120, 0.45), 0 34px 70px -22px rgba(50, 50, 93, 0.38);
 }
 
 .talk-pick[aria-selected="true"] .talk-pick-now {
@@ -202,16 +255,59 @@
 	transform: none;
 }
 
-/* ------------------------------------------------------------ « » */
-.talk-header-actions {
+/* ------------------------------------------------------------ « dots » under the deck */
+.talk-deck-controls {
+	position: relative;
+	z-index: 1;
 	display: flex;
 	align-items: center;
-	gap: 1.2rem;
+	justify-content: center;
+	flex-wrap: wrap;
+	gap: 0.8rem;
+	margin-top: 1.8rem;
 }
 
-.talk-nav {
+.talk-dots {
 	display: flex;
+	align-items: center;
 	gap: 0.45rem;
+	padding: 0 0.2rem;
+}
+
+.talk-dot {
+	width: 9px;
+	height: 9px;
+	padding: 0;
+	border: 0;
+	border-radius: 999px;
+	background: rgba(70, 40, 20, 0.2);
+	cursor: pointer;
+	transition: width 0.35s ease, background 0.35s ease;
+}
+
+.talk-dot:hover {
+	background: rgba(191, 87, 0, 0.45);
+}
+
+.talk-dot[aria-current="true"] {
+	width: 30px;
+	background: linear-gradient(90deg, var(--accent-500), var(--coral-400));
+}
+
+.talk-dot:focus-visible {
+	outline: none;
+	box-shadow: 0 0 0 3px rgba(191, 87, 0, 0.3);
+}
+
+.talk-deck-label {
+	flex-basis: 100%;
+	margin-top: -0.1rem;
+	text-align: center;
+	font-family: "IBM Plex Mono", monospace;
+	font-size: 0.74rem;
+	letter-spacing: 0.14em;
+	text-transform: uppercase;
+	color: var(--ink-700);
 }
 
 .talk-nav-btn {
@@ -242,52 +338,125 @@
 	box-shadow: 0 0 0 3px rgba(191, 87, 0, 0.3);
 }
 
-/* ------------------------------------------------------------ heading */
-.talk-view {
-	margin-top: 2.2rem;
-}
-
-.talk-heading {
-	display: flex;
-	flex-wrap: wrap;
-	align-items: end;
-	justify-content: space-between;
-	gap: 0.9rem 1.5rem;
-	margin-bottom: 1.05rem;
-}
-
 .talk-meta {
-	margin: 0 0 0.4rem;
+	margin: 0 0 0.6rem;
 	font-family: "IBM Plex Mono", monospace;
-	font-size: 0.74rem;
-	letter-spacing: 0.14em;
+	font-size: 0.76rem;
+	letter-spacing: 0.18em;
 	text-transform: uppercase;
 	color: var(--teal-500);
 }
 
+.talk-name {
+	background: linear-gradient(90deg, var(--accent-500), var(--coral-400));
+	-webkit-background-clip: text;
+	background-clip: text;
+	color: transparent;
+}
+
+/* ------------------------------------------------------------ talk heading */
+.talk-view {
+	margin-top: 4rem;
+}
+
+/* centred over the video, so it lines up with the selected card in the deck above */
+.talk-heading {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: 1rem;
+	margin-bottom: 1.5rem;
+	text-align: center;
+}
+
+.talk-heading.slide-next {
+	animation: talk-slide-next 0.55s cubic-bezier(0.2, 0.75, 0.25, 1);
+}
+
+.talk-heading.slide-prev {
+	animation: talk-slide-prev 0.55s cubic-bezier(0.2, 0.75, 0.25, 1);
+}
+
+.talk-frame.slide-next,
+.talk-frame.slide-prev {
+	animation: talk-fade-in 0.55s ease;
+}
+
+@keyframes talk-slide-next {
+	from {
+		opacity: 0;
+		transform: translateX(48px);
+	}
+}
+
+@keyframes talk-slide-prev {
+	from {
+		opacity: 0;
+		transform: translateX(-48px);
+	}
+}
+
+@keyframes talk-fade-in {
+	from {
+		opacity: 0.35;
+	}
+}
+
+.talk-heading-copy {
+	position: relative;
+}
+
 .talk-title {
-	margin: 0;
+	margin: 0 auto;
 	max-width: 52ch;
 	font-family: "Sora", sans-serif;
-	font-size: clamp(1.3rem, 2.2vw, 1.65rem);
-	line-height: 1.15;
+	font-size: clamp(1.6rem, 2.8vw, 2.1rem);
+	font-weight: 700;
+	line-height: 1.1;
 	color: var(--ink-950);
 }
 
 .talk-subtitle {
 	display: block;
-	margin-top: 0.35rem;
+	margin-top: 0.45rem;
 	font-family: "IBM Plex Sans", sans-serif;
-	font-size: 0.62em;
+	font-size: 0.52em;
 	font-weight: 500;
 	line-height: 1.4;
-	color: var(--ink-700);
+	color: var(--ink-800);
 	text-wrap: balance;
+	-webkit-text-fill-color: currentColor;
+}
+
+.talk-by {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	gap: 0.55rem;
+	margin: 0.65rem 0 0;
+	font-size: 0.92rem;
+	color: var(--ink-700);
+}
+
+.talk-by::after,
+.talk-by::before {
+	content: "";
+	width: 22px;
+	height: 2px;
+	border-radius: 2px;
+	background: linear-gradient(90deg, var(--accent-500), var(--coral-400));
+}
+
+.talk-speaker {
+	font-family: "Sora", sans-serif;
+	font-weight: 600;
+	color: var(--ink-950);
 }
 
 .talk-links {
 	display: flex;
 	flex-wrap: wrap;
+	justify-content: center;
 	gap: 0.5rem;
 }
 
@@ -324,6 +493,8 @@
 .talk-stage {
 	--river-w: 290px;
 	--river-out: clamp(0px, calc((100vw - var(--shell-width)) / 2 - 2rem), 330px);
+	/* with the river hidden, the video grows by this much on each side, around the same centre */
+	--grow: min(calc(var(--river-w) + 1.6rem), var(--river-out));
 	display: grid;
 	grid-template-columns: minmax(0, 1fr) var(--river-w);
 	gap: 1.6rem;
@@ -356,7 +527,7 @@
    Zooming just past it (and the projector's edge) keeps the picture clean, with no black frame. */
 .talk-yt,
 .talk-poster {
-	transform: scale(1.06);
+	transform: scale(1.075);
 }
 
 .talk-yt,
@@ -923,9 +1094,12 @@ a.river-card-title:focus-visible {
 	color: var(--white);
 }
 
-/* with the river hidden, the video takes the extra width */
+/* with the river hidden, the video takes the extra width equally on both sides,
+   so its centre (and the centred heading above it) stays where it was */
 .talk-stage.is-river-off {
 	grid-template-columns: minmax(0, 1fr);
+	margin-left: calc(-1 * var(--grow));
+	margin-right: calc(var(--river-w) + 1.6rem - var(--river-out) - var(--grow));
 }
 
 .talk-stage.is-river-off .talk-river {
@@ -1095,6 +1269,21 @@ a.river-card-title:focus-visible {
 
 /* ------------------------------------------------------------ responsive */
 @media (max-width: 1099.98px) {
+	.talk-stage.is-river-off {
+		margin-left: 0;
+		margin-right: 0;
+	}
+
+	.talk-deck {
+		--card-w: 300px;
+		--step: 300px;
+	}
+
+	.talk-pick[data-pos="far"] {
+		opacity: 0;
+		pointer-events: none;
+	}
+
 	.talk-stage {
 		grid-template-columns: minmax(0, 1fr);
 		margin-right: 0;
@@ -1112,8 +1301,24 @@ a.river-card-title:focus-visible {
 }
 
 @media (max-width: 767.98px) {
-	.talk-picks {
-		grid-template-columns: repeat(2, minmax(0, 1fr));
+	.talk-deck {
+		--card-w: 74vw;
+		--step: 64vw;
+		padding: 1.8rem 0 1.2rem;
+	}
+
+	.talk-deck::before {
+		inset: 0 -1rem;
+		border-radius: 20px;
+	}
+
+	.talk-pick[data-pos="far"] {
+		opacity: 0;
+		pointer-events: none;
+	}
+
+	.talk-deck-label {
+		display: none;
 	}
 
 	.talk-pick-band {
@@ -1176,6 +1381,8 @@ a.river-card-title:focus-visible {
 @media (prefers-reduced-motion: reduce) {
 	.talk-pick,
 	.talk-pick-now,
+	.talk-heading,
+	.talk-frame,
 	.river-reel,
 	.river-now,
 	.talk-caption,

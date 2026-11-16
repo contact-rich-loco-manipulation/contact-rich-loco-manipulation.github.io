@@ -26,13 +26,14 @@
   const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
   const ui = {
-    picks: $(".talk-picks"), view: $(".talk-view"), meta: $(".talk-meta"), name: $(".talk-name"),
+    picks: $(".talk-picks"), view: $(".talk-view"), meta: $(".talk-meta"), name: $(".talk-name"), speaker: $(".talk-speaker"),
     subtitle: $(".talk-subtitle"), links: $(".talk-links"), main: $(".talk-main"), frame: $(".talk-frame"),
     poster: $(".talk-poster"), yt: $(".talk-yt"), big: $(".talk-play-big"), toggle: $(".talk-toggle"),
     time: $(".talk-time"), bar: $(".talk-bar"), ticks: $(".talk-bar-ticks"), tip: $(".talk-bar-tip"),
     cc: $(".talk-cc"), mute: $(".talk-mute"), full: $(".talk-full"), caption: $(".talk-caption"),
     status: $(".talk-status"), riverView: $(".river-view"), reel: $(".river-reel"), clock: $(".river-clock"),
-    stage: $(".talk-stage"), riverToggle: $(".talk-river-toggle")
+    stage: $(".talk-stage"), riverToggle: $(".talk-river-toggle"),
+    dots: $(".talk-dots"), deckLabel: $(".talk-deck-label"), heading: $(".talk-heading")
   };
 
   let talks = [], media = {}, current = null, moments = [], items = [], sentences = [];
@@ -41,6 +42,7 @@
   let captionsOn = true, muted = false, dragging = false;
   let reelY = null, jumpTimer = 0, sentenceIndex = -1, saidCount = -1, shownSecond = -1;
   let capSaid = null, capNext = null;
+  let lastIndex = -1;
 
   /* ---------------------------------------------------------------- data */
   function parseVTT(text) {
@@ -419,12 +421,34 @@
     sentences = [];
     moments = buildMoments(current);
 
+    // The selected talk sits in the middle of the deck; its neighbours sit either side, the last peeks from behind.
+    const idx = talks.indexOf(current), n = talks.length;
+    const slot = { 0: "center", 1: "right", [n - 1]: "left" };
     ui.picks.querySelectorAll(".talk-pick").forEach(pick => {
-      const on = pick.dataset.talk === current.id;
+      const i = talks.findIndex(t => t.id === pick.dataset.talk);
+      const d = (i - idx + n) % n;
+      pick.dataset.pos = slot[d] || "far";
+      const on = d === 0;
       pick.setAttribute("aria-selected", String(on));
       pick.tabIndex = on ? 0 : -1;
     });
-    ui.meta.textContent = `${current.speaker} · ${fmt(current.duration)}`;
+    ui.dots.querySelectorAll(".talk-dot").forEach((dot, i) => {
+      if (i === idx) dot.setAttribute("aria-current", "true");
+      else dot.removeAttribute("aria-current");
+    });
+    ui.deckLabel.textContent = `${current.name} · ${idx + 1} / ${n}`;
+    // The heading below slides in from the side the deck moved, so both parts move together.
+    if (lastIndex >= 0 && lastIndex !== idx && !reduceMotion) {
+      const forward = (idx - lastIndex + n) % n <= n / 2;
+      [ui.heading, ui.frame].forEach(node => {
+        node.classList.remove("slide-next", "slide-prev");
+        void node.offsetWidth;
+        node.classList.add(forward ? "slide-next" : "slide-prev");
+      });
+    }
+    lastIndex = idx;
+    ui.meta.textContent = `Now showing · ${fmt(current.duration)}`;
+    ui.speaker.textContent = current.speaker;
     ui.name.textContent = current.name;
     ui.subtitle.textContent = current.title;
     ui.poster.src = `${BASE}posters/${current.id}.jpg`;
@@ -479,7 +503,7 @@
   const PREFS_KEY = "corl-talks-view";
   const loadPrefs = () => { try { return JSON.parse(localStorage.getItem(PREFS_KEY)) || {}; } catch (error) { return {}; } };
   const savePrefs = () => {
-    try { localStorage.setItem(PREFS_KEY, JSON.stringify({ captions: captionsOn, river: riverOn })); } catch (error) { /* private mode */ }
+    try { localStorage.setItem(PREFS_KEY, JSON.stringify({ captions: captionsOn })); } catch (error) { /* private mode */ }
   };
   let riverOn = true;
 
@@ -503,7 +527,7 @@
   {
     const prefs = loadPrefs();
     if (prefs.captions === false) setCaptions(false);
-    if (prefs.river === false) setRiver(false);
+    // The river always starts on; only the captions choice is remembered.
   }
 
   ui.mute.addEventListener("click", () => {
@@ -664,7 +688,7 @@
       pick.dataset.talk = talk.id;
       pick.setAttribute("role", "tab");
       pick.setAttribute("aria-controls", "student-talk-view");
-      // Each band is a slice of one shared gradient (by position), so the four cards read as one ribbon.
+      // Each band is a slice of one shared gradient, so the four cards read as one ribbon.
       const band = el("span", "talk-pick-band");
       band.style.setProperty("--i", String(index * 3 / Math.max(1, talks.length - 1)));
       band.append(
@@ -688,8 +712,23 @@
       pick.addEventListener("click", () => { if (!current || current.id !== talk.id) select(talk.id); });
       ui.picks.append(pick);
     });
+    talks.forEach(talk => {
+      const dot = el("button", "talk-dot");
+      dot.type = "button";
+      dot.setAttribute("aria-label", `Show ${talk.name}`);
+      dot.addEventListener("click", () => { if (current.id !== talk.id) select(talk.id); });
+      ui.dots.append(dot);
+    });
+    const sizeDeck = () => {
+      const tallest = Math.max(...Array.from(ui.picks.children, pick => pick.offsetHeight));
+      ui.picks.style.height = `${tallest}px`;
+    };
+    if (window.ResizeObserver) new ResizeObserver(sizeDeck).observe(ui.picks.firstElementChild);
+    window.addEventListener("resize", sizeDeck);
+    if (document.fonts) document.fonts.ready.then(sizeDeck).catch(() => {});
     const params = new URLSearchParams(window.location.search);
     select(params.get("talk"), Number(params.get("t")) || 0);
+    sizeDeck();
   }
   init();
 })();
