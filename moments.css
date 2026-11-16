@@ -1,0 +1,273 @@
+/* Workshop Moments: a deck of photo cards in the style of the student talk picker, larger.
+   The chosen photo sits in the middle, its neighbours either side, the next ones peek from behind.
+   It only moves when a visitor asks it to (arrows, dots, a click, keys or a swipe). */
+.moments-deck {
+	--card-w: min(600px, 78vw);
+	--step: calc(var(--card-w) * 0.66);
+	position: relative;
+	margin-top: 0.6rem;
+	padding: 2.4rem 0 1.4rem;
+}
+
+.moments-deck::before {
+	content: "";
+	position: absolute;
+	inset: 0 -2rem;
+	z-index: 0;
+	border-radius: 28px;
+	background:
+		radial-gradient(ellipse 50% 70% at 50% 45%, rgba(240, 112, 120, 0.1), transparent 70%),
+		linear-gradient(180deg, rgba(244, 233, 220, 0.6), rgba(244, 233, 220, 0.15));
+	pointer-events: none;
+}
+
+.moments-cards {
+	--ribbon: linear-gradient(90deg, #a34900 0%, #e07b24 28%, #f07078 52%, #9a6b86 74%, #37677d 100%);
+	position: relative;
+	z-index: 1;
+	height: calc(var(--card-w) * 0.75 + 96px);
+	touch-action: pan-y;
+}
+
+.moment-card {
+	position: absolute;
+	top: 0;
+	left: 50%;
+	width: var(--card-w);
+	z-index: 1;
+	display: flex;
+	flex-direction: column;
+	padding: 0;
+	overflow: hidden;
+	font: inherit;
+	color: inherit;
+	text-align: left;
+	background: var(--white);
+	border: 1px solid rgba(70, 40, 20, 0.06);
+	border-radius: 10px;
+	box-shadow: 0 22px 44px -20px rgba(50, 50, 93, 0.26), 0 12px 24px -16px rgba(0, 0, 0, 0.2);
+	opacity: 0;
+	transform: translateX(-50%) scale(0.6);
+	pointer-events: none;
+	cursor: pointer;
+	transition: transform 0.7s cubic-bezier(0.2, 0.75, 0.25, 1), opacity 0.5s ease, filter 0.3s ease, box-shadow 0.3s ease;
+}
+
+.moment-card[data-pos] {
+	opacity: 1;
+	pointer-events: auto;
+}
+
+.moments-cards:not(.is-ready) .moment-card {
+	transition: none;
+}
+
+.moment-card[data-pos="center"] {
+	z-index: 5;
+	transform: translateX(-50%) scale(1);
+	cursor: zoom-in;
+}
+
+.moment-card[data-pos="left"] {
+	z-index: 4;
+	transform: translateX(calc(-50% - var(--step))) scale(0.8);
+}
+
+.moment-card[data-pos="right"] {
+	z-index: 4;
+	transform: translateX(calc(-50% + var(--step))) scale(0.8);
+}
+
+.moment-card[data-pos="far-left"] {
+	z-index: 3;
+	opacity: 0.5;
+	transform: translateX(calc(-50% - var(--step) * 1.5)) scale(0.64);
+}
+
+.moment-card[data-pos="far-right"] {
+	z-index: 3;
+	opacity: 0.5;
+	transform: translateX(calc(-50% + var(--step) * 1.5)) scale(0.64);
+}
+
+.moment-card[data-pos]:not([data-pos="center"]) {
+	filter: saturate(0.8);
+}
+
+.moment-card[data-pos]:not([data-pos="center"]):hover {
+	opacity: 1;
+	filter: none;
+}
+
+.moment-card:focus-visible {
+	outline: none;
+	box-shadow: 0 0 0 3px rgba(191, 87, 0, 0.4), 0 22px 44px -20px rgba(50, 50, 93, 0.26);
+}
+
+/* each band is a slice of one ribbon, so the deck reads as one strip */
+.moment-band {
+	position: relative;
+	display: flex;
+	flex-direction: column;
+	justify-content: flex-end;
+	gap: 0.3rem;
+	min-height: 96px;
+	padding: 0.95rem 1.25rem 1rem;
+	overflow: hidden;
+	color: var(--white);
+	background: var(--ribbon);
+	background-size: 400% 100%;
+	background-position: calc(var(--i, 0) * 33.333%) 0;
+}
+
+.moment-band::before {
+	content: "";
+	position: absolute;
+	inset: 0;
+	background: radial-gradient(circle at 88% 12%, rgba(255, 255, 255, 0.3), transparent 55%);
+	pointer-events: none;
+}
+
+.moment-kicker {
+	position: relative;
+	font-family: "IBM Plex Mono", monospace;
+	font-size: 0.7rem;
+	letter-spacing: 0.18em;
+	text-transform: uppercase;
+	opacity: 0.9;
+}
+
+.moment-title {
+	position: relative;
+	font-family: "Sora", sans-serif;
+	font-size: clamp(1.1rem, 2vw, 1.45rem);
+	font-weight: 600;
+	line-height: 1.15;
+	letter-spacing: 0.04em;
+}
+
+.moment-photo {
+	display: block;
+	aspect-ratio: 4 / 3;
+	overflow: hidden;
+	background: var(--sand-100);
+}
+
+.moment-photo img {
+	display: block;
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+}
+
+.moments-controls {
+	position: relative;
+	z-index: 1;
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	justify-content: center;
+	gap: 0.9rem;
+	margin-top: 1.4rem;
+}
+
+.moments-dots {
+	display: flex;
+	gap: 0.45rem;
+}
+
+.moments-dot {
+	width: 9px;
+	height: 9px;
+	padding: 0;
+	background: rgba(70, 40, 20, 0.2);
+	border: 0;
+	border-radius: 999px;
+	cursor: pointer;
+	transition: width 0.3s ease, background 0.3s ease;
+}
+
+.moments-dot[aria-current="true"] {
+	width: 28px;
+	background: linear-gradient(90deg, var(--accent-500), var(--coral-400));
+}
+
+.moments-label {
+	flex-basis: 100%;
+	font-family: "IBM Plex Mono", monospace;
+	font-size: 0.72rem;
+	letter-spacing: 0.16em;
+	text-transform: uppercase;
+	text-align: center;
+	color: var(--ink-600);
+}
+
+/* a photo opened large */
+.moment-viewer {
+	width: min(1200px, calc(100vw - 32px));
+	max-width: none;
+	max-height: calc(100dvh - 32px);
+	margin: auto;
+	padding: 0;
+	overflow: visible;
+	background: transparent;
+	border: 0;
+}
+
+.moment-viewer::backdrop {
+	background: rgba(20, 12, 6, 0.82);
+	backdrop-filter: blur(4px);
+}
+
+.moment-viewer img {
+	display: block;
+	width: 100%;
+	max-height: calc(100dvh - 120px);
+	object-fit: contain;
+	border-radius: 12px;
+}
+
+.moment-viewer-caption {
+	margin: 0.8rem 0 0;
+	font-size: 0.95rem;
+	color: rgba(255, 255, 255, 0.9);
+	text-align: center;
+}
+
+.moment-viewer-close {
+	position: absolute;
+	top: -0.6rem;
+	right: -0.6rem;
+	z-index: 1;
+	display: grid;
+	place-items: center;
+	width: 2.6rem;
+	height: 2.6rem;
+	font-size: 1.1rem;
+	color: var(--ink-950);
+	background: var(--white);
+	border: 0;
+	border-radius: 50%;
+	box-shadow: 0 8px 20px rgba(0, 0, 0, 0.35);
+	cursor: pointer;
+}
+
+@media (max-width: 760px) {
+	.moments-deck {
+		--card-w: 82vw;
+		--step: calc(var(--card-w) * 0.5);
+	}
+
+	.moment-card[data-pos="far-left"],
+	.moment-card[data-pos="far-right"] {
+		opacity: 0;
+		pointer-events: none;
+	}
+}
+
+@media (prefers-reduced-motion: reduce) {
+	.moment-card,
+	.moments-dot {
+		transition: none;
+	}
+}
