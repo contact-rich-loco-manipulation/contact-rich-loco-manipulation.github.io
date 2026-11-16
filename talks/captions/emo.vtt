@@ -1,0 +1,3043 @@
+WEBVTT
+Kind: captions
+Language: en
+
+NOTE Emo Todorov - Resurrecting Model-Based Control and Learning (Invited Talk).
+Synced to K3_Emo_Todorov_CLEAN.mp4 (talk begins at 00:00:06.006 after the intro card).
+
+1
+00:00:06.507 --> 00:00:10.326
+All right welcome
+everyone let's get started
+
+2
+00:00:10.366 --> 00:00:13.426
+our next speaker needs no no introduction.
+
+3
+00:00:14.526 --> 00:00:18.366
+So it's a pleasure to have
+Emo giving us a talk today.
+
+4
+00:00:18.746 --> 00:00:20.046
+I'll just share a quick anecdote.
+
+5
+00:00:20.186 --> 00:00:24.727
+I remember being a PhD admit coming
+into Emo's office and we used to work
+
+6
+00:00:24.767 --> 00:00:27.906
+on task and motion planning and Emo
+was like, what should we talk about?
+
+7
+00:00:28.066 --> 00:00:29.866
+We talked for an hour about neuroscience.
+
+8
+00:00:30.327 --> 00:00:33.727
+And so Emo is one of the most
+versatile researchers across
+
+9
+00:00:33.767 --> 00:00:37.486
+neuroscience to reinforcement
+learning to simulation.
+
+10
+00:00:38.526 --> 00:00:43.107
+And today he's hopefully going to show us
+some amazing live demos and tell us tell
+
+11
+00:00:43.147 --> 00:00:49.646
+us about lots of cool stuff thank
+you everyone um i'm glad i have a talk
+
+12
+00:00:49.686 --> 00:00:52.727
+but but let's just uh play
+with this software first a little bit it's
+
+13
+00:00:52.767 --> 00:00:53.767
+Called kiko so
+
+14
+00:00:56.426 --> 00:00:58.106
+Hello, we cannot hear you.
+
+15
+00:01:00.566 --> 00:01:02.346
+It's the cat being echoed.
+
+16
+00:01:04.966 --> 00:01:08.006
+I'm old, I need to pass
+this down to the cat.
+
+17
+00:01:08.566 --> 00:01:09.566
+Okay,
+
+18
+00:01:10.946 --> 00:01:17.366
+So this thing is walking with MPC, you can
+see with algorithm I want to talk about,
+
+19
+00:01:17.406 --> 00:01:20.726
+it is related to algorithm
+you can also work with sampling
+
+20
+00:01:28.426 --> 00:01:39.806
+Here is an example of an algorithm you can
+run this thing with an elliptical solver
+
+21
+00:02:02.686 --> 00:02:04.806
+So see how when you have
+a hundred goes over,
+
+22
+00:02:04.846 --> 00:02:10.266
+it just basically nails it, but if
+you switch those up it goes over.
+
+23
+00:02:21.566 --> 00:02:22.706
+So,
+
+24
+00:02:24.166 --> 00:02:33.846
+Both sampling solvers
+and analytical solvers
+
+25
+00:02:33.886 --> 00:02:38.766
+can see nowadays, and they have various
+
+26
+00:02:49.626 --> 00:02:51.746
+Okay, so I'm going to actually,
+
+27
+00:02:51.786 --> 00:02:55.886
+I don't know if you can see,
+but I'm going to summarize.
+
+28
+00:02:57.226 --> 00:03:03.286
+But the point of the demo is that a lot
+of the RL tasks that are actually
+
+29
+00:03:03.326 --> 00:03:09.526
+solved by RL without mimicking
+can also be solved by NPC.
+
+30
+00:03:11.586 --> 00:03:12.686
+That's an important one.
+
+31
+00:03:13.046 --> 00:03:16.266
+Okay, so back to the actual talk.
+
+32
+00:03:16.486 --> 00:03:19.306
+I'm going to talk about model-based
+optimization in job physics
+
+33
+00:03:19.346 --> 00:03:22.286
+using this software called
+PIPO that's built on top of it.
+
+34
+00:03:22.326 --> 00:03:29.366
+I've been promising to release it since
+2020 basically, this time for real.
+
+35
+00:03:30.206 --> 00:03:32.166
+The reason for the huge
+delay in retrospect
+
+36
+00:03:32.206 --> 00:03:34.806
+is because it's like
+a ridiculous Eurovision project.
+
+37
+00:03:36.606 --> 00:03:38.686
+You can't do everything at once.
+
+38
+00:03:38.966 --> 00:03:41.526
+And a lot of the things were
+done at like, I don't know, 70%,
+
+39
+00:03:41.566 --> 00:03:46.026
+but the remaining 20-30%
+or who knows, I figured, OK,
+
+40
+00:03:46.066 --> 00:03:47.946
+I'll tie it all, it's not
+very important at least.
+
+41
+00:03:48.146 --> 00:03:49.606
+But that day was never coming.
+
+42
+00:03:49.986 --> 00:03:52.386
+Now, I finally have a team
+of colleagues named Fable,
+
+43
+00:03:52.426 --> 00:03:54.146
+Fable, Fable, Fable, and Fable.
+
+44
+00:03:55.406 --> 00:04:01.206
+And so they're helping me tie
+the loose ends and things really close.
+
+45
+00:04:01.386 --> 00:04:06.026
+I'm not going to give any more dates
+because I lost a bet with the cash once,
+
+46
+00:04:06.066 --> 00:04:10.546
+and now I guess we'll have a permanent
+free license because I lost a bet.
+
+47
+00:04:10.686 --> 00:04:12.946
+I don't know when it's going
+to be released, so no more dates.
+
+48
+00:04:13.446 --> 00:04:14.906
+But this time it's going to be released.
+
+49
+00:04:16.706 --> 00:04:18.246
+You said there's a big crowd.
+
+50
+00:04:18.446 --> 00:04:20.386
+Of course there's a big crowd.
+
+51
+00:04:22.286 --> 00:04:25.966
+The difference between INCRA
+and not INCRA was before PayPal.
+
+52
+00:04:28.286 --> 00:04:32.046
+PayPal got released like two weeks after
+INCRA and it totally changed my life.
+
+53
+00:04:35.126 --> 00:04:36.966
+Model-based controlled learning,
+
+54
+00:04:37.006 --> 00:04:39.466
+I continue to think that is the way
+to do things and that's
+
+55
+00:04:39.506 --> 00:04:41.966
+how we're going to get really
+good robot performance.
+
+56
+00:04:42.006 --> 00:04:43.626
+Performance, maybe even
+superhuman one day,
+
+57
+00:04:43.666 --> 00:04:46.846
+because the machines, mechanically,
+have superhuman capabilities.
+
+58
+00:04:47.206 --> 00:04:48.466
+It's the brains behind them that don't.
+
+59
+00:04:49.766 --> 00:04:52.126
+So, we should resurrect
+model-based control learning.
+
+60
+00:04:52.266 --> 00:04:53.786
+Some people have portrayed it there.
+
+61
+00:04:55.046 --> 00:04:58.746
+Now, I kind of want to address the high
+level report we're going to be doing.
+
+62
+00:04:58.926 --> 00:05:00.626
+So, you know, to do that,
+I'll start with a little
+
+63
+00:05:00.666 --> 00:05:03.186
+bit of psychiatry reinforcement learning.
+
+64
+00:05:03.826 --> 00:05:05.486
+It's kind of a slightly different
+
+65
+00:05:07.426 --> 00:05:07.746
+Situation.
+
+66
+00:05:07.786 --> 00:05:10.946
+Claims to be model-free, yet it only
+works if you have a simulation model.
+
+67
+00:05:10.986 --> 00:05:13.346
+In the real world, you can do
+a little bit of fine-tuning,
+
+68
+00:05:13.386 --> 00:05:15.586
+but sometimes it could
+be the job or the work.
+
+69
+00:05:15.786 --> 00:05:17.346
+It's just a trial and error.
+
+70
+00:05:18.086 --> 00:05:19.266
+It's certainly not optimistic.
+
+71
+00:05:21.026 --> 00:05:22.446
+Claims to treat the model
+as a black box finally
+
+72
+00:05:22.486 --> 00:05:25.286
+get utilized through
+this information all the time.
+
+73
+00:05:26.086 --> 00:05:27.826
+Claims that rewards come
+from the environment,
+
+74
+00:05:27.866 --> 00:05:30.966
+that is like the typical picture
+from the impossible in the book,
+
+75
+00:05:31.006 --> 00:05:35.426
+yet everyone does shameless reward-shaping
+and otherwise it doesn't work.
+
+76
+00:05:35.986 --> 00:05:37.466
+Claims that something is enough,
+
+77
+00:05:37.506 --> 00:05:39.866
+yet people nowadays
+are feeding neural networks
+
+78
+00:05:39.906 --> 00:05:41.786
+to simulators so they can get derivatives.
+
+79
+00:05:42.186 --> 00:05:43.866
+What happened guys,
+wasn't something enough?
+
+80
+00:05:45.866 --> 00:05:51.086
+So, it's an exciting thing,
+but time to move along the rest.
+
+81
+00:05:51.446 --> 00:05:54.226
+Now, there's no good reason
+to waste the analytical
+
+82
+00:05:54.266 --> 00:05:56.106
+properties of the model and be model-free.
+
+83
+00:05:56.406 --> 00:05:59.726
+There are, however, multiple
+superficial reasons that kind of sound
+
+84
+00:05:59.766 --> 00:06:01.586
+good on the first tier though,
+so I'd like to address them.
+
+85
+00:06:03.166 --> 00:06:07.786
+The first one is that model-based policies
+can become over-reliant on the specifics
+
+86
+00:06:07.826 --> 00:06:09.726
+of your model, which is often inaccurate,
+
+87
+00:06:09.766 --> 00:06:11.446
+and so we don't want
+to get simply too fast.
+
+88
+00:06:12.146 --> 00:06:13.146
+So that's true.
+
+89
+00:06:13.266 --> 00:06:15.386
+So start with system ID,
+make your model more accurate,
+
+90
+00:06:15.426 --> 00:06:19.606
+and people in RL nowadays are discovering
+that the more system ID you do,
+
+91
+00:06:19.646 --> 00:06:21.206
+the less domain optimization you need.
+
+92
+00:06:21.466 --> 00:06:24.606
+And you can still do domain
+optimization at the end.
+
+93
+00:06:25.286 --> 00:06:28.266
+Domain optimization is quickly
+compatible with model-based methods.
+
+94
+00:06:29.586 --> 00:06:31.046
+So just to be clear what
+I mean by model-based method,
+
+95
+00:06:31.086 --> 00:06:35.486
+like specifically if you want to do policy
+gradients, you pick random initial states,
+
+96
+00:06:35.526 --> 00:06:38.226
+you roll out the policy deterministically,
+
+97
+00:06:38.266 --> 00:06:43.826
+you compute gradients deterministically
+with your calculus instead of sampling.
+
+98
+00:06:44.446 --> 00:06:46.746
+You can still have random
+termination or some
+
+99
+00:06:46.786 --> 00:06:48.566
+kind of termination conditions you want.
+
+100
+00:06:48.946 --> 00:06:51.326
+On each rollout,
+you can simulate different physics,
+
+101
+00:06:51.366 --> 00:06:53.046
+you can choose the initial
+states however you want.
+
+102
+00:06:53.186 --> 00:06:57.186
+So all the randomization or conditioning
+or whatever can still be there,
+
+103
+00:06:57.226 --> 00:06:58.246
+but the rest is a lot more efficient.
+
+104
+00:07:00.826 --> 00:07:05.366
+Another thing that has been done,
+all three policies are kind of reflexes,
+
+105
+00:07:05.406 --> 00:07:09.146
+they can map observations to actions
+directly, you don't need state estimation.
+
+106
+00:07:09.806 --> 00:07:11.886
+That's true, but state
+estimation is a good thing,
+
+107
+00:07:11.926 --> 00:07:13.086
+just like system ideas are a good thing,
+
+108
+00:07:13.126 --> 00:07:16.446
+and I hope more people in that are going
+to discover state estimation,
+
+109
+00:07:16.486 --> 00:07:19.286
+just like they discovered
+it since I did recently.
+
+110
+00:07:19.846 --> 00:07:22.546
+On top of that, computer
+vision finally works,
+
+111
+00:07:22.586 --> 00:07:24.646
+or almost works,
+depending on who you talk to.
+
+112
+00:07:25.146 --> 00:07:27.846
+But you know, this is the best time
+to be building state estimations.
+
+113
+00:07:28.566 --> 00:07:32.146
+So it's kind of ironic, there was a very
+large community of people who spent like
+
+114
+00:07:32.186 --> 00:07:35.286
+half a century working
+on state estimation,
+
+115
+00:07:35.326 --> 00:07:36.746
+just when it was about to be solved,
+
+116
+00:07:36.786 --> 00:07:38.026
+they all left and they started training
+
+117
+00:07:38.066 --> 00:07:40.646
+pixel-to-toe policies
+and forgot about state
+
+118
+00:07:40.686 --> 00:07:41.546
+Estimation.
+
+119
+00:07:41.586 --> 00:07:43.986
+Very strange situation,
+somebody should come back to it.
+
+120
+00:07:44.026 --> 00:07:48.286
+Now, if you really want the reflexive
+policy because you don't have online
+
+121
+00:07:48.326 --> 00:07:49.266
+computer or whatever, fine,
+
+122
+00:07:49.306 --> 00:07:52.286
+you can still do it, but you can do more
+of a process and then just deal with it.
+
+123
+00:07:52.886 --> 00:07:55.466
+Like the first supervisor,
+which works a lot better.
+
+124
+00:07:57.006 --> 00:07:58.726
+Another point is that zero-order,
+
+125
+00:07:58.766 --> 00:08:01.026
+derivative-free
+optimization is more robust.
+
+126
+00:08:01.406 --> 00:08:02.406
+That's definitely true.
+
+127
+00:08:02.926 --> 00:08:03.786
+On the other hand, though,
+
+128
+00:08:03.826 --> 00:08:06.746
+analytical methods find better
+solutions faster when they work.
+
+129
+00:08:06.786 --> 00:08:09.446
+So the best approach here is a hybrid,
+
+130
+00:08:09.486 --> 00:08:14.566
+where you use sampling to find good
+regions of attraction, not water.
+
+131
+00:08:15.146 --> 00:08:18.186
+And then within each region
+of attraction you optimize
+
+132
+00:08:18.226 --> 00:08:21.426
+your proper analytical solver
+over the drastic gradients.
+
+133
+00:08:22.606 --> 00:08:26.246
+And finally, model basements are hard
+to implement too, so you could keep them.
+
+134
+00:08:26.486 --> 00:08:29.526
+I understand there is a shortage
+of licenses on the market right now.
+
+135
+00:08:29.666 --> 00:08:32.386
+I hope availability improves sometimes.
+
+136
+00:08:35.226 --> 00:08:41.066
+Okay, so C++,
+so you can think of it as like
+
+137
+00:08:41.106 --> 00:08:43.166
+you give it a problem
+and it gives you a solution.
+
+138
+00:08:44.986 --> 00:08:48.366
+Solution blocks are the same blocks that
+are used in all of reinforcement learning
+
+139
+00:08:48.406 --> 00:08:51.326
+and dynamic programming and optional
+control to build solutions,
+
+140
+00:08:51.366 --> 00:08:55.526
+actors or explicit policies,
+
+141
+00:08:57.866 --> 00:09:01.546
+And in this case,
+there is a built-in trajectory optimizer.
+
+142
+00:09:02.766 --> 00:09:06.146
+When people do behavioral planning
+on demonstrated trajectories,
+
+143
+00:09:06.186 --> 00:09:08.806
+you can think of the human demonstrators
+being a trajectory optimizer.
+
+144
+00:09:09.086 --> 00:09:10.266
+In fact, when I used to do neuroscience,
+
+145
+00:09:10.306 --> 00:09:13.686
+I wrote a number of papers arguing
+that the brain does some kind
+
+146
+00:09:13.726 --> 00:09:17.166
+of stochastic optimal control,
+but that was in previous life.
+
+147
+00:09:17.506 --> 00:09:20.946
+So each of those blocks is capable
+of what is now called recursive
+
+148
+00:09:20.986 --> 00:09:26.726
+self-improvement with We've had
+that in optical control since the 1960s.
+
+149
+00:09:27.566 --> 00:09:30.586
+Actors can improve themselves
+with policy gradients with our ATMs.
+
+150
+00:09:30.746 --> 00:09:33.346
+Critics can improve themselves
+with value iteration in place,
+
+151
+00:09:33.386 --> 00:09:34.686
+so we don't have any questions.
+
+152
+00:09:35.286 --> 00:09:38.146
+Projector optimizers
+can improve themselves in FNC.
+
+153
+00:09:39.106 --> 00:09:41.366
+If you decide to use multiple
+blocks simultaneously,
+
+154
+00:09:41.406 --> 00:09:44.006
+you enable more algorithms.
+
+155
+00:09:44.066 --> 00:09:46.786
+So, policy iteration
+means action and critique.
+
+156
+00:09:47.106 --> 00:09:49.546
+Policy gradient plus plus
+means policy gradient,
+
+157
+00:09:49.586 --> 00:09:50.626
+which we're creating on the horizon.
+
+158
+00:09:50.666 --> 00:09:53.846
+Now, how do these things interact
+with the trajectory optimizer?
+
+159
+00:09:54.586 --> 00:09:58.266
+So, the critic can provide the trajectory
+optimizer with a final cost.
+
+160
+00:09:58.486 --> 00:10:00.866
+Because trajectory optimizer is only
+going to look out to some point,
+
+161
+00:10:00.906 --> 00:10:03.086
+and then beyond that,
+what happens afterwards,
+
+162
+00:10:03.126 --> 00:10:04.126
+we'll need somebody to tell you.
+
+163
+00:10:04.546 --> 00:10:07.486
+Actor can provide the trajectory
+optimizer with the whole term, obviously.
+
+164
+00:10:08.146 --> 00:10:12.746
+Now, the trajectory
+optimizer can provide both
+
+165
+00:10:12.786 --> 00:10:15.286
+the actor and the critic
+with supervised learning time.
+
+166
+00:10:15.326 --> 00:10:22.006
+So the answer gets to minimize global
+errors along optimal trajectories.
+
+167
+00:10:22.226 --> 00:10:25.786
+Once you have this thing going, once
+you have a good trajectory on the planner,
+
+168
+00:10:25.826 --> 00:10:28.426
+it's not clear that any of those
+dynamic programming
+
+169
+00:10:28.466 --> 00:10:31.226
+or reinforcement learning methods
+are on the top of the agenda.
+
+170
+00:10:32.226 --> 00:10:35.306
+And the reason for that is that if
+you look at what is policy gradient,
+
+171
+00:10:35.346 --> 00:10:37.366
+policy iteration, value iteration,
+
+172
+00:10:38.306 --> 00:10:39.306
+There are two things happening.
+
+173
+00:10:39.546 --> 00:10:41.246
+One is something, some processes,
+
+174
+00:10:41.286 --> 00:10:44.226
+discovering better
+actions at given states.
+
+175
+00:10:44.266 --> 00:10:47.726
+States, and two, those better actions
+are cached into a global function
+
+176
+00:10:47.766 --> 00:10:50.466
+approximation that's trying
+to interpolate over the state space.
+
+177
+00:10:51.246 --> 00:10:54.366
+All these function approximation
+matters are good at the function
+
+178
+00:10:54.406 --> 00:10:57.486
+approximation part, but they're not
+that good at the discovery part.
+
+179
+00:10:58.246 --> 00:11:01.086
+Projective optimizers are much
+better at figuring out, you know,
+
+180
+00:11:01.126 --> 00:11:05.286
+if I'm in this state right now and I'm
+going to run for like two seconds,
+
+181
+00:11:05.326 --> 00:11:06.666
+what is the best action to do right now?
+
+182
+00:11:07.726 --> 00:11:10.206
+Projective optimizer has a huge
+advantage that it's local,
+
+183
+00:11:10.246 --> 00:11:16.226
+doesn't need to worry about So once
+you have a trajectory optimizer that's
+
+184
+00:11:16.266 --> 00:11:19.786
+actually doing the discovery
+for you, you may be able to get away
+
+185
+00:11:19.826 --> 00:11:22.806
+just with supervised learning caching
+both the policies and the values
+
+186
+00:11:22.846 --> 00:11:25.586
+And not really pretending
+to be doing discovery.
+
+187
+00:11:27.686 --> 00:11:33.386
+Now Ocubo has multiple blocks in it,
+there's some common computation
+
+188
+00:11:33.426 --> 00:11:38.606
+infrastructure, there's derivatives,
+government optimization,
+
+189
+00:11:38.646 --> 00:11:40.286
+native neural network module,
+running both on CPU on GPU,
+
+190
+00:11:40.326 --> 00:11:42.286
+so you don't have to go to Python
+and Python for all that.
+
+191
+00:11:42.786 --> 00:11:46.306
+It has a problem specification
+language, importantly,
+
+192
+00:11:46.346 --> 00:11:51.386
+which allows you to specify
+an optimization problem and then
+
+193
+00:11:51.426 --> 00:11:54.166
+attack that problem with all
+the combinations of the language.
+
+194
+00:11:54.206 --> 00:11:56.586
+So the same problem can be solved
+in many different ways.
+
+195
+00:11:57.806 --> 00:11:59.526
+And then it has a number
+of original methods,
+
+196
+00:11:59.566 --> 00:12:01.446
+which is something I'll talk about today.
+
+197
+00:12:03.466 --> 00:12:06.386
+It aims to enable pretty
+much anything you want to do,
+
+198
+00:12:06.426 --> 00:12:09.046
+but there might prefer like target control
+
+199
+00:12:09.086 --> 00:12:10.766
+scheme that I really
+want to enable is this.
+
+200
+00:12:10.926 --> 00:12:13.366
+So, offline you put this ID,
+you train a critic,
+
+201
+00:12:13.406 --> 00:12:17.626
+use both goal-conditioned and domain
+randomize, not so much an actor.
+
+202
+00:12:17.986 --> 00:12:20.186
+And then online you need
+to do state estimation,
+
+203
+00:12:20.226 --> 00:12:23.906
+and then you can do short
+horizon MPC to the critic.
+
+204
+00:12:24.606 --> 00:12:25.406
+Now, what is that?
+
+205
+00:12:25.446 --> 00:12:27.566
+If you know how, for example,
+alpha zero works,
+
+206
+00:12:27.606 --> 00:12:29.966
+where they learn a critic
+namely their value function,
+
+207
+00:12:30.006 --> 00:12:34.966
+and then they do planning
+with research or whatever.
+
+208
+00:12:35.006 --> 00:12:37.386
+Well, here it's done
+with analytical state optimization.
+
+209
+00:12:38.006 --> 00:12:42.186
+You plan for a while on like how,
+however good project you have.
+
+210
+00:12:42.806 --> 00:12:46.406
+You look at the critical value
+function that tells you what you need.
+
+211
+00:12:46.586 --> 00:12:49.966
+This is the only thing that has
+achieved superhuman performance.
+
+212
+00:12:50.506 --> 00:12:53.186
+It destroys every human brain.
+
+213
+00:12:53.466 --> 00:12:56.846
+The rest I would have is imitation,
+obviously it's clumsy.
+
+214
+00:12:57.566 --> 00:13:01.346
+RL trial and errors,
+very impressive in quadrupedal commotion.
+
+215
+00:13:01.486 --> 00:13:03.526
+The rest, not so impressive
+as I understand it.
+
+216
+00:13:04.826 --> 00:13:07.046
+So this is what is going to get us there.
+
+217
+00:13:07.146 --> 00:13:10.526
+It's hard, and it needs a lot
+of infrastructure to be built.
+
+218
+00:13:10.766 --> 00:13:13.666
+And I hope to provide
+that so people can just start
+
+219
+00:13:13.706 --> 00:13:15.406
+playing with it instead
+of doing it themselves.
+
+220
+00:13:16.106 --> 00:13:17.746
+But again, if you want
+to do other things like just
+
+221
+00:13:17.786 --> 00:13:20.046
+the policy gradients and the literature,
+you can do that.
+
+222
+00:13:22.186 --> 00:13:25.326
+Now, here's an example of Gauss-Newton.
+
+223
+00:13:25.386 --> 00:13:26.426
+This is actually a simple example.
+
+224
+00:13:26.686 --> 00:13:30.306
+So this is physics-inspired inverse
+kinematics that already works.
+
+225
+00:13:31.446 --> 00:13:35.786
+MuJoCo uses soft constraint penalties,
+but they're defined as acceleration space.
+
+226
+00:13:36.546 --> 00:13:39.626
+For IK you need position space,
+so what I've done is somehow mapped them
+
+227
+00:13:39.666 --> 00:13:41.906
+to position space,
+and I won't go over the details,
+
+228
+00:13:41.946 --> 00:13:44.106
+and then I'm running
+Gauss-Newton on top of them.
+
+229
+00:13:44.666 --> 00:13:47.106
+And so you get really nice IK.
+
+230
+00:13:47.286 --> 00:13:49.286
+So here I'm editing this character.
+
+231
+00:13:50.486 --> 00:13:54.366
+It's completely responsible, when you
+leave it alone it's just perfectly stable.
+
+232
+00:13:54.566 --> 00:13:56.986
+So this is not like integrating
+some damped physics.
+
+233
+00:13:57.426 --> 00:13:59.486
+What he's doing is solving
+a Gauss-Newton problem,
+
+234
+00:13:59.526 --> 00:14:01.866
+like optimization problem
+at every time step,
+
+235
+00:14:02.886 --> 00:14:05.086
+Saying basically stay
+close to where you are now,
+
+236
+00:14:05.126 --> 00:14:06.846
+but also satisfy these constraints.
+
+237
+00:14:06.886 --> 00:14:09.726
+So, and then if the constraints
+go away, then it just freezes.
+
+238
+00:14:10.106 --> 00:14:12.046
+Then you can abuse the thing
+and push it around.
+
+239
+00:14:15.506 --> 00:14:17.386
+You can do the same
+thing for a trajectory.
+
+240
+00:14:17.526 --> 00:14:18.246
+So this is really nice.
+
+241
+00:14:18.286 --> 00:14:19.286
+So here,
+
+242
+00:14:20.486 --> 00:14:23.246
+The constraints, soft constraints
+are imposed at every pose,
+
+243
+00:14:23.286 --> 00:14:24.826
+and in addition to that,
+there's a smoothness pose.
+
+244
+00:14:24.866 --> 00:14:26.746
+So as I'm dragging one of the keyframes,
+
+245
+00:14:26.786 --> 00:14:30.346
+the thing is smoothing
+or interpolating in trajectory space.
+
+246
+00:14:30.466 --> 00:14:33.386
+So you see that shadow
+of this interpolated trajectory.
+
+247
+00:14:33.546 --> 00:14:35.986
+And now I'm going to jam
+this obstacle into the trajectory.
+
+248
+00:14:36.686 --> 00:14:41.086
+And you can see how the whole trajectory
+is behaving as a soft object almost.
+
+249
+00:14:41.286 --> 00:14:42.726
+That's like forming a real diagram.
+
+250
+00:14:43.846 --> 00:14:45.426
+Analytical optimization is really fast.
+
+251
+00:14:45.766 --> 00:14:48.146
+So here I'm going to squeeze
+the trajectory into the floor.
+
+252
+00:14:49.026 --> 00:14:50.886
+And it's going to invent
+some way of making
+
+253
+00:14:50.926 --> 00:14:54.506
+my character lie under the obstacle.
+
+254
+00:14:54.866 --> 00:14:56.486
+This is not physics, this is kinematics.
+
+255
+00:14:57.306 --> 00:15:00.826
+Now let's talk about physics,
+analytical derivatives of Mujaco.
+
+256
+00:15:00.866 --> 00:15:02.326
+So finally it's done.
+
+257
+00:15:03.006 --> 00:15:06.486
+Mujaco is now a fully differentiable
+end-to-end physics simulator.
+
+258
+00:15:08.246 --> 00:15:09.826
+After a lot of work.
+
+259
+00:15:09.946 --> 00:15:11.546
+It would not be possible
+without my colleague
+
+260
+00:15:11.586 --> 00:15:13.826
+Fabio to tie the loose ends,
+but now they're tied.
+
+261
+00:15:14.426 --> 00:15:16.826
+Let me just give you a very
+high-level overview.
+
+262
+00:15:17.026 --> 00:15:18.866
+So, state has positional viscosity.
+
+263
+00:15:19.446 --> 00:15:20.226
+We have forward dynamics,
+
+264
+00:15:20.266 --> 00:15:24.486
+which maps states and applied
+forces to accelerations.
+
+265
+00:15:24.866 --> 00:15:28.206
+Dynamics recovers the applied forces
+from the states and accelerations.
+
+266
+00:15:28.966 --> 00:15:31.746
+So those two functions
+in MuJoCo are well-defined,
+
+267
+00:15:31.786 --> 00:15:35.526
+there's a one-to-one, it's fully
+invertible and they're all dependable.
+
+268
+00:15:37.006 --> 00:15:40.866
+So when you compute derivatives, or rather
+Jacobians because they're all vector
+
+269
+00:15:40.906 --> 00:15:44.566
+functions, you can compute Jacobians
+of one of those and then you recover
+
+270
+00:15:44.606 --> 00:15:48.146
+the others to linear algebra,
+like the relationships are shown here.
+
+271
+00:15:48.186 --> 00:15:52.746
+So you get to choose which one to compute,
+and which one to compute,
+
+272
+00:15:52.786 --> 00:15:55.366
+the inverse dynamics
+is the one you should compute
+
+273
+00:15:55.406 --> 00:15:58.906
+because it's a lot better
+and easier to invert.
+
+274
+00:15:59.426 --> 00:16:01.526
+So now I'm going to clutter
+the slide with a lot of math.
+
+275
+00:16:03.086 --> 00:16:06.466
+The way Mojoko works is there
+is an extended Gauss clause,
+
+276
+00:16:06.506 --> 00:16:11.486
+so the Gauss principle in the use
+of simulated constraint dynamics.
+
+277
+00:16:11.766 --> 00:16:14.186
+This first term basically
+gives you f equals ma.
+
+278
+00:16:14.226 --> 00:16:17.986
+The second term is the penalty
+over constrained
+
+279
+00:16:18.026 --> 00:16:21.646
+violations in acceleration
+space is constrained to Cogna.
+
+280
+00:16:21.706 --> 00:16:23.446
+This is some kind of virtual spring count.
+
+281
+00:16:24.406 --> 00:16:28.546
+The way Mujobu works is to reduce
+the acceleration by minimizing
+
+282
+00:16:28.586 --> 00:16:34.246
+this scalar function over
+accelerations and adding a cross.
+
+283
+00:16:34.546 --> 00:16:36.606
+And then from this you can show
+the inverse analysis
+
+284
+00:16:36.646 --> 00:16:39.586
+which is the derivative of that function
+with respect to acceleration.
+
+285
+00:16:40.046 --> 00:16:43.766
+So the forward needs a constraint
+which is numerical, like Newton,
+
+286
+00:16:43.806 --> 00:16:47.146
+or precondition, or contra-Ecranian,
+or to check graphs, etc.
+
+287
+00:16:47.486 --> 00:16:49.906
+The inverse doesn't need anything,
+it's just an analytical formula.
+
+288
+00:16:50.386 --> 00:16:52.306
+So, obviously you want to differentiate
+
+289
+00:16:52.346 --> 00:16:54.826
+an analytical formula
+and not a numerical solution.
+
+290
+00:16:57.086 --> 00:17:01.746
+Now, I found myself discovering
+a new software engineering process.
+
+291
+00:17:03.026 --> 00:17:05.546
+You've all heard of continuous
+integration, right?
+
+292
+00:17:05.586 --> 00:17:06.506
+So the whole team sends commits,
+
+293
+00:17:06.546 --> 00:17:08.506
+and you have a server
+that integrates all the time,
+
+294
+00:17:08.546 --> 00:17:11.066
+and that's called continuous integration.
+
+295
+00:17:11.106 --> 00:17:11.586
+Integration.
+
+296
+00:17:11.626 --> 00:17:14.106
+Well, I stumbled upon
+continuous differentiation.
+
+297
+00:17:15.206 --> 00:17:15.946
+What is that?
+
+298
+00:17:15.986 --> 00:17:17.386
+Well, I'm differentiating Mojoku.
+
+299
+00:17:17.726 --> 00:17:20.626
+At the same time, DeepMind
+is releasing a new version every month.
+
+300
+00:17:21.226 --> 00:17:23.966
+And every time they release something,
+they break some of my things,
+
+301
+00:17:24.006 --> 00:17:25.726
+and they have new things
+that I still have to differentiate.
+
+302
+00:17:26.226 --> 00:17:31.006
+So I've been chasing the Mojoku
+releases for a few months now,
+
+303
+00:17:31.046 --> 00:17:33.086
+and it looks like it's going
+to be a continuous process
+
+304
+00:17:33.126 --> 00:17:36.546
+because they're determined
+on releasing all the time.
+
+305
+00:17:36.626 --> 00:17:39.866
+So this is current as of 3.17,
+which is like a month old.
+
+306
+00:17:40.086 --> 00:17:41.066
+Now Now we have Njoku 4.0,
+
+307
+00:17:41.106 --> 00:17:44.046
+so next week I'll see what
+they broke and what they added.
+
+308
+00:17:45.846 --> 00:17:49.486
+The workbook is going to be released
+with a frozen version of Njoku,
+
+309
+00:17:49.526 --> 00:17:52.586
+statically linked,
+so you cannot change Njoku versions,
+
+310
+00:17:52.626 --> 00:17:56.706
+because Njoku itself is adapted to the
+Njoku version, but I'll try to keep up.
+
+311
+00:17:58.126 --> 00:17:59.306
+Now I'm not going to talk much,
+
+312
+00:17:59.346 --> 00:18:02.626
+I'll just say that the biggest
+pain in differentiating this thing
+
+313
+00:18:02.666 --> 00:18:07.446
+is this constrained Jacobian system,
+especially the contact Jacobians.
+
+314
+00:18:08.026 --> 00:18:09.566
+Jacobian is already a first derivative.
+
+315
+00:18:09.906 --> 00:18:11.966
+You differentiate, you're
+getting a second derivative.
+
+316
+00:18:12.826 --> 00:18:14.286
+Collision detectors, well, first of all,
+
+317
+00:18:14.326 --> 00:18:16.026
+there's a whole zoo
+of collision detectors.
+
+318
+00:18:16.246 --> 00:18:18.326
+And on top of that, they do
+mouse-moving things, so it's a mess,
+
+319
+00:18:18.366 --> 00:18:20.906
+but anyway, one-sided
+dynamo-critical derivatives.
+
+320
+00:18:22.146 --> 00:18:23.746
+So, three trajectories.
+
+321
+00:18:24.106 --> 00:18:25.426
+This is what they look like.
+
+322
+00:18:25.466 --> 00:18:26.646
+Doesn't matter where they came from.
+
+323
+00:18:26.766 --> 00:18:28.826
+There's some trajectories
+executed in MuJoCo.
+
+324
+00:18:30.306 --> 00:18:34.486
+This is a little soft thing that's trying
+to run away, but we'll catch it later.
+
+325
+00:18:34.526 --> 00:18:35.526
+Data.
+
+326
+00:18:35.586 --> 00:18:40.026
+So three systems, humanoid,
+hand-tubed, and this flexible object.
+
+327
+00:18:40.706 --> 00:18:44.326
+Physics, they're just rolling
+forward in microseconds,
+
+328
+00:18:44.366 --> 00:18:47.526
+average per ten steps on my laptop,
+so it's really fast, 37 microseconds.
+
+329
+00:18:48.006 --> 00:18:51.526
+Now, to compute all the Jacobians
+of inverse dynamics,
+
+330
+00:18:51.566 --> 00:18:54.346
+this is expressed as
+a factor times the physics,
+
+331
+00:18:54.386 --> 00:18:57.566
+so 1.7 means 1.7 times 37 microseconds.
+
+332
+00:18:57.906 --> 00:18:59.546
+This is actually fast in the simulation.
+
+333
+00:18:59.926 --> 00:19:02.766
+So the problem is those real
+numbers, those red numbers
+
+334
+00:19:04.266 --> 00:19:08.026
+Meaning that fully
+differentiating all the analytical
+
+335
+00:19:08.066 --> 00:19:11.366
+Jacobians takes about as
+much time as stepping.
+
+336
+00:19:11.886 --> 00:19:14.366
+So if you right now have
+a computer that can give
+
+337
+00:19:14.406 --> 00:19:17.826
+you a million physics steps per second,
+
+338
+00:19:18.726 --> 00:19:22.926
+Your same computer will be able to give
+you half a million fully differentiated
+
+339
+00:19:22.966 --> 00:19:26.066
+steps per second, and then you can do all
+the analytical experiments if you want.
+
+340
+00:19:26.246 --> 00:19:28.506
+I hope you do,
+but you can choose to do it all.
+
+341
+00:19:29.306 --> 00:19:31.766
+This thing on the bottom shows what
+happens when you fold these analytical
+
+342
+00:19:31.806 --> 00:19:37.026
+derivatives into APG's analytical policy
+gradient and these two are shooting
+
+343
+00:19:37.066 --> 00:19:39.906
+a direct projector optimization
+and the numbers are still small.
+
+344
+00:19:40.046 --> 00:19:41.626
+So these merits
+are the facts of the network.
+
+345
+00:19:42.006 --> 00:19:43.706
+So for example, APG here,
+
+346
+00:19:43.746 --> 00:19:48.666
+I have a neural network with about
+200,000 bytes, like 512 to 56128.
+
+347
+00:19:49.226 --> 00:19:52.666
+Standard for control, I'm projecting
+the Jacobian center gradient into
+
+348
+00:19:52.706 --> 00:19:56.246
+that neural network all down on the CPU
+with my native neural network package.
+
+349
+00:19:56.286 --> 00:20:00.466
+And it's about two times smaller
+than just running a business.
+
+350
+00:20:00.806 --> 00:20:01.626
+And that's it.
+
+351
+00:20:01.666 --> 00:20:04.186
+So you don't have to sample
+forever and average.
+
+352
+00:20:05.246 --> 00:20:08.806
+Now, how well is analytical policy
+data going to work on your problem?
+
+353
+00:20:09.186 --> 00:20:10.286
+That's a separate story.
+
+354
+00:20:10.626 --> 00:20:14.606
+In general, when you run optimization,
+the outcome depends on two things.
+
+355
+00:20:14.846 --> 00:20:16.266
+One, how good your optimizer is.
+
+356
+00:20:16.566 --> 00:20:20.586
+And two, how you set up your optimization
+landscape, initial conditions, etc.
+
+357
+00:20:21.486 --> 00:20:22.746
+Those two kind of work together.
+
+358
+00:20:22.986 --> 00:20:25.586
+The optimizer's job
+is to navigate your landscape.
+
+359
+00:20:25.886 --> 00:20:27.986
+What landscape you give your
+optimizer, that's up to you.
+
+360
+00:20:28.666 --> 00:20:31.246
+They're still adjusting, so this is not
+going to take away all the hacking,
+
+361
+00:20:31.286 --> 00:20:35.426
+but whatever you hack, it will show
+you what happened to the landscape.
+
+362
+00:20:35.846 --> 00:20:36.986
+You still have to hack it for it.
+
+363
+00:20:39.506 --> 00:20:44.846
+Now, one of the novel things here
+that we've been working on for a while,
+
+364
+00:20:44.886 --> 00:20:48.226
+Q-analysis-directed meticulous code,
+the goal-directed dynamics,
+
+365
+00:20:48.266 --> 00:20:50.646
+it's a basic non-smooth green-solver.
+
+366
+00:20:50.826 --> 00:20:51.826
+So here's what it does.
+
+367
+00:20:51.886 --> 00:20:53.986
+You have a current cost.
+
+368
+00:20:54.226 --> 00:20:56.286
+You have a value function
+that you approximated somehow.
+
+369
+00:20:56.706 --> 00:20:58.986
+This is the net one-step dynamics.
+
+370
+00:20:59.746 --> 00:21:02.586
+So this quantity here in RL
+is called the Q-function.
+
+371
+00:21:02.806 --> 00:21:05.746
+It gives you the state-action
+value function.
+
+372
+00:21:06.186 --> 00:21:11.066
+When you go model-based, there is no need
+to ever represent Q-functions explicitly.
+
+373
+00:21:11.106 --> 00:21:14.006
+Because the Q function
+is given to you analytically
+
+374
+00:21:14.046 --> 00:21:17.146
+by the state value function
+and the cost and the distance.
+
+375
+00:21:17.446 --> 00:21:20.126
+So you only learn state value
+functions which are much smaller
+
+376
+00:21:20.166 --> 00:21:24.126
+and then And then how do you get
+a greedy action out of this?
+
+377
+00:21:24.366 --> 00:21:29.366
+You basically search over all controls
+over some boxes and this software
+
+378
+00:21:29.406 --> 00:21:32.346
+that we're working on for a while
+does it very efficiently.
+
+379
+00:21:32.906 --> 00:21:37.066
+This happens to be an example
+of a piecewise smooth optimization because
+
+380
+00:21:37.106 --> 00:21:40.586
+the function, the power dynamics
+are piecewise smooth in the controls,
+
+381
+00:21:40.626 --> 00:21:42.406
+when you have unilateral constraints.
+
+382
+00:21:44.286 --> 00:21:47.466
+So, when you have
+a pyramidal friction call,
+
+383
+00:21:47.506 --> 00:21:51.626
+this is a mixed integer program,
+which could be arbitrarily slow.
+
+384
+00:21:52.066 --> 00:21:54.746
+So, just to test how fast it is,
+I solved 400 of those from, say,
+
+385
+00:21:54.786 --> 00:21:59.886
+500 of those instances of MIQ piece from
+Utico, and compared them to Plurogo,
+
+386
+00:21:59.926 --> 00:22:01.766
+which is a commercial
+software that actually
+
+387
+00:22:01.806 --> 00:22:03.786
+gives you a certificate of optimality.
+
+388
+00:22:03.826 --> 00:22:09.926
+It does this insane branching bound things
+and it's really difficult, but it's slow.
+
+389
+00:22:10.446 --> 00:22:14.386
+So what happens is my little Chibi solver
+is about 500 times faster than Gurovian.
+
+390
+00:22:14.826 --> 00:22:17.946
+Finds the global minimum
+about 90% of the time.
+
+391
+00:22:18.066 --> 00:22:20.266
+And I know what the global minimum
+is because Gurovian taught me.
+
+392
+00:22:20.506 --> 00:22:22.206
+And it's reasonable on the rest.
+
+393
+00:22:22.826 --> 00:22:23.926
+Only this kind of thing.
+
+394
+00:22:24.046 --> 00:22:24.906
+I could not claim that.
+
+395
+00:22:24.946 --> 00:22:26.566
+I might just have found it solved faster.
+
+396
+00:22:26.686 --> 00:22:30.546
+But on the ones that come up in control,
+it turns out they can be solved faster.
+
+397
+00:22:30.626 --> 00:22:31.946
+These are some statistics for sure.
+
+398
+00:22:31.986 --> 00:22:39.346
+Now, this thing is falling into our now
+the successor of the classic method.
+
+399
+00:22:39.626 --> 00:22:42.646
+I guess I'm so old that my
+previous work is now a classic.
+
+400
+00:22:42.966 --> 00:22:44.166
+That's kind of disturbing.
+
+401
+00:22:44.546 --> 00:22:46.286
+Anyway, so here's the .
+
+402
+00:22:47.046 --> 00:22:50.606
+So the backward pass
+is control-limited L2G.
+
+403
+00:22:51.306 --> 00:22:52.466
+I'll have a paper with
+
+404
+00:22:55.206 --> 00:22:56.706
+Control-limited DDP.
+
+405
+00:22:56.846 --> 00:22:57.886
+This is the version of it.
+
+406
+00:22:57.926 --> 00:23:01.706
+It propagates a quadratic value
+function in the backward class.
+
+407
+00:23:02.246 --> 00:23:04.646
+And now what's new is what
+happens in the forward class.
+
+408
+00:23:04.946 --> 00:23:06.846
+So what happens, I can show it to you.
+
+409
+00:23:06.946 --> 00:23:09.186
+Okay, so this is time, this is state.
+
+410
+00:23:09.526 --> 00:23:11.046
+As you mentioned,
+of course, it's the value.
+
+411
+00:23:11.926 --> 00:23:13.326
+Black is our current trajectory.
+
+412
+00:23:14.846 --> 00:23:17.546
+We approximated the value function
+around it and it brought this redness.
+
+413
+00:23:17.846 --> 00:23:21.126
+And now we're going to go forward
+and try to find a better trajectory.
+
+414
+00:23:21.666 --> 00:23:24.426
+And what we're doing now is we're going
+
+415
+00:23:24.466 --> 00:23:27.086
+to be greedy with respect
+to that value function.
+
+416
+00:23:27.126 --> 00:23:32.306
+So you step greedily forward
+through that new solver,
+
+417
+00:23:32.346 --> 00:23:36.826
+and what it means is that you are now,
+instead of relying on the affine control
+
+418
+00:23:36.866 --> 00:23:38.686
+that was found with the plot projector,
+
+419
+00:23:38.726 --> 00:23:41.146
+which is what we did in the past,
+now we'll basically find a new
+
+420
+00:23:41.186 --> 00:23:44.246
+Controller that takes
+into account the dynamics.
+
+421
+00:23:44.866 --> 00:23:47.526
+So it's a very good algorithm.
+
+422
+00:23:47.706 --> 00:23:48.706
+Here's just one example.
+
+423
+00:23:48.986 --> 00:23:52.206
+Here's a 400 step projector,
+10 milliseconds each,
+
+424
+00:23:52.246 --> 00:23:54.866
+takes about a second
+for my laptop to optimize.
+
+425
+00:23:56.146 --> 00:23:58.046
+The task is to do a handstand.
+
+426
+00:23:58.186 --> 00:24:01.346
+So it just says go to that pose
+on the top at the end
+
+427
+00:24:01.386 --> 00:24:04.246
+of the movement and minimize
+control and that's it.
+
+428
+00:24:04.626 --> 00:24:06.206
+So, S by Z.
+
+429
+00:24:06.986 --> 00:24:07.986
+Figures it out.
+
+430
+00:24:11.406 --> 00:24:14.766
+Oh, so, now once you have
+a good trajectory,
+
+431
+00:24:14.806 --> 00:24:16.466
+optimize it to do more breathing control.
+
+432
+00:24:16.806 --> 00:24:18.806
+Does this recent trend
+in RL to train robot
+
+433
+00:24:18.846 --> 00:24:21.646
+voices to mimic human movement databases?
+
+434
+00:24:26.226 --> 00:24:28.506
+So the training time keeps going down.
+
+435
+00:24:28.986 --> 00:24:30.406
+Every other paper shows that.
+
+436
+00:24:30.466 --> 00:24:32.646
+Oh, we did it in 80 hours,
+now we did it in five hours.
+
+437
+00:24:32.746 --> 00:24:33.746
+Now we have one hour.
+
+438
+00:24:34.286 --> 00:24:35.286
+What's the minimum?
+
+439
+00:24:36.246 --> 00:24:37.346
+Well, the minimum is zero.
+
+440
+00:24:37.826 --> 00:24:38.826
+You don't need training.
+
+441
+00:24:39.106 --> 00:24:41.286
+I think this just solves
+the problem whatever you're doing.
+
+442
+00:24:43.526 --> 00:24:44.926
+So I'm going to show you a video.
+
+443
+00:24:45.106 --> 00:24:49.046
+The red is the motion capture
+from something like that.
+
+444
+00:24:49.086 --> 00:24:54.326
+The white is G1 NVC in Kiko.
+
+445
+00:24:54.806 --> 00:25:00.046
+Lookout is 40 times 10 milliseconds,
+so 0.4 in the future.
+
+446
+00:25:00.486 --> 00:25:04.666
+And what I'm showing in the video
+is the current time step has the reference
+
+447
+00:25:04.706 --> 00:25:08.966
+in the robot, but the robot moves
+400 milliseconds in the future,
+
+448
+00:25:09.006 --> 00:25:10.546
+so that's why there's no...
+
+449
+00:25:11.586 --> 00:25:13.586
+And it's just going through.
+
+450
+00:25:13.626 --> 00:25:17.966
+So I did a bunch of those last
+night in every one of the works.
+
+451
+00:25:18.006 --> 00:25:21.766
+Sometimes it does funny things
+like it can hop around to stabilize
+
+452
+00:25:21.806 --> 00:25:24.866
+itself because the reference motion,
+of course, is not critical.
+
+453
+00:25:26.266 --> 00:25:30.006
+But in the end, it just works out
+of the box, real time on a laptop.
+
+454
+00:25:37.446 --> 00:25:38.686
+Oh, this is cool.
+
+455
+00:25:38.946 --> 00:25:41.486
+So sampling MPC is really amazing.
+
+456
+00:25:42.746 --> 00:25:45.306
+I haven't applied the analytical
+method to this yet,
+
+457
+00:25:45.346 --> 00:25:46.826
+but here we have this soft object.
+
+458
+00:25:46.866 --> 00:25:48.946
+It's supposed to reach
+the green target and turns
+
+459
+00:25:48.986 --> 00:25:53.686
+into a pancake ninja thing
+and navigates obstacles.
+
+460
+00:25:53.806 --> 00:25:56.486
+This works about three times slower
+in real time on a Treadripper,
+
+461
+00:25:56.526 --> 00:25:57.626
+so this is a challenging problem.
+
+462
+00:25:58.466 --> 00:26:00.726
+I haven't tried it with
+the analytical methods yet.
+
+463
+00:26:00.826 --> 00:26:02.106
+I hope they make it work.
+
+464
+00:26:02.286 --> 00:26:03.726
+Here it was supposed to climb the stairs,
+
+465
+00:26:03.766 --> 00:26:06.526
+but it decided that it could
+just jump around Tom's target.
+
+466
+00:26:09.506 --> 00:26:11.906
+This guy runs on real time.
+
+467
+00:26:12.346 --> 00:26:15.086
+So this guy is chasing the green target.
+
+468
+00:26:15.126 --> 00:26:18.606
+And you can move the target around,
+it just keeps changing it forever.
+
+469
+00:26:19.026 --> 00:26:20.766
+When you leave it there, it's very clever,
+
+470
+00:26:20.806 --> 00:26:24.806
+it lands its belly on the target,
+you can see, so its belly is like a solid.
+
+471
+00:26:25.306 --> 00:26:27.646
+So now the rest of the target
+can get where it wants to go.
+
+472
+00:26:30.466 --> 00:26:35.346
+Okay, now, another new method
+is a new method for optimization,
+
+473
+00:26:35.386 --> 00:26:39.846
+which I'm now calling Universe
+Direct Rejective Optimizer, or IDT.
+
+474
+00:26:39.906 --> 00:26:42.826
+I used to call it whatever,
+something accelerated by the way.
+
+475
+00:26:43.566 --> 00:26:45.706
+So this is again exploiting
+the inverse dynamics,
+
+476
+00:26:45.746 --> 00:26:49.946
+saying inverse dynamics
+are exploited to get derivatives,
+
+477
+00:26:49.986 --> 00:26:51.206
+now you can do objective optimization.
+
+478
+00:26:51.526 --> 00:26:54.486
+So you define the unknown
+to be the sequence of poses,
+
+479
+00:26:54.526 --> 00:26:57.606
+finite difference in time
+to give loss considerations.
+
+480
+00:26:58.746 --> 00:27:02.806
+The step cost is structured as quadratic
+in control and whatever in the state.
+
+481
+00:27:03.286 --> 00:27:06.526
+Now you have some actuation model
+that tells you what the control poses are.
+
+482
+00:27:06.566 --> 00:27:07.046
+Are.
+
+483
+00:27:07.086 --> 00:27:11.286
+Inverse dynamics tells you what
+total forces apply on your system,
+
+484
+00:27:11.326 --> 00:27:13.166
+and these two better be equal,
+so you subtract them,
+
+485
+00:27:13.206 --> 00:27:15.806
+you penalize them with some number,
+
+486
+00:27:15.846 --> 00:27:19.366
+add the cost that you have to pay
+anyway, and you find the control.
+
+487
+00:27:19.786 --> 00:27:22.706
+So what this is doing
+is eliminating the control.
+
+488
+00:27:22.946 --> 00:27:24.886
+So MuJoCo already has inverse dynamics.
+
+489
+00:27:25.266 --> 00:27:28.086
+This is extending
+it with an inverse control mode.
+
+490
+00:27:28.506 --> 00:27:30.266
+So now everything gets eliminated,
+
+491
+00:27:30.306 --> 00:27:33.206
+and you just have the sequence
+of clauses this is your trajectory cost.
+
+492
+00:27:34.146 --> 00:27:39.126
+The batch of complications
+can be now smooth and complicated.
+
+493
+00:27:40.366 --> 00:27:44.906
+For this workshop, even if you have
+a perfect optimizer that is like low,
+
+494
+00:27:44.946 --> 00:27:51.546
+let's say, your favorite for nominalizing,
+suppose you have the following situation.
+
+495
+00:27:51.806 --> 00:27:53.966
+I have an object here,
+and my hand is here.
+
+496
+00:27:54.166 --> 00:27:55.746
+And I have to keep the object.
+
+497
+00:27:56.106 --> 00:27:57.506
+And that's my initial trajectory.
+
+498
+00:27:58.266 --> 00:27:59.906
+Now, starting from here,
+
+499
+00:27:59.946 --> 00:28:03.106
+there is nothing local local to tell
+me that I should close my fingers.
+
+500
+00:28:03.746 --> 00:28:06.446
+Because if I close my fingers a little
+bit, the object is still not there.
+
+501
+00:28:07.166 --> 00:28:10.786
+So this is the situation where your
+optimization landscape is completely flat.
+
+502
+00:28:11.066 --> 00:28:12.626
+All derivatives are exactly zero.
+
+503
+00:28:13.026 --> 00:28:14.926
+You go to like a 55th order Newton method,
+
+504
+00:28:14.966 --> 00:28:17.166
+that's not Newton anymore,
+it doesn't matter.
+
+505
+00:28:17.386 --> 00:28:18.866
+Local information is simply null.
+
+506
+00:28:19.586 --> 00:28:20.586
+So what do you do?
+
+507
+00:28:21.246 --> 00:28:24.866
+You could try some global search, but in a
+large trajectory with blocks and contacts,
+
+508
+00:28:24.906 --> 00:28:30.266
+that's combinatorial, but what I'm trying
+to do, and I have a method that does that,
+
+509
+00:28:30.306 --> 00:28:34.166
+that this heuristic MIQP
+is extended to trajectory space,
+
+510
+00:28:34.206 --> 00:28:34.926
+but it still needs a good
+
+511
+00:28:34.966 --> 00:28:35.406
+Direction.
+
+512
+00:28:35.446 --> 00:28:36.446
+Otherwise, .
+
+513
+00:28:37.346 --> 00:28:39.706
+So what I'm trying to do
+is find ways to kind of smooth,
+
+514
+00:28:39.746 --> 00:28:44.286
+extend the area where contacts are, so
+that the solver can see from a distance.
+
+515
+00:28:44.846 --> 00:28:47.586
+And the two versions of that,
+kind of summarized here,
+
+516
+00:28:47.626 --> 00:28:52.066
+one is smoothed Mojoku physics, where
+that penalty P that I showed you earlier
+
+517
+00:28:52.106 --> 00:28:55.586
+is now modified to be a C2 function,
+and it's actually strictly continuous.
+
+518
+00:28:56.206 --> 00:28:57.566
+So I've done a bunch of things to Mojoku
+
+519
+00:28:57.606 --> 00:28:59.446
+physics to make that happen,
+and it does work.
+
+520
+00:28:59.486 --> 00:29:02.346
+So you get nice, smooth physics,
+
+521
+00:29:02.386 --> 00:29:03.706
+like imagine every object kind of becomes
+
+522
+00:29:03.746 --> 00:29:05.686
+a hairy thing that you can push
+from a distance.
+
+523
+00:29:05.986 --> 00:29:08.126
+And so your optimist can see
+the benefit of pushing it,
+
+524
+00:29:08.166 --> 00:29:10.686
+but that's not physical, right?
+
+525
+00:29:10.766 --> 00:29:13.486
+So then you have to do a continuation
+where you turn the knob where this thing
+
+526
+00:29:13.526 --> 00:29:15.246
+goes closer and closer
+to the original physics,
+
+527
+00:29:15.286 --> 00:29:18.066
+and then you hope your
+continuation can chase it.
+
+528
+00:29:18.866 --> 00:29:21.706
+The other one is actually really powerful.
+
+529
+00:29:21.886 --> 00:29:25.346
+So what that does is says, we're going
+to collision detection with some margins,
+
+530
+00:29:25.386 --> 00:29:26.986
+so we detect a bunch
+of potential contacts.
+
+531
+00:29:28.286 --> 00:29:30.106
+Now we're going to give
+ourselves the power
+
+532
+00:29:30.146 --> 00:29:32.426
+to generate contact
+forces from a distance.
+
+533
+00:29:33.746 --> 00:29:36.746
+And now the optimizer can see,
+what if I could push on that thing?
+
+534
+00:29:36.926 --> 00:29:37.726
+What would happen?
+
+535
+00:29:37.766 --> 00:29:39.406
+Oh, look, I can hold
+the bottle now, great.
+
+536
+00:29:39.666 --> 00:29:42.626
+So maybe I should just go
+and actually push on it, right?
+
+537
+00:29:42.686 --> 00:29:46.366
+So there is a cost for this magical
+non-physical forces that if the optimizer
+
+538
+00:29:46.406 --> 00:29:47.506
+finds that they're useful,
+
+539
+00:29:47.546 --> 00:29:50.646
+then it discovers that it actually
+better make real contact.
+
+540
+00:29:51.146 --> 00:29:53.926
+So here's some simple examples of that.
+
+541
+00:29:53.966 --> 00:29:58.986
+So the red mass is actually
+the actual passive.
+
+542
+00:29:59.486 --> 00:30:02.386
+The box has to go into the other box
+and has to match the orientation.
+
+543
+00:30:02.786 --> 00:30:06.746
+So you can see it starts from a distance
+and figures out what needs to be done.
+
+544
+00:30:07.266 --> 00:30:08.266
+Here's another example.
+
+545
+00:30:08.366 --> 00:30:09.366
+The red ball is passive.
+
+546
+00:30:09.626 --> 00:30:10.866
+They are active, the other is passive.
+
+547
+00:30:11.566 --> 00:30:13.226
+It has to send them to their targets.
+
+548
+00:30:14.126 --> 00:30:15.286
+Figures out this whole trajectory.
+
+549
+00:30:15.786 --> 00:30:19.906
+So this whole thing is planned
+out front and played on.
+
+550
+00:30:21.706 --> 00:30:24.586
+And so the way it's doing that,
+these lines that are connecting,
+
+551
+00:30:24.626 --> 00:30:26.866
+this is the things that it's
+allowed to consider
+
+552
+00:30:26.906 --> 00:30:29.386
+as magical forces and then take them out.
+
+553
+00:30:29.466 --> 00:30:31.146
+So the thing that I showed you at
+the end has no magic in it,
+
+554
+00:30:31.186 --> 00:30:34.086
+but the magic guided it to that solution.
+
+555
+00:30:35.226 --> 00:30:38.266
+This is all inspired by our own
+work on contact invariant.
+
+556
+00:30:38.506 --> 00:30:40.766
+This is now 15 years old.
+
+557
+00:30:41.326 --> 00:30:42.886
+This figure more or less works in my lab.
+
+558
+00:30:43.006 --> 00:30:45.106
+This kind of remains a state of the art.
+
+559
+00:30:45.146 --> 00:30:48.426
+In fact, I'm sure some people in this room
+have tried to replicate and fail.
+
+560
+00:30:48.886 --> 00:30:50.126
+How do I know they failed?
+
+561
+00:30:50.166 --> 00:30:51.486
+Well, they haven't
+mentioned anything about it.
+
+562
+00:30:53.866 --> 00:30:55.406
+Now, this was great.
+
+563
+00:30:55.666 --> 00:30:58.886
+Unfortunately, it's not compatible
+with any well-defined program.
+
+564
+00:30:59.246 --> 00:31:01.926
+So this always mixes wishful
+thinking and physics,
+
+565
+00:31:01.966 --> 00:31:03.006
+and there's no way to separate them.
+
+566
+00:31:03.286 --> 00:31:05.746
+Also, optimizing one of those
+clips took five minutes.
+
+567
+00:31:06.546 --> 00:31:10.866
+So now what I've done is I've kind
+of parted this to optical and defined
+
+568
+00:31:10.906 --> 00:31:16.706
+CO as a kind of virtual actuator
+that produces certain contact forces.
+
+569
+00:31:17.146 --> 00:31:18.726
+They're added to a control model.
+
+570
+00:31:19.026 --> 00:31:21.806
+So they are at the top of control
+physics and there is a continuation,
+
+571
+00:31:21.846 --> 00:31:25.206
+not that you can tweak,
+and then you get to the complete.
+
+572
+00:31:26.126 --> 00:31:28.146
+And it's compatible with O2, check the O2.
+
+573
+00:31:28.246 --> 00:31:32.466
+And so here are some things
+that I haven't like pushed
+
+574
+00:31:32.506 --> 00:31:37.166
+it to generate the atmosphere Here
+is an interesting failure mode.
+
+575
+00:31:37.346 --> 00:31:42.146
+So here the magical plant figured
+that it likes to slide on the ground.
+
+576
+00:31:42.366 --> 00:31:44.966
+And it gave and handed off
+to a real solver which says,
+
+577
+00:31:45.006 --> 00:31:47.066
+okay, how do I make a plant work?
+
+578
+00:31:47.386 --> 00:31:48.786
+And this is it.
+
+579
+00:31:48.886 --> 00:31:49.886
+So this is in the ground physics.
+
+580
+00:31:50.746 --> 00:31:51.746
+What is it doing?
+
+581
+00:31:51.906 --> 00:31:53.926
+It was told that it should slide.
+
+582
+00:31:54.046 --> 00:31:55.946
+So it said, you know, I know how to slide.
+
+583
+00:31:56.026 --> 00:31:57.306
+I can vibrate at 30 hertz.
+
+584
+00:31:59.266 --> 00:32:01.366
+And pretty much pull
+energy out of the ground.
+
+585
+00:32:01.486 --> 00:32:02.446
+Yeah, I can slide.
+
+586
+00:32:02.486 --> 00:32:06.706
+So a powerful optimizer will
+optimize what you give to it,
+
+587
+00:32:06.746 --> 00:32:09.726
+but if you give it the wrong landscape,
+it will find the wrong thing.
+
+588
+00:32:10.066 --> 00:32:12.646
+So I think I should be wrapping up here.
+
+589
+00:32:13.386 --> 00:32:16.166
+So what is this shaping up
+to be when it's released?
+
+590
+00:32:16.726 --> 00:32:18.186
+So on one hand, it's on the high level,
+
+591
+00:32:18.226 --> 00:32:21.066
+it's supposed to be the problem in the
+form of a model cost and a data set,
+
+592
+00:32:21.106 --> 00:32:25.306
+which basically the cost function
+references like recorded movements,
+
+593
+00:32:25.346 --> 00:32:30.586
+recorded sensor traces,
+which reduce data estimation system .
+
+594
+00:32:30.626 --> 00:32:31.626
+Whatever.
+
+595
+00:32:31.726 --> 00:32:35.106
+Solution could be active reading
+or projectory or any combination of them.
+
+596
+00:32:35.206 --> 00:32:39.746
+On top of that there's a low level SDK
+that gives you access to the, of building
+
+597
+00:32:39.786 --> 00:32:44.246
+blocks like the neural network, here and
+there, so you can build your own stuff.
+
+598
+00:32:45.306 --> 00:32:49.786
+And in addition to that, it could
+be made in like a real time
+
+599
+00:32:51.986 --> 00:32:54.486
+Where, which you can actually
+use the control robot.
+
+600
+00:32:54.746 --> 00:32:57.206
+So the idea The idea here
+is that you do trajectory
+
+601
+00:32:57.246 --> 00:32:59.906
+optimization for both state
+estimation and control.
+
+602
+00:33:00.406 --> 00:33:03.266
+Offline you learn a critic,
+as I mentioned earlier.
+
+603
+00:33:03.786 --> 00:33:06.586
+P6 meaning system ID and any vision
+models that are going
+
+604
+00:33:06.626 --> 00:33:09.926
+to pull out features obviously
+have to be learned offline.
+
+605
+00:33:11.526 --> 00:33:15.286
+The thing that you can update
+estimation prior online.
+
+606
+00:33:15.666 --> 00:33:17.946
+So this, I kind of want
+to leave you with this picture.
+
+607
+00:33:18.106 --> 00:33:23.366
+So this goes back to the duality between
+optimal estimation and optimal control
+
+608
+00:33:23.406 --> 00:33:31.506
+which Kalman first discovered a guy
+discovered a common filter like 15 years
+
+609
+00:33:31.546 --> 00:33:33.446
+ago I was working on this thing
+called linear solvable
+
+610
+00:33:33.486 --> 00:33:35.966
+MDP stuff it's a really nice
+mathematical theory to kind
+
+611
+00:33:36.006 --> 00:33:39.766
+Of generalize that duality and I'm still
+very excited about that so here's a simple
+
+612
+00:33:39.806 --> 00:33:43.046
+example of that duality how you do
+both estimation and control on the same
+
+613
+00:33:43.086 --> 00:33:47.786
+so real time this is now this is the
+future this is the past over the future
+
+614
+00:33:47.826 --> 00:33:51.946
+We have some task clusters not only
+in time but also in information You have
+
+615
+00:33:51.986 --> 00:33:54.406
+some critic that's added
+cost on the horizon,
+
+616
+00:33:54.446 --> 00:33:57.786
+you optimize this cost classically.
+
+617
+00:33:58.526 --> 00:33:59.626
+How do you do state estimation?
+
+618
+00:34:00.066 --> 00:34:03.486
+You look into the past, you have a bunch
+of sensors that define sensor cost.
+
+619
+00:34:03.766 --> 00:34:08.046
+The measured sensor, the predicted sensor
+given your model have three in the signal.
+
+620
+00:34:08.566 --> 00:34:10.406
+And in addition to that you have a prior.
+
+621
+00:34:10.586 --> 00:34:13.526
+Now prior is a probability to turn
+into a cost to take your minus long.
+
+622
+00:34:14.966 --> 00:34:16.906
+And then as you go forward
+you update this prior
+
+623
+00:34:16.946 --> 00:34:18.966
+recursive there and you will
+run a projector.
+
+624
+00:34:19.886 --> 00:34:21.786
+Now, both the critic and the prior,
+
+625
+00:34:21.826 --> 00:34:24.466
+you can squeeze them and send
+them all the way to the present.
+
+626
+00:34:24.726 --> 00:34:25.726
+It's really good.
+
+627
+00:34:26.006 --> 00:34:27.746
+So when you do that,
+on the estimation side,
+
+628
+00:34:27.786 --> 00:34:30.906
+you just build this kind of recursive
+estimation where it's a gap,
+
+629
+00:34:30.946 --> 00:34:32.986
+or a particle filter, or a center filter,
+
+630
+00:34:33.026 --> 00:34:36.146
+or some basic thing that all
+these things are just one step.
+
+631
+00:34:38.226 --> 00:34:39.226
+Similarly,
+
+632
+00:34:40.246 --> 00:34:43.446
+If you push the critic all the way,
+now you're adding the critic policy.
+
+633
+00:34:43.626 --> 00:34:44.626
+So that's like one step.
+
+634
+00:34:45.806 --> 00:34:47.066
+One step may not be enough.
+
+635
+00:34:47.106 --> 00:34:51.426
+And that's okay, you can do multi-steps,
+so push both the prior and the critic away
+
+636
+00:34:51.466 --> 00:34:55.286
+from the present, bridge the gap
+with the projector optimizer,
+
+637
+00:34:55.326 --> 00:34:57.606
+that projector optimizer
+has to run in real time,
+
+638
+00:34:57.646 --> 00:34:59.726
+but it does already,
+and you don't need, what I
+
+639
+00:34:59.766 --> 00:35:01.766
+Was showing you for example
+in the Munich NPC,
+
+640
+00:35:01.806 --> 00:35:04.606
+that was not critic at all,
+40 steps for a football.
+
+641
+00:35:04.906 --> 00:35:06.626
+You don't need 40 steps,
+as long as you have a critic,
+
+642
+00:35:06.666 --> 00:35:08.866
+10 steps are going to be enough.
+
+643
+00:35:11.706 --> 00:35:14.906
+So this is the scheme
+that I think is very promising,
+
+644
+00:35:14.946 --> 00:35:18.126
+and people will give you the tools
+to just run it out of the box.
+
+645
+00:35:18.206 --> 00:35:21.786
+You'll still have to figure out
+some adjustments on your end,
+
+646
+00:35:21.826 --> 00:35:23.506
+but the low level
+is hopefully taken care of.
+
+647
+00:35:24.026 --> 00:35:25.026
+So that's it.
+
+648
+00:35:25.446 --> 00:35:28.386
+Thank you, and any questions other than,
+where is it going to be released?
+
+649
+00:35:28.686 --> 00:35:36.206
+[Applause]

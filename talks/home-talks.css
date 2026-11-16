@@ -458,6 +458,7 @@
 	flex-wrap: wrap;
 	justify-content: center;
 	gap: 0.5rem;
+	padding-bottom: 1.25rem;
 }
 
 .talk-link {
@@ -528,6 +529,12 @@
 .talk-yt,
 .talk-poster {
 	transform: scale(1.075);
+}
+
+/* The invited talks are composed edge to edge, with no margin to hide. */
+.keynote-section .talk-yt,
+.keynote-section .talk-poster {
+	transform: none;
 }
 
 .talk-yt,
@@ -1391,4 +1398,632 @@ a.river-card-title:focus-visible {
 		transition: none;
 		animation: none;
 	}
+}
+
+/* ------------------------------------------------------------ invited talks */
+/* One large player per invited speaker, stacked in the order of the program cards.
+   Before the talk plays, the frame shows a cover about the speaker; it fades once the video runs. */
+.keynote-list {
+	display: grid;
+	gap: 1.6rem;
+	margin-top: 1.6rem;
+}
+
+.keynote {
+	min-width: 0;
+	scroll-margin-top: calc(var(--nav-height) + 1rem);
+}
+
+.keynote.is-open:not(:last-child) {
+	margin-bottom: 1.4rem;
+}
+
+.keynote-section .talk-view {
+	margin-top: 0;
+}
+
+.keynote .talk-play-big {
+	display: none;
+}
+
+.keynote .talk-frame {
+	container-type: inline-size;
+}
+
+/* The cover looks like a video: the speaker on a slice of the workshop ribbon (the same gradient as the
+   student cards) on the left, and a still from the talk with a play button on the right. */
+.keynote-section {
+	--talk-ribbon: linear-gradient(90deg, #a34900 0%, #e07b24 28%, #f07078 52%, #9a6b86 74%, #37677d 100%);
+}
+
+.keynote:nth-child(1) { --i: 0; }
+.keynote:nth-child(2) { --i: 1; }
+.keynote:nth-child(3) { --i: 2; }
+.keynote:nth-child(4) { --i: 3; }
+
+.talk-cover {
+	position: absolute;
+	inset: 0;
+	z-index: 3;
+	display: grid;
+	grid-template-columns: minmax(0, 1fr) auto;
+	overflow: hidden;
+	cursor: pointer;
+	background: var(--ink-950);
+	transition: opacity 0.45s ease, visibility 0.45s ease;
+}
+
+.talk-frame.is-live .talk-cover {
+	opacity: 0;
+	visibility: hidden;
+	pointer-events: none;
+}
+
+/* left: who is speaking */
+.talk-cover-panel {
+	position: relative;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: flex-start;
+	min-width: 0;
+	padding: 1.6rem clamp(1.4rem, 3.4cqw, 2.8rem);
+	overflow: hidden;
+	color: var(--white);
+	background: var(--talk-ribbon);
+	background-size: 400% 100%;
+	background-position: calc(var(--i, 0) * 33.333%) 0;
+}
+
+.talk-cover-panel::before {
+	content: "";
+	position: absolute;
+	inset: 0;
+	background:
+		radial-gradient(circle at 18% 12%, rgba(255, 255, 255, 0.24), transparent 55%),
+		linear-gradient(180deg, rgba(33, 21, 14, 0) 40%, rgba(33, 21, 14, 0.22));
+	pointer-events: none;
+}
+
+.talk-cover-panel > * {
+	position: relative;
+}
+
+.talk-cover-face {
+	width: clamp(84px, 13.5cqw, 164px);
+	height: auto;
+	aspect-ratio: 1;
+	margin-bottom: clamp(0.9rem, 1.9cqw, 1.4rem);
+	object-fit: cover;
+	object-position: center top;
+	background: var(--sand-100);
+	border: 4px solid rgba(255, 255, 255, 0.92);
+	border-radius: 50%;
+	box-shadow: 0 0 0 10px rgba(255, 255, 255, 0.16), 0 16px 34px rgba(33, 21, 14, 0.32);
+}
+
+.talk-cover-name {
+	margin: 0;
+	font-family: "Sora", sans-serif;
+	font-size: max(20px, 3.15cqw);
+	font-weight: 700;
+	line-height: 1.05;
+	letter-spacing: -0.02em;
+	color: var(--white);
+	text-shadow: 0 2px 14px rgba(33, 21, 14, 0.25);
+}
+
+.talk-cover-affiliation {
+	margin: 0.6cqw 0 0;
+	font-size: max(12px, 1.25cqw);
+	font-weight: 600;
+	color: rgba(255, 255, 255, 0.9);
+}
+
+.talk-cover-title {
+	margin: 1.8cqw 0 0;
+	font-family: "Sora", sans-serif;
+	font-size: max(14px, 1.65cqw);
+	font-weight: 500;
+	line-height: 1.3;
+	color: var(--white);
+	text-wrap: balance;
+}
+
+.talk-cover-name a,
+.talk-cover-affiliation a {
+	color: inherit;
+}
+
+.talk-cover-name a {
+	text-decoration: none;
+}
+
+.talk-cover-affiliation a {
+	text-decoration: underline;
+	text-decoration-color: rgba(255, 255, 255, 0.45);
+	text-underline-offset: 0.2em;
+}
+
+.talk-cover-name a:hover,
+.talk-cover-name a:focus-visible,
+.talk-cover-affiliation a:hover,
+.talk-cover-affiliation a:focus-visible {
+	text-decoration: underline;
+	text-decoration-color: var(--white);
+	text-underline-offset: 0.2em;
+}
+
+/* right: a still from the talk, ready to play */
+/* exactly 16:9 at the cover's height, so the whole frame shows; the panel takes the rest of the width */
+.talk-cover-thumb {
+	position: relative;
+	height: 100%;
+	aspect-ratio: 16 / 9;
+	max-width: 66cqw;
+	min-width: 0;
+	overflow: hidden;
+	background: var(--ink-950);
+}
+
+.talk-cover-thumb img {
+	position: absolute;
+	inset: 0;
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+	transition: transform 0.6s ease, filter 0.4s ease;
+}
+
+.talk-cover-thumb::after {
+	content: "";
+	position: absolute;
+	inset: 0;
+	background:
+		radial-gradient(circle at 50% 50%, rgba(33, 21, 14, 0.18), transparent 60%),
+		linear-gradient(180deg, transparent 60%, rgba(33, 21, 14, 0.45));
+	pointer-events: none;
+}
+
+.talk-cover:hover .talk-cover-thumb img {
+	transform: scale(1.04);
+}
+
+.talk-cover-play {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	z-index: 1;
+	display: grid;
+	place-items: center;
+	width: clamp(58px, 8cqw, 92px);
+	aspect-ratio: 1;
+	padding-left: 0.3rem;
+	font-size: clamp(1.2rem, 2.2cqw, 1.8rem);
+	color: var(--white);
+	background: linear-gradient(135deg, var(--accent-500), var(--coral-400));
+	border-radius: 50%;
+	box-shadow: 0 0 0 10px rgba(255, 255, 255, 0.22), 0 16px 36px rgba(33, 21, 14, 0.4);
+	transform: translate(-50%, -50%);
+	transition: transform 0.35s ease, box-shadow 0.35s ease;
+}
+
+.talk-cover:hover .talk-cover-play {
+	transform: translate(-50%, -50%) scale(1.08);
+	box-shadow: 0 0 0 14px rgba(255, 255, 255, 0.28), 0 18px 40px rgba(33, 21, 14, 0.45);
+}
+
+.talk-frame.is-loading .talk-cover-play {
+	animation: talk-cover-pulse 1s ease-in-out infinite;
+}
+
+@keyframes talk-cover-pulse {
+	50% {
+		transform: translate(-50%, -50%) scale(0.92);
+		opacity: 0.8;
+	}
+}
+
+.talk-cover-chip {
+	position: absolute;
+	left: clamp(0.8rem, 2cqw, 1.3rem);
+	bottom: clamp(0.8rem, 2cqw, 1.3rem);
+	z-index: 1;
+	padding: 0.45rem 0.85rem;
+	font: 500 max(11px, 1.05cqw)/1 "IBM Plex Mono", monospace;
+	letter-spacing: 0.06em;
+	text-transform: uppercase;
+	color: var(--white);
+	background: rgba(20, 14, 10, 0.55);
+	border-radius: 999px;
+	-webkit-backdrop-filter: blur(6px);
+	backdrop-filter: blur(6px);
+}
+
+/* no recording yet */
+.talk-cover.is-soon {
+	cursor: default;
+}
+
+.talk-cover.is-soon .talk-cover-thumb img {
+	filter: grayscale(0.4) brightness(0.85);
+}
+
+.talk-cover.is-soon:hover .talk-cover-thumb img {
+	transform: none;
+}
+
+.talk-cover.is-soon .talk-cover-play,
+.talk-cover.is-soon .talk-cover-duration {
+	display: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+	.talk-cover,
+	.talk-cover-thumb img,
+	.talk-cover-play {
+		transition: none;
+	}
+
+	.talk-frame.is-loading .talk-cover-play {
+		animation: none;
+	}
+}
+
+/* phones: the still on top, who is speaking below it */
+@media (max-width: 640px) {
+	.keynote-list .keynote:not(.is-open) .talk-frame {
+		height: auto;
+	}
+
+	.keynote-list .keynote:not(.is-open) .talk-cover {
+		position: relative;
+		inset: auto;
+		grid-template-columns: minmax(0, 1fr);
+	}
+
+	.keynote-list .keynote:not(.is-open) .talk-cover-thumb {
+		order: -1;
+		height: auto;
+		max-width: none;
+		aspect-ratio: 16 / 9;
+	}
+
+	.keynote-list .keynote:not(.is-open) .talk-cover-panel {
+		display: grid;
+		grid-template-columns: auto minmax(0, 1fr);
+		column-gap: 0.9rem;
+		align-items: center;
+		padding: 0.95rem 1.1rem 1.05rem;
+	}
+
+	.keynote-list .keynote:not(.is-open) .talk-cover-face {
+		grid-row: span 3;
+		width: 76px;
+		margin: 0;
+		box-shadow: 0 0 0 5px rgba(255, 255, 255, 0.16), 0 8px 18px rgba(33, 21, 14, 0.3);
+	}
+
+	.keynote-list .keynote:not(.is-open) .talk-cover-name {
+		font-size: 1.2rem;
+	}
+
+	.keynote-list .keynote:not(.is-open) .talk-cover-affiliation {
+		margin-top: 0.15rem;
+		font-size: 0.78rem;
+	}
+
+	.keynote-list .keynote:not(.is-open) .talk-cover-title {
+		margin-top: 0.3rem;
+		font-size: 0.9rem;
+	}
+}
+
+/* ------------------------------------------------------------ mentions under the video */
+/* With the river hidden, the lab or paper the speaker is talking about appears here while they talk about it. */
+.talk-mentions {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: center;
+	gap: 0.5rem;
+	min-height: 2.5rem;
+	padding: 0 1rem 0.9rem;
+}
+
+.talk-stage:not(.is-river-off) .talk-mentions {
+	display: none;
+}
+
+.talk-mention {
+	display: none;
+	align-items: center;
+	gap: 0.6rem;
+	max-width: 100%;
+	padding: 0.4rem 0.95rem 0.4rem 0.45rem;
+	font-size: 0.88rem;
+	line-height: 1.25;
+	color: var(--ink-900);
+	text-decoration: none;
+	background: var(--white);
+	border: 1px solid rgba(191, 87, 0, 0.22);
+	border-radius: 999px;
+	box-shadow: 0 8px 22px -12px rgba(70, 35, 10, 0.35);
+	transition: color 0.2s ease, border-color 0.2s ease, transform 0.2s ease;
+}
+
+.talk-mention.is-live {
+	display: inline-flex;
+	animation: mention-in 0.45s cubic-bezier(0.2, 0.75, 0.25, 1);
+}
+
+.talk-mention:hover,
+.talk-mention:focus-visible {
+	color: var(--accent-700);
+	border-color: var(--accent-500);
+	transform: translateY(-1px);
+}
+
+.talk-mention-kind {
+	flex: none;
+	padding: 0.25rem 0.55rem;
+	font: 500 0.66rem/1 "IBM Plex Mono", monospace;
+	letter-spacing: 0.08em;
+	text-transform: uppercase;
+	color: var(--white);
+	background: linear-gradient(90deg, var(--accent-500), var(--coral-400));
+	border-radius: 999px;
+}
+
+.talk-mention-title {
+	min-width: 0;
+	font-weight: 500;
+}
+
+@keyframes mention-in {
+	from {
+		opacity: 0;
+		transform: translateY(6px);
+	}
+}
+
+@media (prefers-reduced-motion: reduce) {
+	.talk-mention.is-live {
+		animation: none;
+	}
+}
+
+/* ------------------------------------------------------------ invited talks before play */
+/* Until a talk is played, its card is just the cover (portrait, name, lab, title, play),
+   two to a row; the controls, captions and links appear once it opens. */
+.keynote:not(.is-open) .talk-controls,
+.keynote:not(.is-open) .talk-caption,
+.keynote:not(.is-open) .talk-mentions,
+.keynote:not(.is-open) .talk-links {
+	display: none;
+}
+
+.keynote:not(.is-open) .talk-frame {
+	border-radius: 7px;
+}
+
+.keynote:not(.is-open) .talk-stage.is-river-off {
+	margin-left: 0;
+	margin-right: 0;
+}
+
+.keynote:not(.is-open) .talk-main {
+	transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.keynote:not(.is-open):hover .talk-main {
+	transform: translateY(-3px);
+}
+
+@media (prefers-reduced-motion: reduce) {
+	.keynote:not(.is-open) .talk-main {
+		transition: none;
+	}
+
+	.keynote:not(.is-open):hover .talk-main {
+		transform: none;
+	}
+}
+
+/* Before play the cover keeps the full width but not the full 16:9 height, so the four speakers
+   take less scrolling; it opens to the 16:9 player on play. */
+.keynote:not(.is-open) .talk-frame {
+	aspect-ratio: auto;
+	height: clamp(260px, 31.5vw, 455px);
+}
+
+.keynote:not(.is-open) .talk-poster {
+	display: none;
+}
+
+/* ------------------------------------------------------------ opened invited talk */
+/* Opening and closing ease the frame between the cover height and 16:9. Once open, a large see-through ×
+   appears at the top right when the pointer moves over the top of the video, and closes the talk back to its cover. */
+.keynote .talk-main {
+	container-type: inline-size;
+}
+
+.keynote .talk-frame {
+	transition: height 0.85s cubic-bezier(0.2, 0.75, 0.25, 1);
+}
+
+.keynote.is-open .talk-stage:not(.is-fullscreen) .talk-frame {
+	aspect-ratio: auto;
+	height: calc(100cqw * 9 / 16);
+}
+
+.keynote .talk-stage {
+	transition: margin 0.85s cubic-bezier(0.2, 0.75, 0.25, 1);
+}
+
+.keynote.is-open .talk-controls,
+.keynote.is-open .talk-mentions,
+.keynote.is-open .talk-links {
+	animation: keynote-reveal 0.6s ease 0.45s both;
+}
+
+@keyframes keynote-reveal {
+	from {
+		opacity: 0;
+		transform: translateY(8px);
+	}
+}
+
+/* an invisible band along the top of the video; moving the pointer there brings the × in at the top right */
+.talk-x-zone {
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	z-index: 6;
+	display: none;
+	height: max(96px, 30%);
+}
+
+.keynote.is-open .talk-x-zone {
+	display: block;
+}
+
+.talk-x {
+	position: absolute;
+	top: clamp(0.8rem, 2.4cqw, 1.4rem);
+	right: clamp(0.8rem, 2.4cqw, 1.4rem);
+	display: grid;
+	place-items: center;
+	width: clamp(50px, 6.5cqw, 72px);
+	aspect-ratio: 1;
+	padding: 0;
+	font-size: clamp(1.25rem, 2.3cqw, 1.8rem);
+	color: var(--white);
+	background: rgba(20, 14, 10, 0.5);
+	border: 1.5px solid rgba(255, 255, 255, 0.7);
+	border-radius: 50%;
+	box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+	-webkit-backdrop-filter: blur(8px);
+	backdrop-filter: blur(8px);
+	cursor: pointer;
+	opacity: 0;
+	transform: translateY(-14px) scale(0.92);
+	transition: opacity 0.3s ease, transform 0.4s cubic-bezier(0.2, 0.75, 0.25, 1), background 0.2s ease;
+}
+
+.talk-x-zone:hover .talk-x,
+.talk-x:focus-visible {
+	opacity: 1;
+	transform: none;
+}
+
+.talk-x:hover,
+.talk-x:focus-visible {
+	background: rgba(20, 14, 10, 0.62);
+	border-color: var(--white);
+}
+
+.talk-x:focus-visible {
+	outline: 2px solid var(--white);
+	outline-offset: 3px;
+}
+
+.talk-stage.is-fullscreen .talk-x-zone {
+	display: none;
+}
+
+/* no hover on touch screens: keep the × in view, a little quieter */
+@media (hover: none) {
+	.keynote.is-open .talk-x {
+		opacity: 0.8;
+		transform: none;
+	}
+}
+
+@media (prefers-reduced-motion: reduce) {
+	.keynote .talk-frame,
+	.keynote .talk-stage,
+	.talk-x {
+		transition: none;
+	}
+
+	.keynote.is-open .talk-controls,
+	.keynote.is-open .talk-mentions,
+	.keynote.is-open .talk-links {
+		animation: none;
+	}
+}
+
+/* ------------------------------------------------------------ tip: the river can be hidden */
+/* Shown once, the first time a talk is opened on a visit; points at the river button. */
+/* above the video frame, so the tip can rise over it */
+.keynote .talk-controls {
+	position: relative;
+	z-index: 8;
+}
+
+.talk-river-hint {
+	position: absolute;
+	bottom: calc(100% + 12px);
+	left: var(--x, 90%);
+	z-index: 7;
+	width: max-content;
+	max-width: min(300px, 80vw);
+	padding: 0.7rem 0.95rem;
+	font: 500 0.86rem/1.4 "IBM Plex Sans", sans-serif;
+	text-align: left;
+	color: var(--white);
+	background: var(--ink-950);
+	border: 0;
+	border-radius: 10px;
+	box-shadow: 0 14px 34px rgba(33, 21, 14, 0.3);
+	cursor: pointer;
+	opacity: 0;
+	transform: translate(calc(-100% + 30px), 6px);
+	transition: opacity 0.35s ease, transform 0.35s ease;
+	pointer-events: none;
+}
+
+.talk-river-hint.is-shown {
+	opacity: 1;
+	transform: translate(calc(-100% + 30px), 0);
+	pointer-events: auto;
+}
+
+/* the little pointer, aimed at the button below */
+.talk-river-hint::after {
+	content: "";
+	position: absolute;
+	right: 23px;
+	bottom: -6px;
+	width: 14px;
+	height: 14px;
+	background: var(--ink-950);
+	border-radius: 2px;
+	transform: rotate(45deg);
+}
+
+.talk-controls:has(.talk-river-hint.is-shown) .talk-river-toggle {
+	animation: river-hint-pulse 1.6s ease-in-out infinite;
+}
+
+@keyframes river-hint-pulse {
+	50% {
+		box-shadow: 0 0 0 7px rgba(240, 112, 120, 0.3);
+	}
+}
+
+@media (prefers-reduced-motion: reduce) {
+	.talk-river-hint {
+		transition: none;
+	}
+
+	.talk-controls:has(.talk-river-hint.is-shown) .talk-river-toggle {
+		animation: none;
+	}
+}
+
+/* no link buttons for a talk: no empty row under it */
+.talk-links:empty {
+	display: none;
 }

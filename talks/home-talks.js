@@ -1,12 +1,37 @@
-/* Student talks on the home page: YouTube playback with our own controls,
-   whole-sentence captions below the video, and a "river" beside it where the
-   talk's moments and the papers it mentions drift up as the talk plays. */
+/* Talks on the home page (invited talks and student talks): YouTube playback with
+   our own controls, whole-sentence captions below the video, and a "river" beside
+   it where the talk's moments and the papers it mentions drift up as the talk plays.
+   Every element with a data-talks file gets its own player. With the picker deck
+   markup it shows a deck of talks; without it, one talk with a cover (.talk-cover).
+     data-talks   JSON list of talks (chapters, resources, optional youtube id)
+     data-only    show just this talk id (one player per talk, no deck)
+     data-media   optional JSON of YouTube ids by talk id
+     data-kind    label on the picker cards, e.g. "Student talk"
+     data-shuffle "false" keeps the file's order instead of a fresh order per visit */
 (() => {
   "use strict";
-  const root = document.getElementById("student-talks");
-  if (!root) return;
 
+  /* ---------------------------------------------------------------- youtube (shared) */
+  let apiLoad = null;
+  function loadAPI() {
+    if (window.YT && window.YT.Player) return Promise.resolve();
+    if (apiLoad) return apiLoad;
+    apiLoad = new Promise((resolve, reject) => {
+      const previous = window.onYouTubeIframeAPIReady;
+      window.onYouTubeIframeAPIReady = () => { if (previous) previous(); resolve(); };
+      const script = document.createElement("script");
+      script.src = "https://www.youtube.com/iframe_api";
+      script.onerror = () => { apiLoad = null; reject(new Error("YouTube could not be reached. Try again.")); };
+      document.head.append(script);
+    });
+    return apiLoad;
+  }
+
+  document.querySelectorAll("[data-talks]").forEach(mount);
+
+  function mount(root) {
   const BASE = "talks/";
+  const KIND = root.dataset.kind || "Student talk";
   const PPS = 7.5;       // river speed: pixels per second of talk
   const GAP = 22;        // minimum space between river items
   const ANCHOR = 0.28;   // the "now" line, as a share of the river height (keep in step with --anchor in the CSS)
@@ -33,7 +58,7 @@
     cc: $(".talk-cc"), mute: $(".talk-mute"), full: $(".talk-full"), caption: $(".talk-caption"),
     status: $(".talk-status"), riverView: $(".river-view"), reel: $(".river-reel"), clock: $(".river-clock"),
     stage: $(".talk-stage"), riverToggle: $(".talk-river-toggle"),
-    dots: $(".talk-dots"), deckLabel: $(".talk-deck-label"), heading: $(".talk-heading")
+    dots: $(".talk-dots"), deckLabel: $(".talk-deck-label"), heading: $(".talk-heading"), cover: $(".talk-cover")
   };
 
   let talks = [], media = {}, current = null, moments = [], items = [], sentences = [];
@@ -43,6 +68,32 @@
   let reelY = null, jumpTimer = 0, sentenceIndex = -1, saidCount = -1, shownSecond = -1;
   let capSaid = null, capNext = null;
   let lastIndex = -1;
+  let mentions = [];
+  ui.mentions = $(".talk-mentions") || (() => {
+    const box = el("div", "talk-mentions");
+    box.setAttribute("aria-live", "polite");
+    ui.links.before(box);
+    return box;
+  })();
+  // An opened invited talk shows a large see-through × at the top right when the pointer moves over the top of the video;
+  // it closes the talk back to the cover. Esc does the same.
+  if (ui.cover) {
+    const x = el("button", "talk-x");
+    x.type = "button";
+    x.setAttribute("aria-label", "Close the talk and go back");
+    x.title = "Close";
+    const icon = el("i", "fa-solid fa-xmark");
+    icon.setAttribute("aria-hidden", "true");
+    x.append(icon);
+    x.addEventListener("click", event => { event.stopPropagation(); closeTalk(); });
+    // The × lives in an invisible corner zone and only shows while the pointer is in that corner.
+    const zone = el("div", "talk-x-zone");
+    zone.append(x);
+    ui.frame.append(zone);
+    root.addEventListener("keydown", event => {
+      if (event.key === "Escape" && root.classList.contains("is-open") && !document.fullscreenElement) closeTalk();
+    });
+  }
 
   /* ---------------------------------------------------------------- data */
   function parseVTT(text) {
@@ -70,7 +121,12 @@
       text = "";
       times = [];
     };
+    // A caption is a sentence, but never more than about two lines: unpunctuated speech
+    // also breaks at a pause between cues, at a cue boundary once it is long, or mid-cue if it runs on.
+    let lastEnd = -Infinity;
     cues.forEach(cue => {
+      if (text.trim() && (cue.start - lastEnd > 0.8 || text.length > 140)) flush();
+      lastEnd = cue.end;
       const piece = `${cue.text.replace(/\s+/g, " ").trim()} `;
       const span = Math.max(0.05, cue.end - cue.start);
       for (let k = 0; k < piece.length; k += 1) {
@@ -78,7 +134,7 @@
         text += ch;
         times.push(cue.start + span * (k / piece.length));
         const atEnd = k + 1 >= piece.length || piece[k + 1] === " ";
-        if (atEnd && (/[.!?]/.test(ch) || (text.length > 230 && /[,;:]/.test(ch)))) flush();
+        if (atEnd && ch !== " " && (/[.!?]/.test(ch) || (text.length > 120 && /[,;:]/.test(ch)) || text.length > 190)) flush();
       }
     });
     flush();
@@ -94,20 +150,13 @@
   }
 
   /* ---------------------------------------------------------------- youtube */
-  let apiLoad = null;
-  function loadAPI() {
-    if (window.YT && window.YT.Player) return Promise.resolve();
-    if (apiLoad) return apiLoad;
-    apiLoad = new Promise((resolve, reject) => {
-      const previous = window.onYouTubeIframeAPIReady;
-      window.onYouTubeIframeAPIReady = () => { if (previous) previous(); resolve(); };
-      const script = document.createElement("script");
-      script.src = "https://www.youtube.com/iframe_api";
-      script.onerror = () => { apiLoad = null; reject(new Error("YouTube could not be reached. Try again.")); };
-      document.head.append(script);
-    });
-    return apiLoad;
-  }
+  const videoOf = talk => (media[talk.id] && media[talk.id].youtube) || talk.youtube || "";
+  // Invited talks give an affiliation; student talks name the presenter.
+  const bylineOf = talk => talk.affiliation || talk.speaker;
+  // Only one talk on the page plays at a time.
+  document.addEventListener("talks:play", event => {
+    if (event.detail !== root && ready && playing) player.pauseVideo();
+  });
 
   function teardown() {
     clearInterval(timer);
@@ -129,11 +178,63 @@
     if (!playing) paint(polledT);
   }
 
+  // A small tip pointing at the river button, shown the first time a talk is opened on a visit.
+  let hint = null, hintTimer = 0;
+  function showRiverHint() {
+    if (window.__talksRiverHintShown || !ui.riverToggle) return;
+    window.__talksRiverHintShown = true;
+    const controls = ui.riverToggle.parentElement;
+    hint = el("button", "talk-river-hint");
+    hint.type = "button";
+    hint.setAttribute("aria-label", "Dismiss tip");
+    hint.append(el("span", "talk-river-hint-text", "“In this talk” bothering you? Turn it off with this button."));
+    hint.addEventListener("click", hideRiverHint);
+    controls.append(hint);
+    const place = () => {
+      if (!hint) return;
+      const b = ui.riverToggle.getBoundingClientRect(), c = controls.getBoundingClientRect();
+      hint.style.setProperty("--x", `${b.left - c.left + b.width / 2}px`);
+    };
+    setTimeout(() => { place(); if (hint) hint.classList.add("is-shown"); }, 1100);
+    window.addEventListener("resize", place);
+    hintTimer = setTimeout(hideRiverHint, 11000);
+  }
+  function hideRiverHint() {
+    clearTimeout(hintTimer);
+    if (!hint) return;
+    const node = hint;
+    hint = null;
+    node.classList.remove("is-shown");
+    setTimeout(() => node.remove(), 400);
+  }
+
+  // Back to the cover: stop the video but keep the place, so playing again picks up where it was.
+  function closeTalk() {
+    const full = document.fullscreenElement || document.webkitFullscreenElement;
+    if (full === ui.stage) (document.exitFullscreen || document.webkitExitFullscreen).call(document);
+    seq += 1;
+    teardown();
+    root.classList.remove("is-open");
+    // a closed cover keeps the full width; the river comes back when the talk is opened again
+    if (root.dataset.river === "off") setRiver(false);
+    hideRiverHint();
+    paint(position);
+    requestAnimationFrame(() => root.scrollIntoView({ behavior: reduceMotion ? "auto" : "smooth", block: "nearest" }));
+  }
+
   async function start(at) {
     position = clamp(at);
     paint(position);
-    const videoId = media[current.id] && media[current.id].youtube;
+    const videoId = videoOf(current);
     if (!videoId) { ui.status.textContent = "This recording is coming soon."; return; }
+    // A compact player (an invited talk shown as a banner) opens into the full player on first play.
+    if (ui.cover && !root.classList.contains("is-open")) {
+      root.classList.add("is-open");
+      // opened, the talk shows "In this talk" beside the video, with a one-time tip on how to hide it
+      if (root.dataset.river === "off") { setRiver(true); showRiverHint(); }
+      requestAnimationFrame(() => root.scrollIntoView({ behavior: reduceMotion ? "auto" : "smooth", block: "start" }));
+      if (items.length) requestAnimationFrame(layoutRiver);
+    }
     if (ready) { player.seekTo(position, true); player.playVideo(); return; }
     if (starting) return;
     starting = true;
@@ -162,7 +263,7 @@
           if (mine !== seq) return;
           ready = true;
           starting = false;
-          event.target.getIframe().title = `${current.name}, presented by ${current.speaker}`;
+          event.target.getIframe().title = `${current.name === current.speaker ? current.title : current.name}, presented by ${current.speaker}`;
           if (muted) event.target.mute();
           event.target.seekTo(position, true);
           event.target.playVideo();
@@ -174,6 +275,7 @@
           if (mine !== seq) return;
           const state = window.YT.PlayerState;
           if (event.data === state.PLAYING) {
+            document.dispatchEvent(new CustomEvent("talks:play", { detail: root }));
             ui.frame.classList.add("is-live");
             ui.frame.classList.remove("is-loading");
             // Captions are shown on the page, not inside the video.
@@ -289,6 +391,10 @@
       if (item.kind !== "moment") return;
       const on = item === currentMoment;
       if (item.current !== on) { item.current = on; item.node.classList.toggle("is-current", on); }
+    });
+    mentions.forEach(m => {
+      const live = t >= m.start && t < m.end;
+      if (m.live !== live) { m.live = live; m.node.classList.toggle("is-live", live); }
     });
     showCaption(t);
   }
@@ -421,6 +527,24 @@
     sentences = [];
     moments = buildMoments(current);
 
+    if (ui.picks) showInDeck();
+    if (ui.meta) ui.meta.textContent = `Now showing · ${fmt(current.duration)}`;
+    if (ui.speaker) ui.speaker.textContent = bylineOf(current);
+    if (ui.name) ui.name.textContent = current.name;
+    if (ui.subtitle) ui.subtitle.textContent = current.title;
+    if (ui.cover && !videoOf(current)) {
+      ui.cover.classList.add("is-soon");
+      const label = ui.cover.querySelector(".talk-cover-play-label");
+      if (label) label.textContent = "Video coming soon";
+    }
+    ui.poster.src = `${BASE}posters/${current.id}.jpg`;
+    ui.poster.alt = `${current.name} title slide`;
+    ui.big.setAttribute("aria-label", `Play ${current.name}`);
+    ui.bar.setAttribute("aria-valuemax", String(Math.floor(duration)));
+    selectRest(at);
+  }
+
+  function showInDeck() {
     // The selected talk sits in the middle of the deck; its neighbours sit either side, the last peeks from behind.
     const idx = talks.indexOf(current), n = talks.length;
     const slot = { 0: "center", 1: "right", [n - 1]: "left" };
@@ -447,24 +571,26 @@
       });
     }
     lastIndex = idx;
-    ui.meta.textContent = `Now showing · ${fmt(current.duration)}`;
-    ui.speaker.textContent = current.speaker;
-    ui.name.textContent = current.name;
-    ui.subtitle.textContent = current.title;
-    ui.poster.src = `${BASE}posters/${current.id}.jpg`;
-    ui.poster.alt = `${current.name} title slide`;
-    ui.big.setAttribute("aria-label", `Play ${current.name}`);
-    ui.bar.setAttribute("aria-valuemax", String(Math.floor(duration)));
+  }
 
+  function selectRest(at) {
     const resources = current.resources || [];
     const main = resources.filter(r => r.end - r.start >= current.duration * 0.5);
     const mentioned = resources.filter(r => !main.includes(r));
-    const links = main.map(r => /paper/i.test(r.label)
+    const links = main.map(r => r.kind === "speaker"
+      ? outLink("Speaker", r.url, "fa-solid fa-user")
+      : /paper/i.test(r.label)
       ? outLink("Paper", r.url, "fa-regular fa-file-lines")
       : outLink("Project", r.url, "fa-solid fa-arrow-up-right-from-square"));
-    const videoId = media[current.id] && media[current.id].youtube;
-    if (videoId) links.push(outLink("YouTube", `https://youtu.be/${videoId}`, "fa-brands fa-youtube"));
     ui.links.replaceChildren(...links);
+
+    // With the river hidden, a lab or paper the speaker brings up appears under the video while they talk about it.
+    mentions = mentioned.map(r => {
+      const chip = paperLink("talk-mention", "", r.url);
+      chip.append(el("span", "talk-mention-kind", r.venue || "Paper"), el("span", "talk-mention-title", `${r.title} ↗`));
+      return { start: r.start, end: r.end, node: chip, live: false };
+    });
+    ui.mentions.replaceChildren(...mentions.map(m => m.node));
 
     ui.ticks.replaceChildren(...moments.slice(1).map(m => {
       const tick = el("span", "talk-bar-tick");
@@ -497,6 +623,8 @@
   /* ---------------------------------------------------------------- events */
   ui.big.addEventListener("click", () => start(position));
   ui.poster.addEventListener("click", () => start(position));
+  // The cover's own links (the speaker's page, their lab) open normally; anywhere else starts the talk.
+  if (ui.cover) ui.cover.addEventListener("click", event => { if (!event.target.closest("a")) start(position); });
   ui.toggle.addEventListener("click", togglePlay);
 
   // Viewer preferences (captions, the river) are remembered on this device when storage is available.
@@ -523,11 +651,14 @@
   }
 
   ui.cc.addEventListener("click", () => { setCaptions(!captionsOn); savePrefs(); });
-  ui.riverToggle.addEventListener("click", () => { setRiver(!riverOn); savePrefs(); });
+  ui.riverToggle.addEventListener("click", () => { setRiver(!riverOn); savePrefs(); hideRiverHint(); });
   {
     const prefs = loadPrefs();
     if (prefs.captions === false) setCaptions(false);
     // The river always starts on; only the captions choice is remembered.
+    // A player can ask to start with captions on and the river hidden (data-captions="on", data-river="off").
+    if (root.dataset.captions === "on") setCaptions(true);
+    if (root.dataset.river === "off") setRiver(false);
   }
 
   ui.mute.addEventListener("click", () => {
@@ -642,6 +773,7 @@
     const at = talks.findIndex(talk => talk === current);
     select(talks[(at + delta + talks.length) % talks.length].id);
   };
+  if (ui.picks) {
   $(".talk-prev").addEventListener("click", () => stepTalk(-1));
   $(".talk-next").addEventListener("click", () => stepTalk(1));
 
@@ -655,6 +787,7 @@
     next.focus();
     select(next.dataset.talk);
   });
+  }
 
   if (window.ResizeObserver) {
     let size = "";
@@ -668,31 +801,50 @@
   /* ---------------------------------------------------------------- init */
   async function init() {
     try {
-      const [talkResponse, mediaResponse] = await Promise.all([fetch(`${BASE}talks.json`), fetch(`${BASE}media.json`)]);
+      const [talkResponse, mediaResponse] = await Promise.all([
+        fetch(root.dataset.talks),
+        root.dataset.media ? fetch(root.dataset.media) : Promise.resolve(null)
+      ]);
       if (!talkResponse.ok) throw new Error("talks unavailable");
       talks = await talkResponse.json();
-      media = mediaResponse.ok ? await mediaResponse.json() : {};
+      media = mediaResponse && mediaResponse.ok ? await mediaResponse.json() : {};
+      if (root.dataset.only) talks = talks.filter(talk => talk.id === root.dataset.only);
+      if (!talks.length) throw new Error("talk missing");
     } catch (error) {
       ui.status.textContent = "The talks could not be loaded. Please refresh the page.";
       ui.view.hidden = false;
       return;
     }
     // A fresh order on every visit, so no talk is always the one people meet first.
-    for (let i = talks.length - 1; i > 0; i -= 1) {
+    if (root.dataset.shuffle !== "false") for (let i = talks.length - 1; i > 0; i -= 1) {
       const j = Math.floor(Math.random() * (i + 1));
       [talks[i], talks[j]] = [talks[j], talks[i]];
     }
+    if (ui.picks) buildDeck();
+    const params = new URLSearchParams(window.location.search);
+    // ?talk=<id>&t=<seconds> opens a talk at a moment; only the player that has that talk follows it.
+    const linked = talks.some(talk => talk.id === params.get("talk"));
+    if (linked) select(params.get("talk"), Number(params.get("t")) || 0);
+    else select(talks[0].id);
+    if (linked && ui.cover) {
+      root.classList.add("is-open");
+      if (root.dataset.river === "off") setRiver(true);
+      root.scrollIntoView({ block: "start" });
+    }
+  }
+
+  function buildDeck() {
     talks.forEach((talk, index) => {
       const pick = el("button", "talk-pick");
       pick.type = "button";
       pick.dataset.talk = talk.id;
       pick.setAttribute("role", "tab");
-      pick.setAttribute("aria-controls", "student-talk-view");
+      pick.setAttribute("aria-controls", ui.view.id);
       // Each band is a slice of one shared gradient, so the four cards read as one ribbon.
       const band = el("span", "talk-pick-band");
       band.style.setProperty("--i", String(index * 3 / Math.max(1, talks.length - 1)));
       band.append(
-        el("span", "talk-pick-kicker", `Student talk · ${fmt(talk.duration)}`),
+        el("span", "talk-pick-kicker", `${KIND} · ${fmt(talk.duration)}`),
         el("span", "talk-pick-name", talk.name)
       );
       const thumb = el("span", "talk-pick-thumb");
@@ -707,7 +859,7 @@
       play.setAttribute("aria-hidden", "true");
       thumb.append(image, play, el("span", "talk-pick-now", "Now showing"));
       const body = el("span", "talk-pick-body");
-      body.append(el("span", "talk-pick-speaker", talk.speaker), el("span", "talk-pick-title", talk.title));
+      body.append(el("span", "talk-pick-speaker", bylineOf(talk)), el("span", "talk-pick-title", talk.title));
       pick.append(band, thumb, body);
       pick.addEventListener("click", () => { if (!current || current.id !== talk.id) select(talk.id); });
       ui.picks.append(pick);
@@ -726,9 +878,8 @@
     if (window.ResizeObserver) new ResizeObserver(sizeDeck).observe(ui.picks.firstElementChild);
     window.addEventListener("resize", sizeDeck);
     if (document.fonts) document.fonts.ready.then(sizeDeck).catch(() => {});
-    const params = new URLSearchParams(window.location.search);
-    select(params.get("talk"), Number(params.get("t")) || 0);
-    sizeDeck();
+    requestAnimationFrame(sizeDeck);
   }
   init();
+  }
 })();

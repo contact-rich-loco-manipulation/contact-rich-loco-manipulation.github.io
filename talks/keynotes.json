@@ -1,0 +1,426 @@
+[
+  {
+    "id": "alan",
+    "name": "Alan Fern",
+    "speaker": "Alan Fern",
+    "affiliation": "Oregon State University",
+    "title": "What if planning isn't the hard part?",
+    "summary": "Foundation models can plan the task; the hard part is real physical execution, and layered whole-body control is how to get there.",
+    "duration": 1661.824,
+    "youtube": "p2VZO24NW2U",
+    "chapters": [
+      {
+        "start": 0,
+        "title": "Introduction"
+      },
+      {
+        "start": 68,
+        "title": "Last-meter logistics in messy environments"
+      },
+      {
+        "start": 131,
+        "title": "Three parts: orchestration, interaction, execution"
+      },
+      {
+        "start": 160,
+        "title": "Task orchestration planning"
+      },
+      {
+        "start": 312,
+        "title": "Testing a frontier model as the planner"
+      },
+      {
+        "start": 390,
+        "title": "Physical interaction planning with foundation models"
+      },
+      {
+        "start": 566,
+        "title": "What stays hard: real physical execution"
+      },
+      {
+        "start": 640,
+        "title": "Why layered architectures?"
+      },
+      {
+        "start": 807,
+        "title": "Semantically meaningful interfaces"
+      },
+      {
+        "start": 951,
+        "title": "Whole-body control: the masked humanoid controller"
+      },
+      {
+        "start": 1115,
+        "title": "Whole-body collision avoidance"
+      },
+      {
+        "start": 1213,
+        "title": "The skill layer: object-oriented motion directives"
+      },
+      {
+        "start": 1391,
+        "title": "Extending the system: the Humanoid Hanoi benchmark"
+      },
+      {
+        "start": 1547,
+        "title": "Open problems and takeaways"
+      }
+    ],
+    "resources": [
+      {
+        "venue": "Lab",
+        "title": "Dynamic Robotics and AI Lab",
+        "label": "Alan's lab at Oregon State, home of Cassie and Digit",
+        "url": "https://mime.engineering.oregonstate.edu/research/drl/",
+        "start": 50,
+        "end": 86
+      },
+      {
+        "venue": "ICAPS 2026",
+        "title": "RAMP-3D",
+        "label": "Grounding vision and language to 3D masks for long-horizon box rearrangement",
+        "url": "https://osudrl.github.io/ramp_3d/",
+        "start": 206,
+        "end": 264
+      },
+      {
+        "venue": "AAAI Symposium 2025",
+        "title": "Masked Humanoid Controller",
+        "label": "Learning multi-modal whole-body control for real-world humanoid robots",
+        "url": "https://masked-humanoid.github.io/mhc/",
+        "start": 1052,
+        "end": 1135
+      },
+      {
+        "venue": "Humanoids 2026",
+        "title": "RECAL",
+        "label": "Collision-aware humanoid whole-body control under imperfect tracking targets",
+        "url": "https://mohitgadde.com/recal/",
+        "start": 1135,
+        "end": 1236
+      },
+      {
+        "venue": "CoRL 2026",
+        "title": "Humanoid Hanoi",
+        "label": "Shared whole-body control for skill-based box rearrangement",
+        "url": "https://osudrl.github.io/Humanoid_Hanoi/",
+        "start": 1445,
+        "end": 1533
+      }
+    ]
+  },
+  {
+    "id": "pulkit",
+    "name": "Pulkit Agrawal",
+    "speaker": "Pulkit Agrawal",
+    "affiliation": "MIT",
+    "title": "Contacts and Dynamics for Manipulation & Locomotion",
+    "summary": "Why controller gains, mass, actuators and touch decide whether contact-rich policies are performant on real robots.",
+    "duration": 1662.419,
+    "youtube": "mLjjESPpmHM",
+    "chapters": [
+      {
+        "start": 0,
+        "title": "Introduction"
+      },
+      {
+        "start": 80,
+        "title": "Robots need to be performant"
+      },
+      {
+        "start": 128,
+        "title": "Not all data is born equal"
+      },
+      {
+        "start": 162,
+        "title": "Mastering contacts and dynamics"
+      },
+      {
+        "start": 301,
+        "title": "Controller gains change policy performance"
+      },
+      {
+        "start": 518,
+        "title": "Mass and inertia: when robots outweigh objects"
+      },
+      {
+        "start": 789,
+        "title": "From manipulation to locomotion: SoftMimic"
+      },
+      {
+        "start": 910,
+        "title": "Compliance for any motion tracker"
+      },
+      {
+        "start": 979,
+        "title": "Learning actuator models without torque sensors"
+      },
+      {
+        "start": 1112,
+        "title": "Contact-aware actuator networks"
+      },
+      {
+        "start": 1254,
+        "title": "Soccer dribbling with onboard sensing"
+      },
+      {
+        "start": 1466,
+        "title": "Do robots need skin-like tactile sensors?"
+      },
+      {
+        "start": 1542,
+        "title": "High-resolution touch and throughput"
+      },
+      {
+        "start": 1650,
+        "title": "Closing"
+      }
+    ],
+    "resources": [
+      {
+        "venue": "Lab",
+        "title": "Improbable AI Lab",
+        "label": "Pulkit's lab at MIT CSAIL",
+        "url": "https://improbableai.com/",
+        "start": 86,
+        "end": 102
+      },
+      {
+        "venue": "RSS 2026",
+        "title": "Tune to Learn",
+        "label": "How controller gains affect robot policy learning",
+        "url": "https://younghyopark.me/tune-to-learn",
+        "start": 364,
+        "end": 520
+      },
+      {
+        "venue": "CoRL 2026 Workshop",
+        "title": "When Robots Outweigh Objects",
+        "label": "How inertia mismatch shapes robot policy learning",
+        "url": "https://younghyopark.me/inertia-mismatch",
+        "start": 520,
+        "end": 790
+      },
+      {
+        "venue": "CoRL 2026",
+        "title": "Contact-UAN",
+        "label": "Unsupervised actuator networks as a residual world model for humanoid control",
+        "url": "https://contact-uan.csail.mit.edu/",
+        "start": 1037,
+        "end": 1254
+      }
+    ]
+  },
+  {
+    "id": "emo",
+    "name": "Emo Todorov",
+    "speaker": "Emo Todorov",
+    "affiliation": "University of Washington and Roboti",
+    "title": "Resurrecting Model-Based Control and Learning",
+    "summary": "A case for model-based control and learning, built on fast analytical MuJoCo derivatives, new solvers and model predictive control.",
+    "duration": 2139.494,
+    "youtube": "9GUS_z3hjGk",
+    "chapters": [
+      {
+        "start": 0,
+        "title": "Introduction"
+      },
+      {
+        "start": 38,
+        "title": "Live demo: model predictive control in the simulator"
+      },
+      {
+        "start": 191,
+        "title": "Resurrecting model-based control and learning"
+      },
+      {
+        "start": 289,
+        "title": "What reinforcement learning claims, and what it does"
+      },
+      {
+        "start": 342,
+        "title": "Answering the objections to model-based methods"
+      },
+      {
+        "start": 486,
+        "title": "Building blocks: actors, critics and trajectory optimizers"
+      },
+      {
+        "start": 667,
+        "title": "The software stack and the proposed control scheme"
+      },
+      {
+        "start": 790,
+        "title": "Physics-inspired inverse kinematics"
+      },
+      {
+        "start": 881,
+        "title": "Analytical derivatives of MuJoCo"
+      },
+      {
+        "start": 1102,
+        "title": "How fast are full derivatives?"
+      },
+      {
+        "start": 1225,
+        "title": "Goal-directed dynamics: a fast non-smooth solver"
+      },
+      {
+        "start": 1350,
+        "title": "Successor to iLQG: handstands and motion tracking"
+      },
+      {
+        "start": 1526,
+        "title": "Sampling MPC on soft bodies"
+      },
+      {
+        "start": 1560,
+        "title": "Inverse-dynamics trajectory optimization"
+      },
+      {
+        "start": 1654,
+        "title": "Seeing contacts from a distance"
+      },
+      {
+        "start": 1919,
+        "title": "What the release will look like"
+      },
+      {
+        "start": 1980,
+        "title": "The duality of estimation and control"
+      }
+    ],
+    "resources": [
+      {
+        "venue": "SIGGRAPH 2012",
+        "title": "Contact-invariant optimization",
+        "label": "Discovery of complex behaviors through contact-invariant optimization (Mordatch, Todorov, Popović)",
+        "url": "https://doi.org/10.1145/2185520.2185539",
+        "start": 1836,
+        "end": 1929
+      }
+    ]
+  },
+  {
+    "id": "tao",
+    "name": "Tao Pang",
+    "speaker": "Tao Pang",
+    "affiliation": "Multiply Labs",
+    "title": "How can we efficiently leverage coding agents for dexterous manipulation?",
+    "summary": "Coding agents can solve dexterous manipulation when given the right tool: smoothed contact dynamics and linear MPC.",
+    "duration": 1393.067,
+    "youtube": "",
+    "chapters": [
+      {
+        "start": 0,
+        "title": "Introduction"
+      },
+      {
+        "start": 67,
+        "title": "Will the next frontier model solve robotics?"
+      },
+      {
+        "start": 113,
+        "title": "How coding agents solve robotics tasks"
+      },
+      {
+        "start": 170,
+        "title": "An experiment: in-hand reorientation with a $10 budget"
+      },
+      {
+        "start": 319,
+        "title": "Results without the right tool"
+      },
+      {
+        "start": 391,
+        "title": "One extra tool: linear MPC"
+      },
+      {
+        "start": 491,
+        "title": "Why linear control works for contact-rich manipulation"
+      },
+      {
+        "start": 509,
+        "title": "A planar pusher: hybrid contact dynamics"
+      },
+      {
+        "start": 696,
+        "title": "The trouble with enumerating contact modes"
+      },
+      {
+        "start": 780,
+        "title": "How RL powers through contact modes: randomized smoothing"
+      },
+      {
+        "start": 973,
+        "title": "Smoothing without sampling"
+      },
+      {
+        "start": 1022,
+        "title": "Where can we trust the smoothed linearization?"
+      },
+      {
+        "start": 1061,
+        "title": "From the planar pusher to arms, hands and Spot"
+      },
+      {
+        "start": 1123,
+        "title": "Summary"
+      },
+      {
+        "start": 1138,
+        "title": "Better tools, better agents: what's next?"
+      },
+      {
+        "start": 1202,
+        "title": "Long-tail tasks at Multiply Labs"
+      },
+      {
+        "start": 1294,
+        "title": "Q&A"
+      }
+    ],
+    "resources": [
+      {
+        "venue": "IROS 2012",
+        "title": "MuJoCo",
+        "label": "A physics engine for model-based control",
+        "url": "https://doi.org/10.1109/IROS.2012.6386109",
+        "start": 66,
+        "end": 101
+      },
+      {
+        "venue": "WAFR 2016",
+        "title": "Pusher-slider feedback control",
+        "label": "A story of hybrid and underactuated contact dynamics (Hogan and Rodriguez)",
+        "url": "https://arxiv.org/abs/1611.08268",
+        "start": 688,
+        "end": 734
+      },
+      {
+        "venue": "T-RO 2023",
+        "title": "Local smoothing of quasi-dynamic contact models",
+        "label": "Global planning for contact-rich manipulation",
+        "url": "https://arxiv.org/abs/2206.10787",
+        "start": 780,
+        "end": 1022
+      },
+      {
+        "venue": "IJRR 2026",
+        "title": "Contact Trust Region",
+        "label": "Dexterous contact-rich manipulation via the contact trust region",
+        "url": "https://arxiv.org/abs/2505.02291",
+        "start": 1022,
+        "end": 1130
+      },
+      {
+        "venue": "Company",
+        "title": "Multiply Labs",
+        "label": "Robotic cell therapy manufacturing, where Tao works now",
+        "url": "https://www.multiplylabs.com/",
+        "start": 1214,
+        "end": 1286
+      }
+    ]
+  }
+]
