@@ -854,6 +854,86 @@ a:hover {
 	overflow-wrap: anywhere;
 }
 
+/* award winners and spotlight talks lead the list, each with a badge */
+.paper-badges {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 0.45rem;
+	margin: 0 0 0.5rem;
+}
+
+.paper-badge {
+	display: inline-flex;
+	align-items: center;
+	gap: 0.45em;
+	padding: 0.28rem 0.75rem;
+	font-family: "IBM Plex Mono", monospace;
+	font-size: 0.72rem;
+	font-weight: 500;
+	letter-spacing: 0.12em;
+	text-transform: uppercase;
+	text-decoration: none;
+	color: var(--white);
+	border-radius: 999px;
+	box-shadow: 0 6px 14px -8px rgba(70, 35, 10, 0.5);
+	transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.paper-badge:hover,
+.paper-badge:focus-visible {
+	transform: translateY(-1px);
+	box-shadow: 0 10px 18px -8px rgba(70, 35, 10, 0.55);
+}
+
+.paper-badge.is-gold {
+	background: linear-gradient(120deg, #6b4a0e 0%, #a7791b 50%, #d8b04c 100%);
+}
+
+.paper-badge.is-silver {
+	background: linear-gradient(120deg, #39424c 0%, #6c7885 55%, #a8b2bc 100%);
+}
+
+.paper-badge.is-spotlight {
+	background: linear-gradient(120deg, var(--accent-700), var(--accent-500) 55%, var(--coral-400));
+}
+
+/* each accepted title opens the paper hosted on this site */
+.paper-link {
+	color: inherit;
+	text-decoration: none;
+	background-image: linear-gradient(90deg, var(--accent-500), var(--coral-400));
+	background-size: 0% 2px;
+	background-position: 0 100%;
+	background-repeat: no-repeat;
+	transition: background-size 0.3s ease, color 0.2s ease;
+}
+
+.paper-pdf {
+	display: inline-block;
+	margin-left: 0.55em;
+	padding: 0.05em 0.4em;
+	font-family: "IBM Plex Mono", monospace;
+	font-size: 0.62em;
+	font-weight: 500;
+	letter-spacing: 0.1em;
+	vertical-align: 0.2em;
+	color: var(--accent-700);
+	border: 1px solid currentColor;
+	border-radius: 4px;
+	opacity: 0.7;
+}
+
+.paper-link:hover,
+.paper-link:focus-visible {
+	color: var(--accent-700);
+	background-size: 100% 2px;
+}
+
+.paper-link:hover .paper-pdf,
+.paper-link:focus-visible .paper-pdf {
+	opacity: 1;
+}
+
 .paper-authors {
 	margin: 0.45rem 0 0;
 	color: var(--ink-700);

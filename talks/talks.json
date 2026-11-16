@@ -18,7 +18,7 @@
     ],
     "resources": [
       { "title": "PanTact project", "label": "Project & demonstrations", "url": "https://pantact.github.io/", "start": 0, "end": 356.477 },
-      { "title": "PanTact paper", "label": "Research paper", "url": "https://arxiv.org/abs/2610.12558", "start": 74.566, "end": 356.477 },
+      { "title": "PanTact paper", "label": "Research paper", "url": "/papers/28-pantact.pdf", "start": 74.566, "end": 356.477 },
       { "title": "RoboPanoptes", "venue": "RSS 2025", "label": "The all-seeing robot with whole-body dexterity, her earlier work", "url": "https://arxiv.org/abs/2501.05420", "start": 19.7, "end": 45 },
       { "title": "HoMMI", "venue": "RSS 2026", "label": "Whole-body mobile manipulation learned from human demonstrations", "url": "https://arxiv.org/abs/2603.03243", "start": 56.4, "end": 85.9 },
       { "title": "HoMMI visual encoder", "venue": "RSS 2026", "label": "The 3D egocentric encoder PanTact reuses", "url": "https://arxiv.org/abs/2603.03243", "start": 187, "end": 198 }
@@ -43,7 +43,7 @@
     ],
     "resources": [
       { "title": "Workhorse project", "label": "Project & demonstrations", "url": "https://hybridrobotics.github.io/workhorse/", "start": 0, "end": 280.13 },
-      { "title": "Workhorse paper", "label": "Research paper", "url": "https://arxiv.org/abs/2610.09117", "start": 44, "end": 280.13 },
+      { "title": "Workhorse paper", "label": "Research paper", "url": "/papers/30-workhorse.pdf", "start": 44, "end": 280.13 },
       { "title": "3D Gaussian Splatting", "venue": "ACM TOG 2023", "label": "How the simulated test scenes are rendered", "url": "https://arxiv.org/abs/2308.04079", "start": 237.6, "end": 250 }
     ]
   },
@@ -66,7 +66,7 @@
     ],
     "resources": [
       { "title": "OCLO project", "label": "Project & demonstrations", "url": "https://oclo-humanoid.github.io/", "start": 0, "end": 285.63 },
-      { "title": "OCLO paper", "label": "Research paper", "url": "https://arxiv.org/abs/2610.05678", "start": 64.266, "end": 285.63 },
+      { "title": "OCLO paper", "label": "Research paper", "url": "/papers/11-dataset-free-compliant-humanoid-loco-manipulation.pdf", "start": 64.266, "end": 285.63 },
       { "title": "Workhorse", "venue": "This workshop", "label": "A planner that gives five body targets", "url": "https://hybridrobotics.github.io/workhorse/", "start": 29.986, "end": 39.766 },
       { "title": "Related controllers", "venue": "On the slide", "label": "Where other controllers get their posture", "start": 43.9, "end": 60.6, "links": [
         { "title": "SoftMimic", "url": "https://arxiv.org/abs/2510.17792" },
@@ -102,7 +102,7 @@
     ],
     "resources": [
       { "title": "HULK project", "label": "Project & demonstrations", "url": "https://hulk-wbc.com/", "start": 0, "end": 273.88 },
-      { "title": "HULK paper", "label": "Research paper", "url": "https://arxiv.org/abs/2610.08970", "start": 79.346, "end": 273.88 }
+      { "title": "HULK paper", "label": "Research paper", "url": "/papers/15-hulk.pdf", "start": 79.346, "end": 273.88 }
     ]
   }
 ]

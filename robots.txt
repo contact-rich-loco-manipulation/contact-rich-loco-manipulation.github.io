@@ -1,0 +1,4 @@
+# The workshop is non-archival. The accepted papers are posted on this site only:
+# keep the PDFs out of Google, Google Scholar (which uses Googlebot) and other search engines.
+User-agent: *
+Disallow: /papers/
