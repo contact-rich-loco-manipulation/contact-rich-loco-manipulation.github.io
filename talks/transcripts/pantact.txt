@@ -1,0 +1,35 @@
+Xiaomeng Xu - PanTact: Teaching Whole-Body Dexterity with a Wearable Contact Interface
+CoRL 2026 Workshop: Open Problems in Contact-Rich Loco-Manipulation - Student Spotlight 01
+Timestamps refer to 01_Xiaomeng_Xu_PanTact_CLEAN.mp4
+
+[00:06] Today I want to talk about PanTact: how can we teach whole-body dexterity with a wearable contact interface. So, robots typically use their hands for manipulation, but I think dexterity should go beyond the hands. So, I think we should have whole-body dexterity, which is the capability of robots to be able to accomplish manipulation tasks using any suitable surface of the body.
+
+[00:29] And in this work, we enable that on a humanoid, to let it do tasks such as sweeping objects with its arms, closing cabinets with its legs, grasping a small object with a gripper while hugging a large one with its arms, and moving a large box with its legs while it has something in its arms.
+
+[00:45] And we learn such capabilities directly from robot-free human demonstrations, because we as humans naturally use our whole body, beyond our hands, to interact with the world. However, in a typical pipeline for learning whole-body manipulation from humans, usually we just collect human data using some portable device, train a visuomotor policy on such data that predicts only end-effector trajectories, and then achieve those end-effector trajectories with whole-body motions using a whole-body controller.
+
+[01:14] The problem is that they only capture and transfer the motion, while the contact information is missing in every stage of the pipeline, from data collection, to the policy, to the controller. So, to capture the contact in human data, I designed a wearable contact interface that consists of an egocentric camera and handheld grippers, and also contact patches that you can wear on your body to capture body contact.
+
+[01:40] These contact patches are designed to be modular, so each module contains a force sensor, connectors, and strap mounts, and you can strap any number of them together into patches of arbitrary shape and extent, to support reconfiguration and mounting on any body part.
+
+[01:55] For example, we can mount them on arms, knees, and other parts. And this interface captures whole-body contacts alongside the vision and motion, which is all that typical interfaces capture. And after capturing the body contacts in human demonstrations, we can let the policy additionally predict the contact goals, and the whole-body controller should also track such contacts alongside the end-effector trajectories, so that the contacts are being measured, predicted, and tracked across the entire pipeline.
+
+[02:26] However, transferring such whole-body dexterity from human to robot also faces the human-to-robot embodiment gap, because human and robot body proportions just look so different. So there is a visual gap, due to different egocentric viewpoints between the human and robot, and also different heights and body proportions between human and robot create a kinematic gap, which is a bigger problem if we want to transfer whole-body dexterity, due to the different proportions of arms, legs, and heights.
+
+[03:00] So first, to bridge the visual gap, we use a 3D egocentric encoder, and mask out the body observations that may intersect with the contact surfaces. And we also use a gripper-agnostic coordinate frame that is not tied to any specific embodiment. And to bridge the kinematic gap, our key observation is that contact actually provides manipulation-centric information that depends on the task, not on the embodiment.
+
+[03:27] So it should be shared across human and robot, and it should be predicted by a policy that's purely trained on human data. And then, to make these contact targets achievable on the robot, we should leverage the robot's own configuration, letting the whole-body controller control whole-body motion to achieve the contact, as well as satisfying robot-specific constraints.
+
+[03:54] But to deal with the kinematic gap, since human and robot have different body proportions, we cannot enforce a one-to-one mapping of every body part in contact. So instead, we use an any-surface objective, basically meaning that, given a contact point in the world coordinate frame, the robot can use any suitable surface of its body to achieve that contact.
+
+[04:20] And also, only the active contact targets indicate manipulation-critical actions that need to be precisely tracked, while the other body parts in free-space motion need not be exactly reproduced on the robot. So, putting it together, PanTact enables successfully transferring such whole-body contact behaviors across different contact body parts, while if we simply track poses, including wrist or knee poses, it would over-constrain the robot and the body contacts are not achieved.
+
+[04:51] And also, with this any-surface objective, we can see that when the human sometimes uses their knees, the robot can use any suitable surface at the side of its leg to achieve the commanded contact, while the fixed-link mapping always under-achieves the contact.
+
+[05:10] And with such a contact-gated tracking design, where we only track when the contact is commanded to be active, we can see our whole-body controller achieves much more accurate tracking when the contacts are active, in the orange phases, while if we track them constantly, it would lead to a consistently large tracking error.
+
+[05:33] So, putting it together, the idea of PanTact is to use contact as the cross-embodiment interface, where the data collection platform captures contact on humans, the policy learns to predict the contact, and the whole-body controller executes the contact on the robot.
+
+[05:48] Thank you.
+
+[Applause]

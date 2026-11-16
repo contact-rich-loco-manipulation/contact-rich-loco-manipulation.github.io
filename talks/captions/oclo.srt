@@ -1,0 +1,360 @@
+﻿1
+00:00:07,626 --> 00:00:08,886
+Good afternoon, everyone.
+
+2
+00:00:09,286 --> 00:00:10,946
+I'm Seungho Yeom from UCSD.
+
+3
+00:00:11,266 --> 00:00:14,586
+The robot behind me is doing
+nine real-world tasks,
+
+4
+00:00:14,626 --> 00:00:17,466
+and all it's given
+is just two hand targets.
+
+5
+00:00:17,646 --> 00:00:19,706
+Let's dive into how it works.
+
+6
+00:00:24,086 --> 00:00:26,546
+Humanoids take commands from many sources.
+
+7
+00:00:26,966 --> 00:00:29,666
+VR teleop gives three
+or more track points.
+
+8
+00:00:29,986 --> 00:00:34,206
+A planner, like Workhorse,
+gives five body targets.
+
+9
+00:00:34,746 --> 00:00:39,146
+Scripts, policies, and agentic models,
+like GPT-6 Astra, give their own.
+
+10
+00:00:39,766 --> 00:00:43,286
+They differ, but everyone
+says where the hands go.
+
+11
+00:00:44,766 --> 00:00:46,846
+Who decides the rest of the body?
+
+12
+00:00:47,066 --> 00:00:49,406
+Most controllers learn
+it from human motion.
+
+13
+00:00:49,446 --> 00:00:50,446
+Like SONIC.
+
+14
+00:00:50,686 --> 00:00:53,106
+Others, like HOMIE,
+leave it to the operator.
+
+15
+00:00:53,426 --> 00:00:56,286
+We wanted the body to find
+it from the hands alone,
+
+16
+00:00:56,326 --> 00:00:59,966
+with no motion data,
+so any source could drive it.
+
+17
+00:01:01,306 --> 00:01:04,146
+In each step, I ask how a person does it.
+
+18
+00:01:04,266 --> 00:01:07,606
+Like HOMIE, the policy practices
+every command in simulation.
+
+19
+00:01:08,206 --> 00:01:09,666
+It learns to walk first.
+
+20
+00:01:10,786 --> 00:01:14,106
+Then it reaches for random hand targets.
+
+21
+00:01:14,446 --> 00:01:17,366
+Each hand rides a virtual
+spring and gives way.
+
+22
+00:01:17,506 --> 00:01:18,506
+Like your arm.
+
+23
+00:01:18,606 --> 00:01:20,306
+When someone gives you a hand,
+someone bumps your cup.
+
+24
+00:01:21,046 --> 00:01:24,686
+We push and pull its hands,
+and the legs learn to keep balance.
+
+25
+00:01:26,666 --> 00:01:29,226
+But two hand targets don't fix the body.
+
+26
+00:01:29,766 --> 00:01:32,406
+When it picks up,
+carries, and places a box,
+
+27
+00:01:32,446 --> 00:01:35,926
+the same hands and feet
+still fit many postures.
+
+28
+00:01:36,546 --> 00:01:41,026
+So the last stage teaches it to follow
+commands for its height and torso lean.
+
+29
+00:01:42,826 --> 00:01:44,126
+Then who sets the posture?
+
+30
+00:01:44,546 --> 00:01:47,646
+When you pick something up,
+you don't plan your hip height.
+
+31
+00:01:47,686 --> 00:01:49,646
+You just bend enough to reach.
+
+32
+00:01:49,926 --> 00:01:51,926
+Our analytic prior does the same.
+
+33
+00:01:52,226 --> 00:01:54,166
+Lower hands, lower pelvis.
+
+34
+00:01:54,386 --> 00:01:55,886
+Farther hands, more lean.
+
+35
+00:01:57,226 --> 00:01:58,906
+But the prior only checks reach.
+
+36
+00:01:59,666 --> 00:02:03,166
+If a pose feels shaky,
+you shift until it's steady.
+
+37
+00:02:03,506 --> 00:02:04,746
+CEM does that here.
+
+38
+00:02:05,266 --> 00:02:10,426
+From the live state, it simulates
+64 postures one second ahead
+
+39
+00:02:10,466 --> 00:02:13,766
+with the policy in the loop,
+as in Sumo, and keeps the best.
+
+40
+00:02:15,706 --> 00:02:17,006
+Here's the whole loop.
+
+41
+00:02:17,686 --> 00:02:18,846
+Hand targets go in.
+
+42
+00:02:19,006 --> 00:02:22,826
+The prior and CEM,
+when needed, set the posture,
+
+43
+00:02:22,866 --> 00:02:26,606
+and the policy keeps the balance
+while IK moves the arms.
+
+44
+00:02:27,366 --> 00:02:32,206
+And the estimated hand force goes back
+into the spring, so the hands give way.
+
+45
+00:02:33,586 --> 00:02:36,606
+In simulation, we test three tasks.
+
+46
+00:02:36,886 --> 00:02:41,346
+Tracking hand targets while walking,
+pushes on the hands, and load in one hand.
+
+47
+00:02:41,586 --> 00:02:44,606
+Our prior beats CEM
+alone and an end-to-end
+
+48
+00:02:44,646 --> 00:02:47,986
+learned posture model on all three.
+
+49
+00:02:48,306 --> 00:02:52,266
+Adding CEM to the prior works
+best under pushes and loads.
+
+50
+00:02:53,986 --> 00:02:59,186
+On the real G1, we compare ours with
+the same training without hand forces.
+
+51
+00:02:59,746 --> 00:03:03,766
+Torso pushes and pulls
+barely separate the two.
+
+52
+00:03:04,006 --> 00:03:05,646
+However, hand pulls do.
+
+53
+00:03:05,906 --> 00:03:10,086
+At 20 to 40 newtons, a policy
+train without hand targets.
+
+54
+00:03:10,206 --> 00:03:12,746
+Our forces held one out of ten.
+
+55
+00:03:12,946 --> 00:03:14,866
+The one without forces, five.
+
+56
+00:03:14,986 --> 00:03:15,986
+And ours, ten.
+
+57
+00:03:17,326 --> 00:03:20,466
+With teleop, the same
+controller does nine tasks.
+
+58
+00:03:20,706 --> 00:03:25,006
+Crouching to the floor,
+pushing and pulling while walking.
+
+59
+00:03:25,826 --> 00:03:27,846
+And keeping its hand in contact.
+
+60
+00:03:29,326 --> 00:03:30,726
+Teleop is just one source.
+
+61
+00:03:31,186 --> 00:03:37,026
+In simulation, a zero-shot VLM and a
+fine-tuned VLA also drive our controller.
+
+62
+00:03:37,366 --> 00:03:39,406
+Through the same hand targets.
+
+63
+00:03:40,026 --> 00:03:42,586
+Neither handles balance or posture.
+
+64
+00:03:42,866 --> 00:03:46,266
+So agentic AI would only need
+to say where the hands go.
+
+65
+00:03:48,326 --> 00:03:50,966
+Two workshop challenges
+remain open for us.
+
+66
+00:03:51,186 --> 00:03:52,986
+First, choosing contact.
+
+67
+00:03:53,306 --> 00:03:56,266
+Our posture sets only height and lean.
+
+68
+00:03:56,506 --> 00:03:59,606
+But it does not know where
+the force should be given.
+
+69
+00:04:00,646 --> 00:04:01,806
+Second, the load.
+
+70
+00:04:02,026 --> 00:04:07,486
+The robot can feel it, but our prior picks
+one posture for a light or heavy box.
+
+71
+00:04:10,446 --> 00:04:12,906
+Let me wrap up with some take-homes.
+
+72
+00:04:13,206 --> 00:04:15,586
+First, from just two hand targets.
+
+73
+00:04:16,266 --> 00:04:18,226
+The coupled controller
+can set its own posture
+
+74
+00:04:18,266 --> 00:04:20,766
+and stay compliant with no motion data.
+
+75
+00:04:22,026 --> 00:04:26,666
+Second, two hand targets could
+let agentic AI drive a humanoid.
+
+76
+00:04:27,806 --> 00:04:29,066
+Last but not least.
+
+77
+00:04:30,946 --> 00:04:35,166
+I'm also an undergrad looking
+for PhD opportunities for Fall 2027.
+
+78
+00:04:35,686 --> 00:04:39,026
+If you are interested in my work,
+please find me at the poster session.
+
+79
+00:04:39,226 --> 00:04:40,226
+Thank you so much.
+
+80
+00:04:40,206 --> 00:04:42,806
+[Applause]

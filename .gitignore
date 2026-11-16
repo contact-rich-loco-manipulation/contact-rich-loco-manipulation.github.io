@@ -4,3 +4,8 @@ Landing_page/*.mp4
 Landing_page/*.gif
 
 publicity/
+
+# Local Python preview caches and original talk recordings
+__pycache__/
+talks/local-media/
+talks/*.mp4

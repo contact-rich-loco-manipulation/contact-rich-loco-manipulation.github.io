@@ -1,0 +1,294 @@
+WEBVTT
+Kind: captions
+Language: en
+
+NOTE Qiayuan Liao - Workhorse: Learning Robust Whole-Body Humanoid Loco-Manipulation from Human Data.
+Synced to 02_Qiayuan_Liao_Workhorse_CLEAN.mp4 (talk begins at 00:00:06.006 after the intro card).
+
+1
+00:00:07.506 --> 00:00:11.366
+Okay, so the next
+presentation is on Workhorse.
+
+2
+00:00:11.926 --> 00:00:14.966
+Hi, I'm from UC Berkeley
+and this is Workhorse.
+
+3
+00:00:15.006 --> 00:00:18.566
+A humanoid that learns whole-body
+loco-manipulation from human data.
+
+4
+00:00:18.786 --> 00:00:20.746
+And this work was mainly done by Songbo,
+
+5
+00:00:20.786 --> 00:00:24.366
+an undergrad student
+at Tsinghua University.
+
+6
+00:00:24.466 --> 00:00:26.206
+And he is looking for a PhD position.
+
+7
+00:00:26.366 --> 00:00:29.406
+So if you like this work,
+feel free to send an email to him.
+
+8
+00:00:31.246 --> 00:00:32.406
+This is the demo.
+
+9
+00:00:32.746 --> 00:00:37.946
+It's currently fully autonomous
+and can climb a suitcase,
+
+10
+00:00:37.986 --> 00:00:40.966
+catch a thrown ball,
+or throw balls with its whole-body.
+
+11
+00:00:41.446 --> 00:00:43.866
+And all of these come
+from the human data only.
+
+12
+00:00:44.066 --> 00:00:44.966
+With no technology.
+
+13
+00:00:45.006 --> 00:00:45.806
+No data operations.
+
+14
+00:00:45.846 --> 00:00:47.386
+And there are two policies.
+
+15
+00:00:47.666 --> 00:00:51.846
+One is the visual planner
+and gives the command
+
+16
+00:00:51.886 --> 00:00:54.646
+and the whole-body tracker follows it.
+
+17
+00:00:56.846 --> 00:01:00.986
+So we collect data
+by having a person record
+
+18
+00:01:01.026 --> 00:01:04.166
+the task with five trackers
+and a chest camera.
+
+19
+00:01:05.866 --> 00:01:10.206
+And we keep only these five link
+poses as the interface between...
+
+20
+00:01:15.426 --> 00:01:17.166
+Between the two policies.
+
+21
+00:01:17.586 --> 00:01:22.286
+The robot follows human poses
+directly with no retargeting.
+
+22
+00:01:24.486 --> 00:01:30.086
+The same poses also work on the second
+humanoid, other embodiment like the H2.
+
+23
+00:01:33.146 --> 00:01:34.146
+So...
+
+24
+00:01:39.126 --> 00:01:43.806
+In the training, we need to do
+some command augmentations...
+
+25
+00:01:43.846 --> 00:01:48.086
+To bridge the gap between
+the planner and the tracker.
+
+26
+00:01:49.286 --> 00:01:55.066
+If we only train on a clean command,
+it's fragile under drift and pushes.
+
+27
+00:01:55.456 --> 00:01:57.236
+...and become discontinuous.
+
+28
+00:01:57.336 --> 00:02:02.136
+So we try to mimic this kind of planner
+behaviors due to the drifting,
+
+29
+00:02:02.176 --> 00:02:04.916
+due to the execution
+errors during trainings
+
+30
+00:02:04.956 --> 00:02:08.736
+when training these low-level trackers.
+
+31
+00:02:08.896 --> 00:02:13.436
+So you can see this yellow ghost
+keeps drifting and, at each replan,
+
+32
+00:02:13.476 --> 00:02:19.196
+resets to the original reference motion.
+
+33
+00:02:22.316 --> 00:02:29.076
+And the planner reads the history
+of images and poses and the collected data
+
+34
+00:02:29.116 --> 00:02:32.796
+from humans is clean but at deployment,
+
+35
+00:02:32.836 --> 00:02:35.756
+the history drifts because
+of the tracking errors.
+
+36
+00:02:36.576 --> 00:02:40.896
+So we drift the history in training
+for both the pose and image.
+
+37
+00:02:42.196 --> 00:02:44.136
+The action chunks stay unchanged.
+
+38
+00:02:44.556 --> 00:02:46.236
+So the action remains optimal.
+
+39
+00:02:47.936 --> 00:02:50.696
+So for the tracking errors,
+we drift the command.
+
+40
+00:02:50.916 --> 00:02:52.756
+For the planner, we drift the history.
+
+41
+00:02:54.956 --> 00:02:58.976
+And in deployments,
+we need to consider latencies.
+
+42
+00:02:59.396 --> 00:03:01.396
+We have some initials.
+
+43
+00:03:01.436 --> 00:03:07.116
+You have some guess on the latency of each
+sensors and we label it with timestamp.
+
+44
+00:03:07.236 --> 00:03:10.656
+We do the plan from the latest image.
+
+45
+00:03:11.656 --> 00:03:17.696
+And then we predict the action
+chunks after the image.
+
+46
+00:03:17.736 --> 00:03:23.076
+And of course, the first
+actions of the action chunk
+
+47
+00:03:23.116 --> 00:03:28.376
+will be already past because
+it's from the last image.
+
+48
+00:03:28.976 --> 00:03:36.216
+But we have some action chunks
+to smooth the plan trajectories.
+
+49
+00:03:36.776 --> 00:03:40.456
+And these two policies
+work smoothly together.
+
+50
+00:03:42.376 --> 00:03:47.676
+And another important point is we do
+some evaluation in simulation.
+
+51
+00:03:47.716 --> 00:03:51.076
+We do some evaluation
+to be able to do some science.
+
+52
+00:03:51.376 --> 00:03:57.556
+Like for most
+of the navigation's behavior,
+
+53
+00:03:57.596 --> 00:04:03.316
+it can be tested in simulation very well,
+with Gaussian splatting for the scene.
+
+54
+00:04:03.656 --> 00:04:11.076
+And since our manipulation is mainly on
+non-prehensile and there are no soft body,
+
+55
+00:04:11.116 --> 00:04:13.656
+no very dense manipulation,
+
+56
+00:04:13.696 --> 00:04:17.156
+so we are actually also
+able to test this kind
+
+57
+00:04:17.196 --> 00:04:21.916
+of manipulation's behaviors
+in the simulations.
+
+58
+00:04:22.476 --> 00:04:26.136
+And here the H2 is getting
+a much higher success
+
+59
+00:04:26.176 --> 00:04:29.416
+rate because it's more
+similar to a human in form.
+
+60
+00:04:30.236 --> 00:04:31.356
+Feel free to check.
+
+61
+00:04:32.076 --> 00:04:33.856
+Come and meet me at the poster session.
+
+62
+00:04:34.156 --> 00:04:39.056
+[Applause]

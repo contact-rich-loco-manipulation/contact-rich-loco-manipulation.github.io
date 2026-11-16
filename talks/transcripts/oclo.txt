@@ -1,0 +1,25 @@
+Seungho Yeom - OCLO: Dataset-Free Compliant Humanoid Loco-Manipulation with Dynamic Online Posture
+CoRL 2026 Workshop: Open Problems in Contact-Rich Loco-Manipulation
+Timestamps refer to 03_Seungho_Yeom_OCLO_CLEAN.mp4
+
+[00:07] Good afternoon, everyone. I'm Seungho Yeom from UCSD. The robot behind me is doing nine real-world tasks, and all it's given is just two hand targets. Let's dive into how it works. Humanoids take commands from many sources. VR teleop gives three or more track points. A planner, like Workhorse, gives five body targets. Scripts, policies, and agentic models, like GPT-6 Astra, give their own.
+
+[00:39] They differ, but everyone says where the hands go. Who decides the rest of the body? Most controllers learn it from human motion. Like SONIC. Others, like HOMIE, leave it to the operator. We wanted the body to find it from the hands alone, with no motion data, so any source could drive it. In each step, I ask how a person does it. Like HOMIE, the policy practices every command in simulation.
+
+[01:08] It learns to walk first. Then it reaches for random hand targets. Each hand rides a virtual spring and gives way. Like your arm. When someone gives you a hand, someone bumps your cup. We push and pull its hands, and the legs learn to keep balance. But two hand targets don't fix the body. When it picks up, carries, and places a box, the same hands and feet still fit many postures.
+
+[01:36] So the last stage teaches it to follow commands for its height and torso lean. Then who sets the posture? When you pick something up, you don't plan your hip height. You just bend enough to reach. Our analytic prior does the same. Lower hands, lower pelvis. Farther hands, more lean. But the prior only checks reach. If a pose feels shaky, you shift until it's steady.
+
+[02:03] CEM does that here. From the live state, it simulates 64 postures one second ahead with the policy in the loop, as in Sumo, and keeps the best. Here's the whole loop. Hand targets go in. The prior and CEM, when needed, set the posture, and the policy keeps the balance while IK moves the arms. And the estimated hand force goes back into the spring, so the hands give way.
+
+[02:33] In simulation, we test three tasks. Tracking hand targets while walking, pushes on the hands, and load in one hand. Our prior beats CEM alone and an end-to-end learned posture model on all three. Adding CEM to the prior works best under pushes and loads. On the real G1, we compare ours with the same training without hand forces. Torso pushes and pulls barely separate the two.
+
+[03:04] However, hand pulls do. At 20 to 40 newtons, a policy train without hand targets. Our forces held one out of ten. The one without forces, five. And ours, ten. With teleop, the same controller does nine tasks. Crouching to the floor, pushing and pulling while walking. And keeping its hand in contact. Teleop is just one source. In simulation, a zero-shot VLM and a fine-tuned VLA also drive our controller.
+
+[03:37] through the same hand targets. Neither handles balance or posture. So agentic AI would only need to say where the hands go. Two workshop challenges remain open for us. First, choosing contact. Our posture sets only height and lean. But it does not know where the force should be given. Second, the load. The robot can feel it, but our prior picks one posture for a light or heavy box.
+
+[04:10] Let me wrap up with some take-homes. First, from just two hand targets. The coupled controller can set its own posture and stay compliant with no motion data. Second, two hand targets could let agentic AI drive a humanoid. Last but not least. I'm also an undergrad looking for PhD opportunities for Fall 2027. If you are interested in my work, please find me at the poster session.
+
+[04:39] Thank you so much.
+
+[Applause]

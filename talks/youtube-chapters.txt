@@ -1,0 +1,31 @@
+PanTact — Xiaomeng Xu
+0:00 Introduction
+1:14 Method: capturing whole-body contact
+2:26 Bridging the embodiment gap
+3:54 Any-surface contact control
+4:33 Results and ablations
+5:33 Takeaways
+
+Workhorse — Qiayuan Liao
+0:00 Introduction
+0:44 Method: planner and tracker
+1:39 Training for drift and tracking errors
+2:54 Deployment and latency
+3:42 Simulation evaluation
+4:24 Closing
+
+OCLO — Seungho Yeom
+0:00 Introduction
+1:04 Method: learning compliance
+1:36 Online posture and CEM
+2:33 Simulation and real-robot results
+3:48 Open challenges
+4:10 Takeaways
+
+HULK — An Thanh Dang
+0:00 Introduction
+0:59 Weight-bearing demonstrations
+1:19 Method: teacher-student training
+1:55 MPC and balance reward guidance
+2:24 Results: pulling and carrying
+3:51 Takeaways and project link

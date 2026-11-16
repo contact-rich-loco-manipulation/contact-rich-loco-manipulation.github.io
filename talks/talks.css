@@ -1,0 +1,74 @@
+.talks-page [hidden] { display: none !important; }
+.talks-main { padding-top: 3.5rem; padding-bottom: 4rem; }
+.talks-skip { position: fixed; top: -6rem; left: 1rem; z-index: 2000; padding: .75rem; background: white; }
+.talks-skip:focus { top: 1rem; }
+.talks-intro { max-width: 820px; margin-bottom: 2rem; }
+.talks-intro h1 { font-family: Sora, sans-serif; font-size: clamp(2rem, 4.5vw, 3.6rem); line-height: 1.17; letter-spacing: -.045em; margin: .75rem 0 1rem; }
+.talks-intro > p:last-child { color: var(--ink-700); max-width: 680px; font-size: 1.1rem; }
+.talk-list { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 1rem; margin-bottom: 3.5rem; }
+.talk-card { display: block; border: 1px solid var(--sand-200); border-radius: 12px; overflow: hidden; background: white; color: var(--ink-900); transition: border-color .2s, box-shadow .2s; }
+.talk-card:hover, .talk-card[aria-current] { border-color: var(--accent-500); color: var(--ink-900); box-shadow: 0 0 0 2px var(--accent-100); }
+.talk-card img { width: 100%; height: auto; aspect-ratio: 16 / 9; object-fit: cover; }
+.talk-card-copy { display: grid; gap: .3rem; padding: 1rem; }
+.talk-card-top { display: flex; justify-content: space-between; align-items: center; gap: .5rem; }
+.talk-card strong { font-family: Sora, sans-serif; font-size: 1.08rem; }
+.talk-card time { font: .75rem "IBM Plex Mono", monospace; color: var(--ink-700); }
+.talk-card .talk-card-speaker { font-size: .9rem; color: var(--ink-700); }
+.watch-section { scroll-margin-top: calc(var(--nav-height) + 1.5rem); }
+.watch-heading { display: flex; justify-content: space-between; align-items: center; gap: 2rem; margin-bottom: 1.5rem; }
+.watch-heading h2 { font-family: Sora, sans-serif; font-size: 2rem; margin: .2rem 0 .5rem; }
+.watch-heading p { margin-bottom: 0; }
+#talk-title { color: var(--ink-700); max-width: 700px; }
+#share-link { flex-shrink: 0; font-size: .85rem; }
+.watch-grid { display: grid; grid-template-columns: minmax(0, 1fr) 290px; align-items: start; gap: 1.75rem; }
+.watch-primary { min-width: 0; }
+.video-stage { position: relative; aspect-ratio: 16 / 9; overflow: hidden; border-radius: 12px; background: #17130f; }
+.video-stage video, #youtube-stage, #youtube-stage iframe { display: block; width: 100%; height: 100%; border: 0; }
+.video-stage video { object-fit: contain; }
+.video-stage video::cue { background: rgba(0,0,0,.82); color: white; font-family: "IBM Plex Sans", sans-serif; }
+.start-video { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; flex-direction: column; gap: .75rem; width: 100%; border: 0; color: white; font-weight: 600; text-shadow: 0 1px 6px black; background: linear-gradient(0deg, rgba(0,0,0,.48), rgba(0,0,0,.08)); cursor: pointer; }
+.play-symbol { display: grid; place-items: center; width: 64px; height: 64px; border-radius: 50%; background: var(--accent-700); font-size: 1.4rem; padding-left: 4px; }
+.start-video:disabled { cursor: default; }
+.playback-status { font-size: .88rem; color: var(--ink-700); margin: .7rem 0; min-height: 1.45em; }
+.chapter-timeline { display: flex; gap: 4px; margin: 1rem 0 .7rem; }
+.chapter-segment { position: relative; height: 18px; min-width: 8px; border: 0; border-radius: 3px; padding: 0; background: var(--sand-200); cursor: pointer; }
+.chapter-segment::before { content: ""; display: block; position: absolute; inset: 0 auto 0 0; width: var(--progress, 0%); background: var(--accent-500); border-radius: inherit; }
+.chapter-segment[aria-current] { outline: 1px solid var(--accent-700); outline-offset: 2px; }
+.playback-tools { display: flex; align-items: center; flex-wrap: wrap; gap: .5rem 1rem; font-size: .85rem; }
+.time-display { font: .8rem "IBM Plex Mono", monospace; color: var(--ink-700); }
+#current-chapter { flex: 1; }
+.playback-tools button, .playback-tools select { background: white; color: var(--ink-900); border: 1px solid var(--sand-300); border-radius: 5px; padding: .3rem .5rem; }
+.playback-tools label { margin: 0; }
+.player-hint { font-size: .8rem; color: var(--ink-700); margin-top: .75rem; }
+.chapter-panel { background: var(--sand-50); border: 1px solid var(--sand-200); border-radius: 12px; padding: 1.3rem; }
+.chapter-panel h3, .resources-heading h3 { font-family: Sora, sans-serif; font-size: 1.1rem; margin-bottom: 1rem; }
+.chapter-panel .section-kicker { font-size: .7rem; margin-bottom: .4rem; }
+.chapter-list { list-style: none; margin: 0; padding: 0; }
+.chapter-list li + li { border-top: 1px solid var(--sand-200); }
+.chapter-list button { width: 100%; display: grid; grid-template-columns: 42px 1fr; align-items: baseline; gap: .7rem; padding: .85rem .4rem; border: 0; text-align: left; background: transparent; border-radius: 4px; font-size: .88rem; color: var(--ink-800); cursor: pointer; line-height: 1.4; }
+.chapter-list time { font: .75rem "IBM Plex Mono", monospace; color: var(--ink-700); }
+.chapter-list button:hover, .chapter-list button[aria-current] { background: var(--accent-100); color: var(--accent-700); }
+.resources-section { margin: 2rem 0; }
+.resources-heading { display: flex; align-items: baseline; justify-content: space-between; gap: 1rem; }
+.resources-heading h3 { margin-bottom: 0; }
+.resources-heading > span { font-size: .75rem; color: var(--ink-700); }
+.resources-list { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: .6rem; }
+.resource-link { display: block; border: 1px solid var(--sand-200); background: white; border-radius: 7px; padding: .8rem 1rem; }
+.resource-link strong { display: block; font-size: .94rem; }
+.resource-link small { display: block; color: var(--ink-700); font-size: .75rem; }
+.resource-link.is-current { border-color: var(--accent-500); background: var(--accent-100); }
+.resource-link .resource-now { color: var(--accent-700); font-weight: 600; }
+.transcript-section { border-top: 1px solid var(--sand-200); padding-top: 1.25rem; }
+.transcript-section summary { cursor: pointer; font: 500 1.1rem Sora, sans-serif; margin-bottom: 1rem; }
+.transcript-toolbar { display: flex; gap: .6rem 1rem; align-items: center; flex-wrap: wrap; font-size: .8rem; }
+.transcript-toolbar label { margin: 0; }
+.transcript-toolbar input { min-width: 180px; flex: 1; background: white; border: 1px solid var(--sand-300); border-radius: 5px; padding: .6rem; }
+#transcript-status { margin: .7rem 0; font-size: .8rem; color: var(--ink-700); }
+.transcript { max-height: 350px; overflow-y: auto; overscroll-behavior: contain; scrollbar-gutter: stable; border: 1px solid var(--sand-200); border-radius: 8px; background: white; }
+.transcript button { display: grid; grid-template-columns: 45px 1fr; gap: 1rem; width: 100%; padding: .65rem 1rem; text-align: left; background: transparent; border: 0; border-bottom: 1px solid var(--sand-100); font-size: .88rem; color: var(--ink-800); cursor: pointer; }
+.transcript time { font: .75rem "IBM Plex Mono", monospace; color: var(--ink-700); padding-top: .2rem; }
+.transcript button:hover, .transcript button[aria-current] { background: var(--accent-100); }
+.talks-page :is(a, button, input, select, summary):focus-visible { outline: 3px solid var(--teal-500); outline-offset: 4px; }
+@media (max-width: 991px) { .watch-grid { grid-template-columns: minmax(0, 1fr) 250px; gap: 1rem; } .talk-list { gap: .65rem; } .talk-card-copy { padding: .75rem; } }
+@media (max-width: 760px) { .talk-list { grid-template-columns: repeat(2, minmax(0, 1fr)); margin-bottom: 2rem; } .watch-grid { display: flex; flex-direction: column; } .watch-primary, .chapter-panel { width: 100%; } .chapter-panel { order: -1; } .chapter-list { display: flex; overflow-x: auto; gap: .5rem; padding-bottom: .5rem; } .chapter-list li { flex: 0 0 170px; border: 0 !important; } .chapter-list button { height: 100%; display: flex; flex-direction: column; gap: .35rem; border: 1px solid var(--sand-200); padding: .7rem; } .chapter-panel > .player-hint { margin-bottom: 0; } .watch-heading { align-items: start; flex-direction: column; gap: 1rem; } .resources-heading { flex-direction: column; gap: .3rem; } }
+@media (max-width: 420px) { .resources-list { grid-template-columns: 1fr; } .talks-main { padding-top: 2.75rem; } .playback-tools { gap: .5rem; } }

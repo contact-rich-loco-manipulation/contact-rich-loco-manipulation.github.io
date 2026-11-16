@@ -1,0 +1,305 @@
+WEBVTT
+Kind: captions
+Language: en
+
+NOTE An Thanh Dang - HULK: Learning Whole-Body Forceful Loco-Manipulation for Humanoids.
+Synced to 04_An_Thanh_Dang_HULK_CLEAN.mp4 (talk begins at 00:00:06.006 after the intro card).
+
+1
+00:00:08.066 --> 00:00:09.886
+Hello everyone, my name is An.
+
+2
+00:00:10.886 --> 00:00:11.886
+This is Arturo.
+
+3
+00:00:12.646 --> 00:00:14.126
+Today we're excited to present HULK,
+
+4
+00:00:14.166 --> 00:00:18.086
+learning whole-body forceful
+loco-manipulation for humanoids.
+
+5
+00:00:20.066 --> 00:00:23.546
+A lot of progress has been made
+on agile dynamic whole-body controllers,
+
+6
+00:00:23.586 --> 00:00:26.886
+where the humanoid can do really
+cool things such as break dancing,
+
+7
+00:00:26.926 --> 00:00:30.266
+back flips, kick flips, and parkour.
+
+8
+00:00:31.126 --> 00:00:34.846
+But if you look closely, these
+demonstrations have one thing in common.
+
+9
+00:00:35.246 --> 00:00:38.886
+The humanoid is only moving itself
+without any additional load.
+
+10
+00:00:40.906 --> 00:00:44.206
+The utility of a humanoid
+in an industrial setting isn't measured
+
+11
+00:00:44.246 --> 00:00:47.066
+by the back flips it can perform,
+but by the weight that it can handle.
+
+12
+00:00:47.366 --> 00:00:51.286
+In this work, we focus on developing
+a whole-body controller that enables
+
+13
+00:00:51.326 --> 00:00:52.526
+forceful loco-manipulation,
+
+14
+00:00:52.566 --> 00:00:55.326
+allowing humanoids
+to carry heavy and bulky
+
+15
+00:00:55.366 --> 00:00:57.706
+objects while maintaining
+balance under load.
+
+16
+00:00:59.406 --> 00:01:02.466
+Here we showcase a wide range
+of impressive weight-bearing
+
+17
+00:01:02.506 --> 00:01:05.186
+capabilities as demonstrated
+in these videos.
+
+18
+00:01:05.866 --> 00:01:10.706
+Our policy can do dynamic power clean,
+it can carry a really heavy plate,
+
+19
+00:01:10.746 --> 00:01:14.286
+it can do a farmer's walk,
+and it can do a deadlift pretty stable.
+
+20
+00:01:14.626 --> 00:01:17.146
+All while maintaining balance
+under substantial loads.
+
+21
+00:01:19.346 --> 00:01:22.506
+Our method is trained using
+a three-stage teacher-student framework.
+
+22
+00:01:22.726 --> 00:01:25.626
+We first train a whole-body
+controller going
+
+23
+00:01:25.666 --> 00:01:28.206
+through random wrist force perturbations.
+
+24
+00:01:28.366 --> 00:01:34.766
+This is the wrist force teacher and the
+second stage we train a grasp teacher,
+
+25
+00:01:34.806 --> 00:01:40.126
+which performs locomotion while holding
+a bunch of objects using its upper body,
+
+26
+00:01:40.166 --> 00:01:41.166
+so a whole-body grasp.
+
+27
+00:01:42.786 --> 00:01:47.066
+We distill both of these teachers,
+trained with reinforcement learning,
+
+28
+00:01:47.106 --> 00:01:51.286
+into a single proprioceptive student
+policy that we can deploy onto hardware,
+
+29
+00:01:51.326 --> 00:01:52.866
+and in this case, we train G1.
+
+30
+00:01:55.446 --> 00:01:58.486
+During teacher training we use model
+predictive control and a capture
+
+31
+00:01:58.526 --> 00:02:03.266
+point control barrier function
+to add auxiliary reward guidance.
+
+32
+00:02:09.706 --> 00:02:14.606
+The rewards coming from the MPC helps
+in force reasoning and through a reduced
+
+33
+00:02:14.646 --> 00:02:18.586
+order model we are able to model the
+forces and the risks and therefore plan
+
+34
+00:02:18.626 --> 00:02:24.266
+accordingly, while the CVF rewards help us
+in balance recovery under persistent load.
+
+35
+00:02:24.506 --> 00:02:28.946
+Thanks to this, we're able to handle
+up to 130 newtons of disturbance.
+
+36
+00:02:31.206 --> 00:02:36.326
+We're very glad to showcase Hulk under
+a variety of industrially relevant tasks.
+
+37
+00:02:37.286 --> 00:02:40.406
+In the top left,
+you can see the cart pulling task,
+
+38
+00:02:40.446 --> 00:02:44.706
+in which you can see the robot pulling
+the dolly by walking backwards.
+
+39
+00:02:45.286 --> 00:02:49.046
+We're very happy to say that Hulk
+can pull the dolly up to 300 kilograms
+
+40
+00:02:49.086 --> 00:02:54.786
+which is 100 more kilograms than the best
+performing baseline in this task.
+
+41
+00:02:56.226 --> 00:03:01.126
+In the top right we see the robot
+can handle around 13 kilograms of payload.
+
+42
+00:03:04.546 --> 00:03:10.046
+The payload is mounted onto the wrists
+and we can move in a straight line just
+
+43
+00:03:10.086 --> 00:03:14.726
+by commanding the robot to move forward
+and despite having these unmodeled
+
+44
+00:03:14.766 --> 00:03:17.066
+masses in the upper body we can you
+can see that it's moving straight.
+
+45
+00:03:18.486 --> 00:03:21.146
+Finally, we have
+the canister and fridge task.
+
+46
+00:03:21.726 --> 00:03:24.846
+And the robot is holding
+the object by pushing it against
+
+47
+00:03:24.886 --> 00:03:32.326
+the body and performing a whole-body
+grasp using the upper body.
+
+48
+00:03:33.546 --> 00:03:38.066
+We are able to achieve a stable locomotion
+despite these unmodeled objects.
+
+49
+00:03:38.326 --> 00:03:41.386
+And you can see that even
+canister will be held
+
+50
+00:03:41.426 --> 00:03:43.766
+from the side and also
+the fridge in front.
+
+51
+00:03:43.806 --> 00:03:46.926
+So, we are not tied
+to a specific orientation
+
+52
+00:03:46.966 --> 00:03:48.946
+of the objects that we are addressing.
+
+53
+00:03:51.226 --> 00:03:55.126
+To summarize, HOLD uses
+MPC and CDF reward guidance
+
+54
+00:03:55.166 --> 00:03:58.606
+and distills two teachers into
+a single proprioceptive student.
+
+55
+00:04:00.326 --> 00:04:04.826
+HOLD transfers zero-shot
+to the Unitree G1 and has forceful
+
+56
+00:04:04.866 --> 00:04:08.526
+loco-manipulation and whole-body
+carry capabilities.
+
+57
+00:04:09.146 --> 00:04:12.646
+Please scan the top right QR
+code to visit our website,
+
+58
+00:04:12.686 --> 00:04:16.626
+you will see table results
+and more cool videos.
+
+59
+00:04:17.286 --> 00:04:24.066
+And definitely come by our poster
+at 161 so we can chat
+
+60
+00:04:24.106 --> 00:04:26.466
+more about the specifics
+and any questions that you have.
+
+61
+00:04:26.686 --> 00:04:27.686
+Thank you very much.
+
+62
+00:04:27.886 --> 00:04:32.006
+[Applause]

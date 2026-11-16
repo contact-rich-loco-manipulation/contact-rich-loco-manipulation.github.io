@@ -1,0 +1,23 @@
+An Thanh Dang - HULK: Learning Whole-Body Forceful Loco-Manipulation for Humanoids
+CoRL 2026 Workshop: Open Problems in Contact-Rich Loco-Manipulation
+Timestamps refer to 04_An_Thanh_Dang_HULK_CLEAN.mp4
+
+[00:08] Hello everyone, my name is An. This is Arturo. Today we're excited to present HULK, learning whole-body forceful loco-manipulation for humanoids. A lot of progress has been made on agile dynamic whole-body controllers, where the humanoid can do really cool things such as break dancing, back flips, kick flips, and parkour. But if you look closely, these demonstrations have one thing in common.
+
+[00:35] The humanoid is only moving itself without any additional load. The utility of a humanoid in an industrial setting isn't measured by the back flips it can perform, but by the weight that it can handle. In this work, we focus on developing a whole-body controller that enables forceful loco-manipulation, allowing humanoids to carry heavy and bulky objects while maintaining balance under load.
+
+[00:59] Here we showcase a wide range of impressive weight-bearing capabilities as demonstrated in these videos. Our policy can do dynamic power clean, it can carry a really heavy plate, it can do a farmer's walk, and it can do a deadlift pretty stable. All while maintaining balance under substantial loads. Our method is trained using a three-stage teacher-student framework.
+
+[01:22] We first train a whole-body controller going through random wrist force perturbations. This is the wrist force teacher and the second stage we train a grasp teacher, which performs locomotion while holding a bunch of objects using its upper body, so a whole-body grasp. We distill both of these teachers, trained with reinforcement learning, into a single proprioceptive student policy that we can deploy onto hardware, and in this case, we train G1.
+
+[01:55] During teacher training we use model predictive control and a capture point control barrier function to add auxiliary reward guidance. The rewards coming from the MPC helps in force reasoning and through a reduced order model we are able to model the forces and the risks and therefore plan accordingly, while the CVF rewards help us in balance recovery under persistent load.
+
+[02:24] Thanks to this, we're able to handle up to 130 newtons of disturbance. We're very glad to showcase Hulk under a variety of industrially relevant tasks. In the top left, you can see the cart pulling task, in which you can see the robot pulling the dolly by walking backwards. We're very happy to say that Hulk can pull the dolly up to 300 kilograms which is 100 more kilograms than the best performing baseline in this task.
+
+[02:56] In the top right we see the robot can handle around 13 kilograms of payload. The payload is mounted onto the wrists and we can move in a straight line just by commanding the robot to move forward and despite having these unmodeled masses in the upper body we can you can see that it's moving straight. Finally, we have the canister and fridge task. And the robot is holding the object by pushing it against the body and performing a whole-body grasp using the upper body.
+
+[03:33] We are able to achieve a stable locomotion despite these unmodeled objects. And you can see that even canister will be held from the side and also the fridge in front. So, we are not tied to a specific orientation of the objects that we are addressing. To summarize, HOLD uses MPC and CDF reward guidance and distills two teachers into a single proprioceptive student.
+
+[04:00] HOLD transfers zero-shot to the Unitree G1 and has forceful loco-manipulation and whole-body carry capabilities. Please scan the top right QR code to visit our website, you will see table results and more cool videos. And definitely come by our poster at 161 so we can chat more about the specifics and any questions that you have. Thank you very much.
+
+[Applause]

@@ -1,0 +1,21 @@
+Qiayuan Liao - Workhorse: Learning Robust Whole-Body Humanoid Loco-Manipulation from Human Data
+CoRL 2026 Workshop: Open Problems in Contact-Rich Loco-Manipulation
+Timestamps refer to 02_Qiayuan_Liao_Workhorse_CLEAN.mp4
+
+[00:07] Okay, so the next presentation is on Workhorse. Hi, I'm from UC Berkeley and this is Workhorse. A humanoid that learns whole-body loco-manipulation from human data. And this work was mainly done by Songbo, an undergrad student at Tsinghua University. And he is looking for a PhD position. So if you like this work, feel free to send an email to him. This is the demo.
+
+[00:32] It's currently fully autonomous and can climb a suitcase, catch a thrown ball, or throw balls with its whole-body. And all of these come from the human data only. With no technology. No data operations. And there are two policies. One is the visual planner and gives the command and the whole-body tracker follows it. So we collect data by having a person record the task with five trackers and a chest camera.
+
+[01:05] And we keep only these five link poses as the interface between... between the two policies. The robot follows human poses directly with no retargeting. The same poses also work on the second humanoid, other embodiment like the H2. So... In the training, we need to do some command augmentations... to bridge the gap between the planner and the tracker.
+
+[01:49] If we only train on a clean command, it's fragile under drift and pushes. ...and become discontinuous. So we try to mimic this kind of planner behaviors due to the drifting, due to the execution errors during trainings when training these low-level trackers. So you can see this yellow ghost keeps drifting and, at each replan, resets to the original reference motion.
+
+[02:22] And the planner reads the history of images and poses and the collected data from humans is clean but at deployment, the history drifts because of the tracking errors. So we drift the history in training for both the pose and image. The action chunks stay unchanged. So the action remains optimal. So for the tracking errors, we drift the command. For the planner, we drift the history.
+
+[02:54] And in deployments, we need to consider latencies. We have some initials. You have some guess on the latency of each sensors and we label it with timestamp. We do the plan from the latest image. And then we predict the action chunks after the image. And of course, the first actions of the action chunk will be already past because it's from the last image.
+
+[03:28] But we have some action chunks to smooth the plan trajectories. And these two policies work smoothly together. And another important point is we do some evaluation in simulation. We do some evaluation to be able to do some science. Like for most of the navigation's behavior, it can be tested in simulation very well, with Gaussian splatting for the scene.
+
+[04:03] And since our manipulation is mainly on non-prehensile and there are no soft body, no very dense manipulation, so we are actually also able to test this kind of manipulation's behaviors in the simulations. And here the H2 is getting a much higher success rate because it's more similar to a human in form. Feel free to check. Come and meet me at the poster session.
+
+[Applause]

@@ -1,0 +1,155 @@
+
+PanTact: Xiaomeng Xu | CoRL 2026 Student Talk
+Saving…
+Details
+Video elements
+Initial check
+Visibility
+Details
+Reuse details
+Title (required)
+PanTact:  Xiaomeng Xu | CoRL 2026 Student Talk
+A/B testing
+Description
+PanTact: Teaching Whole-Body Dexterity with a Wearable Contact Interface
+Presented by Xiaomeng Xu.
+
+Student spotlight at the CoRL 2026 workshop:
+Open Problems in Contact-Rich Loco-Manipulation
+November 12, 2026 · Austin, Texas
+
+Learning to manipulate with arms, legs, and other body surfaces by capturing contact in human demonstrations.
+
+RESEARCH & LINKS
+PanTact project: https://pantact.github.io/
+PanTact paper: https://arxiv.org/abs/2610.12558
+
+CHAPTERS
+0:00 Introduction and motivation
+1:14 Method: capturing whole-body contact
+2:26 Bridging the embodiment gap
+3:54 Any-surface contact control
+4:33 Results and ablations
+5:33 Takeaways
+Thumbnail
+Set a thumbnail that stands out and draws viewers' attention. Learn more
+Upload file
+Auto-generated thumbnail 2
+Select from video
+A/B testing
+Playlists
+Add your video to one or more playlists to organise your content for viewers. Learn more
+Student spotlight at the CoRL 2026 workshop
+Audience
+This video is set to not 'Made for Kids'
+Set by you
+Regardless of your location, you're legally required to comply with the Children's Online Privacy Protection Act (COPPA) and/or other laws. You're required to tell us whether your videos are 'Made for Kids'. What is 'Made for Kids' content?
+Features like personalised ads and notifications won't be available on videos that are Made for Kids. Videos that are set as Made for Kids by you are more likely to be recommended alongside other children's videos. Learn more
+Yes, it's Made for Kids.
+Features like personalised ads and notifications won't be available on videos that are Made for Kids. Videos that are set as Made for Kids by you are more likely to be recommended alongside other children's videos. Learn more
+No, it's not Made for Kids
+Age restriction
+Show less
+Paid promotion
+
+You're required to tell us if your video has a paid promotion, like product placement or sponsorships, and we'll let viewers know. Learn more
+Yes, my video includes paid promotion
+No, my video doesn't include paid promotion
+Brand partnerships
+Share access to your video and its metrics with brand partners and allow them to promote the video. Learn more
+Share access code
+AI use
+Was AI used to generate or edit your content in any of the following ways?
+
+    Make a real person appear to say or do something that they didn't say or do
+    Alter footage of a real event or place
+    Generate a realistic-looking scene that didn't actually occur
+    Create music that's the main focus of the video
+
+Yes
+No
+To follow YouTube's policy, you're required to tell us about your use of AI. This includes realistic sounds or visuals made or edited with AI. View examples
+Selecting 'yes' adds a label to your content. Learn more
+Collaboration
+Grow your audience by collaborating with other creators and expand your video's reach to their audiences. Learn more
+Invite a collaborator
+Automatic chapters
+Chapters make your video easier to watch. You can overwrite automatic suggestions by creating your own chapters in the video description. Learn more
+Allow automatic chapters
+Featured places
+Help viewers explore key places in your video. These are public places like restaurants and shops – we don't display your current location or other private info. Learn more
+Allow automatic places
+Automatic concepts
+Experiment
+Help viewers learn more about unfamiliar terms without leaving the video. Concepts mentioned in your video may automatically appear in the description.
+Allow automatic concepts
+Tags
+Tags can be useful if content in your video is commonly misspelt. Otherwise, tags play a minimal role in helping viewers to find your video. Learn more
+Robotics
+Loco-manipulation
+Corl
+PanTact
+Pan Tact
+Xiaomeng Xu
+CoRL 2026
+Conference on Robot Learning
+robotics
+robot learning
+humanoid robots
+contact-rich manipulation
+loco-manipulation
+whole-body dexterity
+whole-body control
+wearable contact interface
+imitation learning
+learning from demonstration
+human-to-robot transfer
+contact-aware control
+Unitree G1
+Enter a comma after each tag
+384/500
+Language and captions certification
+Select your video's language and, if needed, a caption certification
+Video language
+English
+Caption certification
+None
+Recording date and location
+Add when and where your video was recorded. Viewers can search for videos by location.
+Recording date
+12 Nov 2026
+Video location
+Licence
+Learn about licence types.
+Licence
+Standard YouTube licence
+Allow embedding
+Publish to subscriptions feed and notify subscribers
+Shorts remixing
+Let others create Shorts using content from this video. Learn more
+Allow video and audio remixing
+Allow only audio remixing
+Don't allow remixing
+Category
+Add your video to a category so that viewers can find it more easily
+Education
+Type
+Lecture
+Problems
+  
+Academic system
+None
+Level
+None
+Exam, course or standard
+Comments and ratings
+Choose if and how you want to show comments
+Comments
+On
+Moderation
+Basic
+Who can comment
+Anyone
+Sort by
+Top
+Show how many viewers like this video

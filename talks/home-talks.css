@@ -1,0 +1,1051 @@
+/* Student talks section on the home page. Colors come from style.css. */
+.talks-section {
+	--talk-gradient: linear-gradient(90deg, var(--accent-500) 0%, var(--coral-400) 55%, var(--teal-500) 100%);
+	--talk-gradient-v: linear-gradient(180deg, var(--accent-500) 0%, var(--coral-400) 55%, var(--teal-500) 100%);
+	position: relative;
+	scroll-margin-top: calc(var(--nav-height) - 2.5rem);
+}
+
+/* ------------------------------------------------------------ talk picker */
+/* Four cards, one ribbon: each card's band is a slice of the same gradient, so together they read as one strip. */
+.talk-picks {
+	--talk-ribbon: linear-gradient(90deg, #a34900 0%, #e07b24 28%, #f07078 52%, #9a6b86 74%, #37677d 100%);
+	display: grid;
+	grid-template-columns: repeat(4, minmax(0, 1fr));
+	gap: 1rem;
+}
+
+.talk-pick {
+	position: relative;
+	display: flex;
+	flex-direction: column;
+	padding: 0;
+	overflow: hidden;
+	font: inherit;
+	color: inherit;
+	text-align: left;
+	background: var(--white);
+	border: 1px solid rgba(70, 40, 20, 0.06);
+	border-radius: 8px;
+	box-shadow: 0 18px 36px -18px rgba(50, 50, 93, 0.22), 0 10px 20px -14px rgba(0, 0, 0, 0.18);
+	cursor: pointer;
+	transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.talk-pick:hover {
+	transform: translateY(-3px);
+	box-shadow: 0 30px 60px -18px rgba(50, 50, 93, 0.28), 0 18px 36px -18px rgba(0, 0, 0, 0.25);
+}
+
+.talk-pick:focus-visible {
+	outline: none;
+	box-shadow: 0 0 0 3px rgba(191, 87, 0, 0.35), 0 18px 36px -18px rgba(50, 50, 93, 0.22);
+}
+
+.talk-pick-band {
+	position: relative;
+	display: flex;
+	flex-direction: column;
+	justify-content: flex-end;
+	gap: 0.3rem;
+	min-height: 92px;
+	padding: 0.85rem 1.1rem 0.9rem;
+	overflow: hidden;
+	color: var(--white);
+	background: var(--talk-ribbon);
+	background-size: 400% 100%;
+	background-position: calc(var(--i, 0) * 33.333%) 0;
+}
+
+/* a soft light in the corner, like light on paper */
+.talk-pick-band::before {
+	content: "";
+	position: absolute;
+	inset: 0;
+	background: radial-gradient(circle at 88% 12%, rgba(255, 255, 255, 0.3), transparent 55%);
+	pointer-events: none;
+}
+
+.talk-pick-kicker {
+	position: relative;
+	font-family: "IBM Plex Mono", monospace;
+	font-size: 0.66rem;
+	letter-spacing: 0.18em;
+	text-transform: uppercase;
+	opacity: 0.88;
+}
+
+.talk-pick-name {
+	position: relative;
+	font-family: "Sora", sans-serif;
+	font-size: 1.3rem;
+	font-weight: 600;
+	line-height: 1.1;
+	letter-spacing: 0.12em;
+	text-transform: uppercase;
+}
+
+/* sits on the video still of the selected talk */
+.talk-pick-now {
+	position: absolute;
+	z-index: 1;
+	top: 0.6rem;
+	left: 0.6rem;
+	display: inline-flex;
+	align-items: center;
+	gap: 0.35rem;
+	padding: 0.2rem 0.55rem;
+	border-radius: 999px;
+	background: rgba(33, 21, 14, 0.62);
+	color: var(--white);
+	backdrop-filter: blur(6px);
+	font-family: "IBM Plex Mono", monospace;
+	font-size: 0.6rem;
+	letter-spacing: 0.14em;
+	text-transform: uppercase;
+	opacity: 0;
+	transform: translateY(-4px);
+	transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.talk-pick-now::before {
+	content: "";
+	width: 6px;
+	height: 6px;
+	border-radius: 50%;
+	background: #f07078;
+}
+
+/* the talk itself: a still from the video, black margin trimmed like the player */
+.talk-pick-thumb {
+	position: relative;
+	display: block;
+	aspect-ratio: 16 / 9;
+	overflow: hidden;
+	background: #f4efe8;
+}
+
+.talk-pick-thumb img {
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+	transform: scale(1.06);
+	transition: transform 0.5s ease;
+}
+
+.talk-pick:hover .talk-pick-thumb img {
+	transform: scale(1.1);
+}
+
+.talk-pick-play {
+	position: absolute;
+	left: 50%;
+	top: 50%;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 42px;
+	height: 42px;
+	margin: -21px 0 0 -21px;
+	border-radius: 50%;
+	background: rgba(255, 255, 255, 0.86);
+	color: var(--accent-700);
+	font-size: 0.85rem;
+	box-shadow: 0 8px 22px rgba(33, 21, 14, 0.25);
+	backdrop-filter: blur(6px);
+	transition: transform 0.3s ease, background 0.3s ease, color 0.3s ease;
+}
+
+.talk-pick-play i {
+	margin-left: 0.15rem;
+}
+
+.talk-pick:hover .talk-pick-play,
+.talk-pick[aria-selected="true"] .talk-pick-play {
+	transform: scale(1.08);
+	background: linear-gradient(135deg, #e07b24, #f07078);
+	color: var(--white);
+}
+
+.talk-pick-body {
+	display: flex;
+	flex-direction: column;
+	gap: 0.2rem;
+	padding: 0.85rem 1.1rem 1rem;
+}
+
+.talk-pick-speaker {
+	font-family: "Sora", sans-serif;
+	font-size: 0.92rem;
+	font-weight: 600;
+	line-height: 1.25;
+	color: var(--ink-950);
+}
+
+.talk-pick-title {
+	display: -webkit-box;
+	overflow: hidden;
+	font-size: 0.8rem;
+	line-height: 1.4;
+	color: var(--ink-700);
+	-webkit-line-clamp: 2;
+	-webkit-box-orient: vertical;
+}
+
+.talk-pick[aria-selected="true"] {
+	transform: translateY(-3px);
+	box-shadow: 0 0 0 2px rgba(240, 112, 120, 0.45), 0 30px 60px -18px rgba(50, 50, 93, 0.3);
+}
+
+.talk-pick[aria-selected="true"] .talk-pick-now {
+	opacity: 1;
+	transform: none;
+}
+
+/* ------------------------------------------------------------ « » */
+.talk-header-actions {
+	display: flex;
+	align-items: center;
+	gap: 1.2rem;
+}
+
+.talk-nav {
+	display: flex;
+	gap: 0.45rem;
+}
+
+.talk-nav-btn {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	width: 42px;
+	height: 42px;
+	border: 1px solid rgba(70, 40, 20, 0.14);
+	border-radius: 50%;
+	background: var(--white);
+	color: var(--ink-900);
+	font-size: 0.85rem;
+	cursor: pointer;
+	box-shadow: var(--shadow-soft);
+	transition: color 0.2s ease, border-color 0.2s ease, transform 0.2s ease, background 0.2s ease;
+}
+
+.talk-nav-btn:hover {
+	border-color: transparent;
+	background: linear-gradient(135deg, #e07b24, #f07078);
+	color: var(--white);
+	transform: translateY(-1px);
+}
+
+.talk-nav-btn:focus-visible {
+	outline: none;
+	box-shadow: 0 0 0 3px rgba(191, 87, 0, 0.3);
+}
+
+/* ------------------------------------------------------------ heading */
+.talk-view {
+	margin-top: 2.2rem;
+}
+
+.talk-heading {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: end;
+	justify-content: space-between;
+	gap: 0.9rem 1.5rem;
+	margin-bottom: 1.05rem;
+}
+
+.talk-meta {
+	margin: 0 0 0.4rem;
+	font-family: "IBM Plex Mono", monospace;
+	font-size: 0.74rem;
+	letter-spacing: 0.14em;
+	text-transform: uppercase;
+	color: var(--teal-500);
+}
+
+.talk-title {
+	margin: 0;
+	max-width: 52ch;
+	font-family: "Sora", sans-serif;
+	font-size: clamp(1.3rem, 2.2vw, 1.65rem);
+	line-height: 1.15;
+	color: var(--ink-950);
+}
+
+.talk-subtitle {
+	display: block;
+	margin-top: 0.35rem;
+	font-family: "IBM Plex Sans", sans-serif;
+	font-size: 0.62em;
+	font-weight: 500;
+	line-height: 1.4;
+	color: var(--ink-700);
+	text-wrap: balance;
+}
+
+.talk-links {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 0.5rem;
+}
+
+.talk-link {
+	display: inline-flex;
+	align-items: center;
+	gap: 0.45rem;
+	padding: 0.5rem 0.9rem;
+	border-radius: 999px;
+	border: 1px solid rgba(70, 40, 20, 0.12);
+	background: rgba(255, 255, 255, 0.9);
+	color: var(--ink-900);
+	font-family: "IBM Plex Mono", monospace;
+	font-size: 0.74rem;
+	font-weight: 500;
+	letter-spacing: 0.08em;
+	text-transform: uppercase;
+	text-decoration: none;
+	transition: transform 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+}
+
+.talk-link:hover {
+	color: var(--accent-700);
+	border-color: rgba(191, 87, 0, 0.4);
+	transform: translateY(-1px);
+}
+
+.talk-link i {
+	font-size: 0.82rem;
+}
+
+/* ------------------------------------------------------------ stage */
+/* The video keeps the full content width; the river uses the empty margin on the right. */
+.talk-stage {
+	--river-w: 290px;
+	--river-out: clamp(0px, calc((100vw - var(--shell-width)) / 2 - 2rem), 330px);
+	display: grid;
+	grid-template-columns: minmax(0, 1fr) var(--river-w);
+	gap: 1.6rem;
+	align-items: stretch;
+	margin-right: calc(-1 * var(--river-out));
+}
+
+.talk-left,
+.talk-main {
+	min-width: 0;
+}
+
+/* video, controls and caption share one card */
+.talk-main {
+	border: 1px solid rgba(70, 40, 20, 0.06);
+	border-radius: 8px;
+	background: var(--white);
+	box-shadow: 0 30px 60px -12px rgba(50, 50, 93, 0.2), 0 18px 36px -18px rgba(0, 0, 0, 0.22), 0 -12px 36px -8px rgba(0, 0, 0, 0.02);
+}
+
+.talk-frame {
+	position: relative;
+	aspect-ratio: 16 / 9;
+	overflow: hidden;
+	border-radius: 7px 7px 0 0;
+	background: #f4efe8;
+}
+
+/* The recordings place each slide on a thin black margin (about 4% of the frame).
+   Zooming just past it (and the projector's edge) keeps the picture clean, with no black frame. */
+.talk-yt,
+.talk-poster {
+	transform: scale(1.06);
+}
+
+.talk-yt,
+.talk-yt > div,
+.talk-yt iframe {
+	position: absolute;
+	inset: 0;
+	width: 100%;
+	height: 100%;
+	border: 0;
+}
+
+.talk-poster {
+	position: absolute;
+	inset: 0;
+	z-index: 2;
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+	cursor: pointer;
+	transition: opacity 0.4s ease, visibility 0.4s ease;
+}
+
+.talk-play-big {
+	position: absolute;
+	z-index: 3;
+	left: 50%;
+	top: 50%;
+	width: 88px;
+	height: 88px;
+	margin: -44px 0 0 -44px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	border: 0;
+	border-radius: 50%;
+	background: linear-gradient(135deg, #e07b24 0%, #ea7350 50%, #f07078 100%);
+	color: var(--white);
+	font-size: 1.65rem;
+	box-shadow: 0 18px 40px rgba(163, 73, 0, 0.32), 0 0 0 10px rgba(255, 255, 255, 0.45);
+	cursor: pointer;
+	transition: transform 0.25s ease, opacity 0.4s ease, visibility 0.4s ease;
+}
+
+.talk-play-big i {
+	margin-left: 0.3rem;
+}
+
+.talk-play-big:hover {
+	transform: scale(1.06);
+}
+
+.talk-play-big:focus-visible {
+	outline: none;
+	box-shadow: 0 18px 40px rgba(163, 73, 0, 0.32), 0 0 0 10px rgba(255, 255, 255, 0.75);
+}
+
+.talk-frame.is-loading .talk-play-big {
+	animation: talk-pulse 1.1s ease-in-out infinite;
+}
+
+.talk-frame.is-live .talk-poster,
+.talk-frame.is-live .talk-play-big {
+	opacity: 0;
+	visibility: hidden;
+	pointer-events: none;
+}
+
+@keyframes talk-pulse {
+	50% {
+		transform: scale(0.92);
+		opacity: 0.75;
+	}
+}
+
+/* ------------------------------------------------------------ controls */
+.talk-controls {
+	display: flex;
+	align-items: center;
+	gap: 0.6rem;
+	padding: 0.85rem 1.1rem 0.4rem;
+}
+
+.talk-btn {
+	flex: none;
+	width: 38px;
+	height: 38px;
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	border: 1px solid rgba(70, 40, 20, 0.12);
+	border-radius: 50%;
+	background: rgba(255, 255, 255, 0.9);
+	color: var(--ink-900);
+	font-size: 0.9rem;
+	cursor: pointer;
+	transition: color 0.2s ease, background 0.2s ease, border-color 0.2s ease;
+}
+
+.talk-btn:hover {
+	color: var(--accent-700);
+	border-color: rgba(191, 87, 0, 0.4);
+}
+
+.talk-btn:focus-visible,
+.talk-bar:focus-visible {
+	outline: none;
+	box-shadow: 0 0 0 3px rgba(191, 87, 0, 0.25);
+}
+
+.talk-toggle {
+	width: 44px;
+	height: 44px;
+	border-color: transparent;
+	background: var(--ink-950);
+	color: var(--white);
+}
+
+.talk-toggle:hover {
+	color: var(--white);
+	background: var(--accent-700);
+	border-color: transparent;
+}
+
+.talk-cc {
+	width: auto;
+	padding: 0 0.75rem;
+	border-radius: 999px;
+	font-family: "IBM Plex Mono", monospace;
+	font-size: 0.68rem;
+	font-weight: 600;
+	letter-spacing: 0.06em;
+}
+
+.talk-cc[aria-pressed="true"] {
+	border-color: transparent;
+	background: var(--ink-950);
+	color: var(--white);
+}
+
+.talk-time {
+	flex: none;
+	min-width: 6.6rem;
+	font-family: "IBM Plex Mono", monospace;
+	font-size: 0.78rem;
+	font-variant-numeric: tabular-nums;
+	color: var(--ink-700);
+}
+
+.talk-bar {
+	--p: 0%;
+	position: relative;
+	flex: 1;
+	height: 30px;
+	border-radius: 999px;
+	cursor: pointer;
+	touch-action: none;
+}
+
+.talk-bar-track {
+	position: absolute;
+	left: 0;
+	right: 0;
+	top: 50%;
+	height: 8px;
+	margin-top: -4px;
+	overflow: hidden;
+	border-radius: 999px;
+	background: rgba(70, 40, 20, 0.1);
+	transition: height 0.2s ease, margin 0.2s ease;
+}
+
+.talk-bar:hover .talk-bar-track {
+	height: 12px;
+	margin-top: -6px;
+}
+
+.talk-bar-fill {
+	position: absolute;
+	inset: 0;
+	background: var(--talk-gradient);
+	clip-path: inset(0 calc(100% - var(--p)) 0 0);
+}
+
+.talk-bar-ticks {
+	position: absolute;
+	inset: 0;
+}
+
+.talk-bar-tick {
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	width: 3px;
+	margin-left: -1.5px;
+	background: #fdfaf5;
+}
+
+.talk-bar-knob {
+	position: absolute;
+	top: 50%;
+	left: var(--p);
+	width: 16px;
+	height: 16px;
+	margin: -8px 0 0 -8px;
+	border-radius: 50%;
+	background: var(--white);
+	box-shadow: 0 0 0 3px var(--coral-400), 0 4px 12px rgba(70, 35, 10, 0.25);
+	transition: transform 0.2s ease;
+}
+
+.talk-bar:hover .talk-bar-knob {
+	transform: scale(1.15);
+}
+
+.talk-bar-tip {
+	position: absolute;
+	bottom: calc(100% + 4px);
+	z-index: 4;
+	transform: translateX(-50%);
+	padding: 0.35rem 0.65rem;
+	border-radius: 8px;
+	background: var(--ink-950);
+	color: var(--white);
+	font-size: 0.78rem;
+	line-height: 1.3;
+	white-space: nowrap;
+	pointer-events: none;
+	box-shadow: 0 8px 22px rgba(33, 21, 14, 0.25);
+}
+
+.talk-bar-tip time {
+	margin-right: 0.45rem;
+	font-family: "IBM Plex Mono", monospace;
+	color: #f7b98a;
+}
+
+/* ------------------------------------------------------------ captions */
+/* One whole sentence at a time: words already spoken are dark, the rest of the sentence waits in a lighter tone. */
+.talk-caption {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	min-height: calc(3 * 1.5em + 1.8rem);
+	margin: 0;
+	padding: 0.6rem 2rem 1.3rem;
+	font-size: clamp(1.1rem, 1.5vw, 1.32rem);
+	line-height: 1.5;
+	text-align: center;
+	text-wrap: pretty;
+}
+
+.talk-caption.is-new {
+	animation: cap-in 0.35s ease;
+}
+
+@keyframes cap-in {
+	from {
+		opacity: 0;
+		transform: translateY(6px);
+	}
+}
+
+.cap-line {
+	display: block;
+	max-width: 62ch;
+}
+
+.cap-said {
+	color: var(--ink-950);
+}
+
+.cap-next {
+	color: rgba(46, 33, 24, 0.34);
+}
+
+.talk-caption.is-idle {
+	color: var(--ink-700);
+	font-size: 1.05rem;
+}
+
+.talk-caption.is-off {
+	visibility: hidden;
+}
+
+.talk-status {
+	margin: 0;
+	padding: 0 1.1rem 1rem;
+	font-size: 0.9rem;
+	color: var(--ink-700);
+}
+
+.talk-status:empty {
+	display: none;
+}
+
+/* ------------------------------------------------------------ river */
+/* Moments and papers drift up past the "now" line as the talk plays. */
+.talk-river {
+	position: relative;
+	min-width: 0;
+	min-height: 420px;
+}
+
+.talk-river-label {
+	margin: 0;
+	padding-left: 1.75rem;
+	font-family: "IBM Plex Mono", monospace;
+	font-size: 0.72rem;
+	letter-spacing: 0.14em;
+	text-transform: uppercase;
+	color: var(--teal-500);
+}
+
+.river-view {
+	--anchor: 28%;
+	cursor: grab;
+	touch-action: none;
+	user-select: none;
+	position: absolute;
+	top: 1.9rem;
+	right: 0;
+	bottom: 0;
+	left: 0;
+	overflow: hidden;
+	-webkit-mask-image: linear-gradient(to bottom, transparent 0, #000 13%, #000 76%, transparent 100%);
+	mask-image: linear-gradient(to bottom, transparent 0, #000 13%, #000 76%, transparent 100%);
+}
+
+.river-bed::before,
+.river-bed::after {
+	content: "";
+	position: absolute;
+	left: 6px;
+	width: 2px;
+	border-radius: 2px;
+}
+
+/* the stretch the talk has already flowed through */
+.river-bed::before {
+	top: 0;
+	height: var(--anchor);
+	background: linear-gradient(180deg, var(--teal-500), var(--coral-400) 55%, var(--accent-500));
+}
+
+/* what is still to come */
+.river-bed::after {
+	top: var(--anchor);
+	bottom: 0;
+	background: rgba(70, 40, 20, 0.12);
+}
+
+.river-now {
+	position: absolute;
+	z-index: 2;
+	left: 1px;
+	top: calc(var(--anchor) - 6px);
+	width: 12px;
+	height: 12px;
+	border-radius: 50%;
+	background: var(--accent-500);
+	box-shadow: 0 0 0 5px rgba(240, 112, 120, 0.2);
+	animation: river-pulse 2.4s ease-in-out infinite;
+}
+
+@keyframes river-pulse {
+	50% {
+		box-shadow: 0 0 0 9px rgba(240, 112, 120, 0.08);
+	}
+}
+
+.river-view.is-scrubbing {
+	cursor: grabbing;
+}
+
+/* the time under the "now" line, shown while the river is dragged */
+.river-clock {
+	position: absolute;
+	z-index: 3;
+	right: 0;
+	top: calc(var(--anchor) - 0.8rem);
+	padding: 0.2rem 0.55rem;
+	border-radius: 999px;
+	background: var(--ink-950);
+	color: var(--white);
+	font-family: "IBM Plex Mono", monospace;
+	font-size: 0.74rem;
+	opacity: 0;
+	transform: translateX(6px);
+	transition: opacity 0.2s ease, transform 0.2s ease;
+	pointer-events: none;
+}
+
+.river-view.is-scrubbing .river-clock {
+	opacity: 1;
+	transform: none;
+}
+
+.river-reel {
+	position: absolute;
+	top: 0;
+	right: 0;
+	left: 0;
+	will-change: transform;
+}
+
+.river-reel.is-jumping {
+	transition: transform 0.7s cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+
+.river-item {
+	position: absolute;
+	right: 0;
+	left: 0;
+	padding-left: 1.75rem;
+}
+
+.river-dot {
+	position: absolute;
+	z-index: 1;
+	left: 2px;
+	top: 5px;
+	width: 10px;
+	height: 10px;
+	border: 2px solid rgba(70, 40, 20, 0.25);
+	border-radius: 50%;
+	background: #fdfaf5;
+	transition: background 0.3s ease, border-color 0.3s ease;
+}
+
+.river-item.is-past .river-dot {
+	border-color: transparent;
+	background: var(--coral-400);
+}
+
+.river-paper .river-dot {
+	border-radius: 2px;
+	transform: rotate(45deg) scale(0.9);
+}
+
+.river-paper.is-past .river-dot {
+	background: var(--teal-500);
+}
+
+/* moments */
+.river-moment-btn {
+	display: block;
+	width: 100%;
+	padding: 0;
+	border: 0;
+	background: none;
+	color: var(--ink-600);
+	font: inherit;
+	text-align: left;
+	cursor: pointer;
+	transition: color 0.3s ease;
+}
+
+.river-moment-btn time {
+	display: block;
+	font-family: "IBM Plex Mono", monospace;
+	font-size: 0.7rem;
+	line-height: 1.6;
+	letter-spacing: 0.06em;
+	color: var(--teal-500);
+}
+
+.river-moment-title {
+	display: block;
+	font-size: 0.98rem;
+	line-height: 1.32;
+	transition: color 0.3s ease;
+}
+
+.river-moment-btn:hover,
+.river-moment.is-past .river-moment-btn {
+	color: var(--ink-800);
+}
+
+.river-moment.is-current .river-moment-title {
+	color: var(--ink-950);
+	font-weight: 600;
+}
+
+.river-moment-btn:focus-visible {
+	outline: none;
+	text-decoration: underline;
+	text-underline-offset: 3px;
+}
+
+/* papers: a gradient venue band, like a publication timeline */
+.river-venue {
+	display: inline-block;
+	padding: 0.16rem 0.55rem;
+	border-radius: 6px;
+	background: var(--talk-gradient);
+	color: var(--white);
+	font-family: "IBM Plex Mono", monospace;
+	font-size: 0.62rem;
+	font-weight: 600;
+	line-height: 1.5;
+	letter-spacing: 0.1em;
+	text-transform: uppercase;
+	transition: box-shadow 0.3s ease;
+}
+
+.river-paper.is-live .river-venue {
+	box-shadow: 0 0 0 4px rgba(240, 112, 120, 0.2);
+}
+
+.river-card-title {
+	display: block;
+	margin-top: 0.4rem;
+	font-family: "Sora", sans-serif;
+	font-size: 1rem;
+	font-weight: 700;
+	line-height: 1.25;
+	color: var(--ink-950);
+	text-decoration: none;
+}
+
+a.river-card-title:hover,
+a.river-card-title:focus-visible {
+	color: var(--accent-700);
+	outline: none;
+}
+
+.river-card-text {
+	margin: 0.2rem 0 0;
+	font-size: 0.84rem;
+	line-height: 1.38;
+	color: var(--ink-700);
+}
+
+.river-card-links {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 0.35rem;
+	margin-top: 0.45rem;
+}
+
+.river-card-links a {
+	padding: 0.18rem 0.6rem;
+	border: 1px solid rgba(55, 103, 125, 0.25);
+	border-radius: 999px;
+	color: var(--teal-500);
+	font-family: "IBM Plex Mono", monospace;
+	font-size: 0.7rem;
+	text-decoration: none;
+	transition: color 0.2s ease, border-color 0.2s ease;
+}
+
+.river-card-links a:hover,
+.river-card-links a:focus-visible {
+	border-color: rgba(191, 87, 0, 0.45);
+	color: var(--accent-700);
+	outline: none;
+}
+
+/* ------------------------------------------------------------ full screen */
+.talk-main:fullscreen {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	padding: 3vh 4vw;
+	overflow: auto;
+	background: #0d1321;
+}
+
+.talk-main:fullscreen .talk-frame,
+.talk-main:fullscreen .talk-controls,
+.talk-main:fullscreen .talk-caption {
+	width: min(100%, calc((100vh - 13rem) * 16 / 9));
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.talk-main:fullscreen .talk-frame {
+	border-radius: 0;
+}
+
+.talk-main:fullscreen .talk-caption {
+	border-color: transparent;
+	background: transparent;
+	color: var(--white);
+	font-size: 1.4rem;
+}
+
+.talk-main:fullscreen .talk-time {
+	color: rgba(255, 255, 255, 0.75);
+}
+
+.talk-main:fullscreen .talk-bar-track {
+	background: rgba(255, 255, 255, 0.18);
+}
+
+.talk-main:fullscreen .talk-bar-tick {
+	background: #0d1321;
+}
+
+/* ------------------------------------------------------------ responsive */
+@media (max-width: 1099.98px) {
+	.talk-stage {
+		grid-template-columns: minmax(0, 1fr);
+		margin-right: 0;
+	}
+
+	.talk-river {
+		min-height: 0;
+		height: 340px;
+	}
+
+	/* on phones, let a vertical swipe scroll the page */
+	.river-view {
+		touch-action: pan-y;
+	}
+}
+
+@media (max-width: 767.98px) {
+	.talk-picks {
+		grid-template-columns: repeat(2, minmax(0, 1fr));
+	}
+
+	.talk-pick-band {
+		min-height: 92px;
+		padding: 0.8rem 0.85rem 0.85rem;
+	}
+
+	.talk-pick-name {
+		font-size: 1rem;
+		letter-spacing: 0.06em;
+	}
+
+	.talk-pick-now {
+		display: none;
+	}
+
+	.talk-pick-play {
+		width: 34px;
+		height: 34px;
+		margin: -17px 0 0 -17px;
+		font-size: 0.72rem;
+	}
+
+	.talk-pick-body {
+		padding: 0.7rem 0.85rem 0.85rem;
+	}
+
+	.talk-pick-kicker {
+		font-size: 0.58rem;
+		letter-spacing: 0.1em;
+		white-space: nowrap;
+	}
+
+	.talk-controls {
+		gap: 0.45rem;
+	}
+
+	.talk-mute {
+		display: none;
+	}
+
+	.talk-time {
+		min-width: 0;
+		font-size: 0.72rem;
+	}
+
+	.talk-caption {
+		font-size: 1rem;
+		padding: 0.75rem 0.9rem;
+	}
+
+	.talk-play-big {
+		width: 64px;
+		height: 64px;
+		margin: -32px 0 0 -32px;
+		font-size: 1.25rem;
+	}
+}
+
+@media (prefers-reduced-motion: reduce) {
+	.talk-pick,
+	.talk-pick-now,
+	.river-reel,
+	.river-now,
+	.talk-caption,
+	.talk-play-big,
+	.talk-poster {
+		transition: none;
+		animation: none;
+	}
+}

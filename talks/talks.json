@@ -1,0 +1,108 @@
+[
+  {
+    "id": "pantact",
+    "name": "PanTact",
+    "speaker": "Xiaomeng Xu",
+    "title": "Teaching Whole-Body Dexterity with a Wearable Contact Interface",
+    "summary": "Learning to manipulate with arms, legs, and other body surfaces by capturing contact in human demonstrations.",
+    "duration": 356.477,
+    "file": "01_Xiaomeng_Xu_PanTact_CLEAN.mp4",
+    "chapters": [
+      { "start": 0, "title": "Introduction" },
+      { "start": 6.006, "title": "Motivation: dexterity beyond hands" },
+      { "start": 74.566, "title": "Method: capturing whole-body contact" },
+      { "start": 146, "title": "Bridging the embodiment gap" },
+      { "start": 234, "title": "Any-surface contact control" },
+      { "start": 273.666, "title": "Results and ablations" },
+      { "start": 333.206, "title": "Takeaways" }
+    ],
+    "resources": [
+      { "title": "PanTact project", "label": "Project & demonstrations", "url": "https://pantact.github.io/", "start": 0, "end": 356.477 },
+      { "title": "PanTact paper", "label": "Research paper", "url": "https://arxiv.org/abs/2610.12558", "start": 74.566, "end": 356.477 },
+      { "title": "RoboPanoptes", "venue": "RSS 2025", "label": "The all-seeing robot with whole-body dexterity, her earlier work", "url": "https://arxiv.org/abs/2501.05420", "start": 19.7, "end": 45 },
+      { "title": "HoMMI", "venue": "RSS 2026", "label": "Whole-body mobile manipulation learned from human demonstrations", "url": "https://arxiv.org/abs/2603.03243", "start": 56.4, "end": 85.9 },
+      { "title": "HoMMI visual encoder", "venue": "RSS 2026", "label": "The 3D egocentric encoder PanTact reuses", "url": "https://arxiv.org/abs/2603.03243", "start": 187, "end": 198 }
+    ]
+  },
+  {
+    "id": "workhorse",
+    "name": "Workhorse",
+    "speaker": "Qiayuan Liao",
+    "title": "Learning Robust Whole-Body Humanoid Loco-Manipulation from Human Data",
+    "summary": "A visual planner and whole-body tracker turn robot-free human demonstrations into autonomous humanoid behavior.",
+    "duration": 280.13,
+    "file": "02_Qiayuan_Liao_Workhorse_CLEAN.mp4",
+    "chapters": [
+      { "start": 0, "title": "Introduction" },
+      { "start": 7, "title": "Motivation and demonstrations" },
+      { "start": 44, "title": "Method: planner and tracker" },
+      { "start": 99.126, "title": "Training for drift and tracking errors" },
+      { "start": 174.956, "title": "Deployment and latency" },
+      { "start": 222.376, "title": "Simulation evaluation" },
+      { "start": 264, "title": "Closing" }
+    ],
+    "resources": [
+      { "title": "Workhorse project", "label": "Project & demonstrations", "url": "https://hybridrobotics.github.io/workhorse/", "start": 0, "end": 280.13 },
+      { "title": "Workhorse paper", "label": "Research paper", "url": "https://arxiv.org/abs/2610.09117", "start": 44, "end": 280.13 },
+      { "title": "3D Gaussian Splatting", "venue": "ACM TOG 2023", "label": "How the simulated test scenes are rendered", "url": "https://arxiv.org/abs/2308.04079", "start": 237.6, "end": 250 }
+    ]
+  },
+  {
+    "id": "oclo",
+    "name": "OCLO",
+    "speaker": "Seungho Yeom",
+    "title": "Dataset-Free Compliant Humanoid Loco-Manipulation with Dynamic Online Posture",
+    "summary": "Compliant whole-body control from two hand targets, with posture chosen online and no human motion dataset.",
+    "duration": 285.63,
+    "file": "03_Seungho_Yeom_OCLO_CLEAN.mp4",
+    "chapters": [
+      { "start": 0, "title": "Introduction" },
+      { "start": 7.626, "title": "Motivation and related work" },
+      { "start": 64.266, "title": "Method: learning compliance" },
+      { "start": 96.546, "title": "Online posture and CEM" },
+      { "start": 153.586, "title": "Simulation and real-robot results" },
+      { "start": 228.326, "title": "Open challenges" },
+      { "start": 250.446, "title": "Takeaways" }
+    ],
+    "resources": [
+      { "title": "OCLO project", "label": "Project & demonstrations", "url": "https://oclo-humanoid.github.io/", "start": 0, "end": 285.63 },
+      { "title": "OCLO paper", "label": "Research paper", "url": "https://arxiv.org/abs/2610.05678", "start": 64.266, "end": 285.63 },
+      { "title": "Workhorse", "venue": "This workshop", "label": "A planner that gives five body targets", "url": "https://hybridrobotics.github.io/workhorse/", "start": 29.986, "end": 39.766 },
+      { "title": "Related controllers", "venue": "On the slide", "label": "Where other controllers get their posture", "start": 43.9, "end": 60.6, "links": [
+        { "title": "SoftMimic", "url": "https://arxiv.org/abs/2510.17792" },
+        { "title": "GentleHumanoid", "url": "https://arxiv.org/abs/2511.04679" },
+        { "title": "ULC", "url": "https://arxiv.org/abs/2507.06905" },
+        { "title": "HugWBC", "url": "https://arxiv.org/abs/2502.03206" }
+      ] },
+      { "title": "SONIC", "venue": "arXiv 2025", "label": "Posture learned from human motion", "url": "https://arxiv.org/abs/2511.07820", "start": 49.4, "end": 53.4 },
+      { "title": "HOMIE", "venue": "arXiv 2025", "label": "Posture left to the teleoperator", "url": "https://arxiv.org/abs/2502.13013", "start": 50.7, "end": 68 },
+      { "title": "Sumo", "venue": "arXiv 2026", "label": "Planning with the policy in the loop", "url": "https://arxiv.org/abs/2604.08508", "start": 130.466, "end": 138 },
+      { "title": "Models that drive OCLO", "venue": "Ongoing work", "label": "A zero-shot VLM and a fine-tuned VLA send only hand targets", "start": 211.2, "end": 228, "links": [
+        { "title": "Qwen3-VL", "url": "https://arxiv.org/abs/2511.21631" },
+        { "title": "GR00T N1.6", "url": "https://research.nvidia.com/labs/gear/gr00t-n1_6/" }
+      ] }
+    ]
+  },
+  {
+    "id": "hulk",
+    "name": "HULK",
+    "speaker": "An Thanh Dang & Arturo Flores Alvarez",
+    "title": "Learning Whole-Body Forceful Loco-Manipulation for Humanoids",
+    "summary": "A teacher-student controller for carrying heavy objects, pulling loads, and balancing during forceful interaction.",
+    "duration": 273.88,
+    "file": "04_An_Thanh_Dang_HULK_CLEAN.mp4",
+    "chapters": [
+      { "start": 0, "title": "Introduction" },
+      { "start": 8, "title": "Motivation: working under load" },
+      { "start": 59, "title": "Weight-bearing demonstrations" },
+      { "start": 79.346, "title": "Method: teacher-student training" },
+      { "start": 115.446, "title": "MPC and balance reward guidance" },
+      { "start": 144.506, "title": "Results: pulling and carrying" },
+      { "start": 231.226, "title": "Takeaways and project link" }
+    ],
+    "resources": [
+      { "title": "HULK project", "label": "Project & demonstrations", "url": "https://hulk-wbc.com/", "start": 0, "end": 273.88 },
+      { "title": "HULK paper", "label": "Research paper", "url": "https://arxiv.org/abs/2610.08970", "start": 79.346, "end": 273.88 }
+    ]
+  }
+]

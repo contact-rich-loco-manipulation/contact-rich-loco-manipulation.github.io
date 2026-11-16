@@ -1,0 +1,482 @@
+WEBVTT
+Kind: captions
+Language: en
+
+NOTE Xiaomeng Xu - PanTact: Teaching Whole-Body Dexterity with a Wearable Contact Interface.
+Synced to 01_Xiaomeng_Xu_PanTact_CLEAN.mp4 (talk begins at 00:00:06.006 after the intro card).
+
+1
+00:00:06.006 --> 00:00:07.206
+Today I want to talk about PanTact:
+
+2
+00:00:07.246 --> 00:00:10.766
+how can we teach whole-body dexterity
+with a wearable contact interface.
+
+3
+00:00:11.766 --> 00:00:15.386
+So, robots typically use
+their hands for manipulation,
+
+4
+00:00:15.426 --> 00:00:17.926
+but I think dexterity
+should go beyond the hands.
+
+5
+00:00:18.466 --> 00:00:21.826
+So, I think we should
+have whole-body dexterity,
+
+6
+00:00:21.866 --> 00:00:24.746
+which is the capability of robots
+to be able to accomplish
+
+7
+00:00:24.786 --> 00:00:28.906
+manipulation tasks using
+any suitable surface of the body.
+
+8
+00:00:29.106 --> 00:00:31.726
+And in this work,
+we enable that on a humanoid,
+
+9
+00:00:31.766 --> 00:00:35.386
+to let it do tasks such as
+sweeping objects with its arms,
+
+10
+00:00:35.426 --> 00:00:37.626
+closing cabinets with its legs,
+
+11
+00:00:37.666 --> 00:00:41.026
+grasping a small object with a gripper
+while hugging a large one with its arms,
+
+12
+00:00:41.146 --> 00:00:44.126
+and moving a large box with its legs
+while it has something in its arms.
+
+13
+00:00:45.106 --> 00:00:48.926
+And we learn such capabilities directly
+from robot-free human demonstrations,
+
+14
+00:00:49.386 --> 00:00:52.106
+because we as humans
+naturally use our whole body,
+
+15
+00:00:52.146 --> 00:00:54.646
+beyond our hands,
+to interact with the world.
+
+16
+00:00:56.706 --> 00:00:58.886
+However, in a typical
+pipeline for learning
+
+17
+00:00:58.926 --> 00:01:00.586
+whole-body manipulation from humans,
+
+18
+00:01:01.426 --> 00:01:04.306
+usually we just collect human
+data using some portable device,
+
+19
+00:01:04.346 --> 00:01:05.986
+train a visuomotor policy on such data
+
+20
+00:01:06.026 --> 00:01:08.926
+that predicts only
+end-effector trajectories,
+
+21
+00:01:09.006 --> 00:01:11.866
+and then achieve those
+end-effector trajectories
+
+22
+00:01:11.906 --> 00:01:13.826
+with whole-body motions using
+a whole-body controller.
+
+23
+00:01:14.566 --> 00:01:17.766
+The problem is that they only
+capture and transfer the motion,
+
+24
+00:01:18.066 --> 00:01:21.646
+while the contact information is missing
+in every stage of the pipeline,
+
+25
+00:01:21.866 --> 00:01:24.646
+from data collection,
+to the policy, to the controller.
+
+26
+00:01:26.006 --> 00:01:29.926
+So, to capture the contact in human data,
+
+27
+00:01:30.106 --> 00:01:34.046
+I designed a wearable contact interface
+that consists of an egocentric camera
+
+28
+00:01:34.346 --> 00:01:35.546
+and handheld grippers,
+
+29
+00:01:35.586 --> 00:01:39.386
+and also contact patches that you can wear
+on your body to capture body contact.
+
+30
+00:01:40.026 --> 00:01:42.566
+These contact patches
+are designed to be modular,
+
+31
+00:01:42.806 --> 00:01:46.826
+so each module contains a force sensor,
+connectors, and strap mounts,
+
+32
+00:01:47.126 --> 00:01:49.466
+and you can strap
+any number of them together
+
+33
+00:01:49.506 --> 00:01:52.146
+into patches of arbitrary
+shape and extent,
+
+34
+00:01:52.186 --> 00:01:55.606
+to support reconfiguration
+and mounting on any body part.
+
+35
+00:01:55.826 --> 00:01:59.046
+For example, we can mount them
+on arms, knees, and other parts.
+
+36
+00:01:59.346 --> 00:02:03.486
+And this interface captures whole-body
+contacts alongside the vision and motion,
+
+37
+00:02:03.526 --> 00:02:05.926
+which is all that typical
+interfaces capture.
+
+38
+00:02:07.346 --> 00:02:09.886
+And after capturing the body
+contacts in human demonstrations,
+
+39
+00:02:10.606 --> 00:02:13.526
+we can let the policy additionally
+predict the contact goals,
+
+40
+00:02:14.386 --> 00:02:16.026
+and the whole-body
+controller should also track
+
+41
+00:02:16.066 --> 00:02:19.286
+such contacts alongside
+the end-effector trajectories,
+
+42
+00:02:19.446 --> 00:02:22.166
+so that the contacts are being measured,
+
+43
+00:02:22.206 --> 00:02:25.546
+predicted, and tracked
+across the entire pipeline.
+
+44
+00:02:26.526 --> 00:02:29.766
+However, transferring such whole-body
+dexterity from human to robot
+
+45
+00:02:29.806 --> 00:02:32.146
+also faces the human-to-robot
+embodiment gap,
+
+46
+00:02:32.186 --> 00:02:35.926
+because human and robot body
+proportions just look so different.
+
+47
+00:02:36.346 --> 00:02:37.546
+So there is a visual gap,
+
+48
+00:02:37.586 --> 00:02:42.706
+due to different egocentric viewpoints
+between the human and robot,
+
+49
+00:02:43.026 --> 00:02:45.926
+and also different heights
+and body proportions
+
+50
+00:02:45.966 --> 00:02:47.926
+between human and robot
+create a kinematic gap,
+
+51
+00:02:48.106 --> 00:02:53.026
+which is a bigger problem if we want
+to transfer whole-body dexterity,
+
+52
+00:02:53.066 --> 00:02:57.426
+due to the different proportions
+of arms, legs, and heights.
+
+53
+00:03:00.086 --> 00:03:02.006
+So first, to bridge the visual gap,
+
+54
+00:03:02.046 --> 00:03:04.326
+we use a 3D egocentric encoder,
+
+55
+00:03:04.366 --> 00:03:10.066
+and mask out the body observations that
+may intersect with the contact surfaces.
+
+56
+00:03:10.606 --> 00:03:12.746
+And we also use
+a gripper-agnostic coordinate
+
+57
+00:03:12.786 --> 00:03:16.246
+frame that is not tied
+to any specific embodiment.
+
+58
+00:03:16.926 --> 00:03:18.906
+And to bridge the kinematic gap,
+
+59
+00:03:19.026 --> 00:03:23.906
+our key observation is that contact
+actually provides manipulation-centric
+
+60
+00:03:23.946 --> 00:03:27.086
+information that depends on the task,
+not on the embodiment.
+
+61
+00:03:27.306 --> 00:03:29.246
+So it should be shared
+across human and robot,
+
+62
+00:03:29.286 --> 00:03:33.786
+and it should be predicted by a policy
+that's purely trained on human data.
+
+63
+00:03:34.766 --> 00:03:39.826
+And then, to make these contact
+targets achievable on the robot,
+
+64
+00:03:40.806 --> 00:03:44.826
+we should leverage
+the robot's own configuration,
+
+65
+00:03:44.866 --> 00:03:48.906
+letting the whole-body controller control
+whole-body motion to achieve the contact,
+
+66
+00:03:49.246 --> 00:03:51.986
+as well as satisfying
+robot-specific constraints.
+
+67
+00:03:54.166 --> 00:03:55.426
+But to deal with the kinematic gap,
+
+68
+00:03:55.466 --> 00:03:59.226
+since human and robot have
+different body proportions,
+
+69
+00:04:02.606 --> 00:04:07.766
+we cannot enforce a one-to-one
+mapping of every body part in contact.
+
+70
+00:04:08.046 --> 00:04:11.006
+So instead, we use
+an any-surface objective,
+
+71
+00:04:11.426 --> 00:04:15.466
+basically meaning that, given a contact
+point in the world coordinate frame,
+
+72
+00:04:15.686 --> 00:04:19.966
+the robot can use any suitable surface
+of its body to achieve that contact.
+
+73
+00:04:20.926 --> 00:04:24.126
+And also, only the active
+contact targets indicate
+
+74
+00:04:24.166 --> 00:04:27.786
+manipulation-critical actions
+that need to be precisely tracked,
+
+75
+00:04:27.826 --> 00:04:30.306
+while the other body
+parts in free-space motion
+
+76
+00:04:30.346 --> 00:04:32.706
+need not be exactly
+reproduced on the robot.
+
+77
+00:04:33.666 --> 00:04:35.326
+So, putting it together,
+
+78
+00:04:35.586 --> 00:04:39.046
+PanTact enables successfully
+transferring such whole-body
+
+79
+00:04:39.086 --> 00:04:42.626
+contact behaviors across
+different contact body parts,
+
+80
+00:04:42.806 --> 00:04:48.146
+while if we simply track poses,
+including wrist or knee poses,
+
+81
+00:04:48.186 --> 00:04:50.986
+it would over-constrain the robot
+and the body contacts are not achieved.
+
+82
+00:04:51.886 --> 00:04:54.466
+And also, with this any-surface objective,
+
+83
+00:04:54.886 --> 00:04:57.426
+we can see that when the human
+sometimes uses their knees,
+
+84
+00:04:57.826 --> 00:05:00.306
+the robot can use any suitable
+surface at the side
+
+85
+00:05:00.346 --> 00:05:05.586
+of its leg to achieve
+the commanded contact,
+
+86
+00:05:05.806 --> 00:05:10.046
+while the fixed-link mapping
+always under-achieves the contact.
+
+87
+00:05:10.526 --> 00:05:16.686
+And with such a contact-gated
+tracking design,
+
+88
+00:05:16.926 --> 00:05:20.206
+where we only track when the contact
+is commanded to be active,
+
+89
+00:05:20.426 --> 00:05:23.806
+we can see our whole-body controller
+achieves much more accurate
+
+90
+00:05:23.846 --> 00:05:27.466
+tracking when the contacts are active,
+in the orange phases,
+
+91
+00:05:27.826 --> 00:05:29.166
+while if we track them constantly,
+
+92
+00:05:29.206 --> 00:05:32.086
+it would lead to a consistently
+large tracking error.
+
+93
+00:05:33.206 --> 00:05:34.526
+So, putting it together,
+
+94
+00:05:35.186 --> 00:05:39.206
+the idea of PanTact is to use contact
+as the cross-embodiment interface,
+
+95
+00:05:39.606 --> 00:05:43.106
+where the data collection platform
+captures contact on humans,
+
+96
+00:05:43.366 --> 00:05:45.406
+the policy learns to predict the contact,
+
+97
+00:05:45.686 --> 00:05:48.526
+and the whole-body controller
+executes the contact on the robot.
+
+98
+00:05:48.806 --> 00:05:50.066
+Thank you.
+
+99
+00:05:50.106 --> 00:05:54.606
+[Applause]
