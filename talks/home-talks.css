@@ -916,45 +916,181 @@ a.river-card-title:focus-visible {
 	outline: none;
 }
 
+/* ------------------------------------------------------------ river toggle */
+.talk-river-toggle[aria-pressed="true"] {
+	border-color: transparent;
+	background: var(--ink-950);
+	color: var(--white);
+}
+
+/* with the river hidden, the video takes the extra width */
+.talk-stage.is-river-off {
+	grid-template-columns: minmax(0, 1fr);
+}
+
+.talk-stage.is-river-off .talk-river {
+	display: none;
+}
+
 /* ------------------------------------------------------------ full screen */
-.talk-main:fullscreen {
+/* The whole player goes full screen on a dark stage: video, controls, captions and the river. */
+.talk-stage.is-fullscreen {
+	--fs-pad: 2.5vh;
+	--fs-below: 15.5rem;   /* room kept under the video for the controls and three caption lines */
+	width: 100vw;
+	height: 100vh;
+	margin: 0;
+	padding: var(--fs-pad) 2vw;
+	gap: 2rem;
+	grid-template-columns: minmax(0, 1fr) 320px;
+	overflow: hidden;
+	background: #0d1321;
+}
+
+.talk-stage.is-fullscreen.is-river-off {
+	grid-template-columns: minmax(0, 1fr);
+}
+
+.talk-stage.is-fullscreen .talk-heading {
+	display: none;
+}
+
+.talk-stage.is-fullscreen .talk-left {
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
-	padding: 3vh 4vw;
-	overflow: auto;
-	background: #0d1321;
+	min-height: 0;
 }
 
-.talk-main:fullscreen .talk-frame,
-.talk-main:fullscreen .talk-controls,
-.talk-main:fullscreen .talk-caption {
-	width: min(100%, calc((100vh - 13rem) * 16 / 9));
-	margin-left: auto;
-	margin-right: auto;
-}
-
-.talk-main:fullscreen .talk-frame {
-	border-radius: 0;
-}
-
-.talk-main:fullscreen .talk-caption {
-	border-color: transparent;
+.talk-stage.is-fullscreen .talk-main {
+	width: min(100%, calc((100vh - 2 * var(--fs-pad) - var(--fs-below)) * 16 / 9));
+	margin: 0 auto;
+	border: 0;
 	background: transparent;
+	box-shadow: none;
+}
+
+/* keep the video exactly 16:9, so YouTube never adds side bars */
+.talk-stage.is-fullscreen .talk-frame {
+	flex: none;
+	border-radius: 6px;
+}
+
+.talk-stage.is-fullscreen .talk-controls {
+	padding: 1rem 0 0.4rem;
+}
+
+.talk-stage.is-fullscreen .talk-time {
+	color: rgba(255, 255, 255, 0.7);
+}
+
+.talk-stage.is-fullscreen .talk-btn {
+	border-color: rgba(255, 255, 255, 0.16);
+	background: rgba(255, 255, 255, 0.07);
 	color: var(--white);
-	font-size: 1.4rem;
 }
 
-.talk-main:fullscreen .talk-time {
-	color: rgba(255, 255, 255, 0.75);
+.talk-stage.is-fullscreen .talk-btn:hover {
+	border-color: rgba(240, 112, 120, 0.6);
+	color: #ffd2c2;
 }
 
-.talk-main:fullscreen .talk-bar-track {
-	background: rgba(255, 255, 255, 0.18);
+.talk-stage.is-fullscreen .talk-toggle,
+.talk-stage.is-fullscreen .talk-cc[aria-pressed="true"],
+.talk-stage.is-fullscreen .talk-river-toggle[aria-pressed="true"] {
+	border-color: transparent;
+	background: var(--white);
+	color: var(--ink-950);
 }
 
-.talk-main:fullscreen .talk-bar-tick {
+.talk-stage.is-fullscreen .talk-bar-track {
+	background: rgba(255, 255, 255, 0.16);
+}
+
+.talk-stage.is-fullscreen .talk-bar-tick {
 	background: #0d1321;
+}
+
+.talk-stage.is-fullscreen .talk-caption {
+	min-height: calc(3 * 1.5em + 1rem);
+	padding: 0.5rem 1rem 0.5rem;
+	color: var(--white);
+	font-size: clamp(1.2rem, 1.6vw, 1.6rem);
+}
+
+.talk-stage.is-fullscreen .cap-said {
+	color: var(--white);
+}
+
+.talk-stage.is-fullscreen .cap-next {
+	color: rgba(255, 255, 255, 0.38);
+}
+
+.talk-stage.is-fullscreen .talk-caption.is-idle {
+	color: rgba(255, 255, 255, 0.7);
+}
+
+/* the river on the dark stage */
+.talk-stage.is-fullscreen .talk-river {
+	min-height: 0;
+}
+
+.talk-stage.is-fullscreen .talk-river-label {
+	color: #8fbfd2;
+}
+
+.talk-stage.is-fullscreen .river-bed::after {
+	background: rgba(255, 255, 255, 0.14);
+}
+
+.talk-stage.is-fullscreen .river-dot {
+	border-color: rgba(255, 255, 255, 0.35);
+	background: #0d1321;
+}
+
+.talk-stage.is-fullscreen .river-item.is-past .river-dot {
+	border-color: transparent;
+	background: var(--coral-400);
+}
+
+.talk-stage.is-fullscreen .river-paper.is-past .river-dot {
+	background: #8fbfd2;
+}
+
+.talk-stage.is-fullscreen .river-moment-btn {
+	color: rgba(255, 255, 255, 0.55);
+}
+
+.talk-stage.is-fullscreen .river-moment-btn time {
+	color: #8fbfd2;
+}
+
+.talk-stage.is-fullscreen .river-moment-btn:hover,
+.talk-stage.is-fullscreen .river-moment.is-past .river-moment-btn {
+	color: rgba(255, 255, 255, 0.8);
+}
+
+.talk-stage.is-fullscreen .river-moment.is-current .river-moment-title,
+.talk-stage.is-fullscreen .river-card-title {
+	color: var(--white);
+}
+
+.talk-stage.is-fullscreen a.river-card-title:hover {
+	color: #ffc9b5;
+}
+
+.talk-stage.is-fullscreen .river-card-text {
+	color: rgba(255, 255, 255, 0.62);
+}
+
+.talk-stage.is-fullscreen .river-card-links a {
+	border-color: rgba(143, 191, 210, 0.35);
+	color: #a9d3e3;
+}
+
+.talk-stage.is-fullscreen .river-clock {
+	background: var(--white);
+	color: var(--ink-950);
 }
 
 /* ------------------------------------------------------------ responsive */

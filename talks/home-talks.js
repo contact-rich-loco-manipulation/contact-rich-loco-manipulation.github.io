@@ -31,7 +31,8 @@
     poster: $(".talk-poster"), yt: $(".talk-yt"), big: $(".talk-play-big"), toggle: $(".talk-toggle"),
     time: $(".talk-time"), bar: $(".talk-bar"), ticks: $(".talk-bar-ticks"), tip: $(".talk-bar-tip"),
     cc: $(".talk-cc"), mute: $(".talk-mute"), full: $(".talk-full"), caption: $(".talk-caption"),
-    status: $(".talk-status"), riverView: $(".river-view"), reel: $(".river-reel"), clock: $(".river-clock")
+    status: $(".talk-status"), riverView: $(".river-view"), reel: $(".river-reel"), clock: $(".river-clock"),
+    stage: $(".talk-stage"), riverToggle: $(".talk-river-toggle")
   };
 
   let talks = [], media = {}, current = null, moments = [], items = [], sentences = [];
@@ -474,13 +475,36 @@
   ui.poster.addEventListener("click", () => start(position));
   ui.toggle.addEventListener("click", togglePlay);
 
-  ui.cc.addEventListener("click", () => {
-    captionsOn = !captionsOn;
-    ui.cc.setAttribute("aria-pressed", String(captionsOn));
-    ui.caption.classList.toggle("is-off", !captionsOn);
+  // Viewer preferences (captions, the river) are remembered on this device when storage is available.
+  const PREFS_KEY = "corl-talks-view";
+  const loadPrefs = () => { try { return JSON.parse(localStorage.getItem(PREFS_KEY)) || {}; } catch (error) { return {}; } };
+  const savePrefs = () => {
+    try { localStorage.setItem(PREFS_KEY, JSON.stringify({ captions: captionsOn, river: riverOn })); } catch (error) { /* private mode */ }
+  };
+  let riverOn = true;
+
+  function setCaptions(on) {
+    captionsOn = on;
+    ui.cc.setAttribute("aria-pressed", String(on));
+    ui.caption.classList.toggle("is-off", !on);
     sentenceIndex = -1;
-    if (captionsOn) showCaption(position);
-  });
+    if (on && current) showCaption(position);
+  }
+
+  function setRiver(on) {
+    riverOn = on;
+    ui.riverToggle.setAttribute("aria-pressed", String(on));
+    ui.stage.classList.toggle("is-river-off", !on);
+    if (on && items.length) requestAnimationFrame(layoutRiver);
+  }
+
+  ui.cc.addEventListener("click", () => { setCaptions(!captionsOn); savePrefs(); });
+  ui.riverToggle.addEventListener("click", () => { setRiver(!riverOn); savePrefs(); });
+  {
+    const prefs = loadPrefs();
+    if (prefs.captions === false) setCaptions(false);
+    if (prefs.river === false) setRiver(false);
+  }
 
   ui.mute.addEventListener("click", () => {
     muted = !muted;
@@ -489,15 +513,25 @@
     ui.mute.setAttribute("aria-label", muted ? "Unmute" : "Mute");
   });
 
+  // Full screen takes the whole player: video, controls, captions and the river.
+  const fullElement = () => document.fullscreenElement || document.webkitFullscreenElement || null;
   ui.full.addEventListener("click", () => {
-    if (document.fullscreenElement) document.exitFullscreen();
-    else if (ui.main.requestFullscreen) ui.main.requestFullscreen().catch(() => {});
+    if (fullElement()) {
+      (document.exitFullscreen || document.webkitExitFullscreen).call(document);
+      return;
+    }
+    const enter = ui.stage.requestFullscreen || ui.stage.webkitRequestFullscreen;
+    if (enter) Promise.resolve(enter.call(ui.stage)).catch(() => {});
   });
-  document.addEventListener("fullscreenchange", () => {
-    const on = document.fullscreenElement === ui.main;
+  const onFullscreen = () => {
+    const on = fullElement() === ui.stage;
+    ui.stage.classList.toggle("is-fullscreen", on);
     ui.full.firstElementChild.className = on ? "fa-solid fa-compress" : "fa-solid fa-expand";
     ui.full.setAttribute("aria-label", on ? "Exit full screen" : "Full screen");
-  });
+    if (items.length) requestAnimationFrame(layoutRiver);
+  };
+  document.addEventListener("fullscreenchange", onFullscreen);
+  document.addEventListener("webkitfullscreenchange", onFullscreen);
 
   const ratioAt = event => {
     const box = ui.bar.getBoundingClientRect();
