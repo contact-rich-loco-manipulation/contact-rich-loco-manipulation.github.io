@@ -390,22 +390,6 @@
         "end": 59
       },
       {
-        "venue": "Institute",
-        "title": "RAI Institute",
-        "label": "Where Tao led dexterous manipulation before Multiply Labs",
-        "url": "https://rai-inst.com/",
-        "start": 60,
-        "end": 66
-      },
-      {
-        "venue": "Earlier talk",
-        "title": "Resurrecting Model-Based Control and Learning",
-        "label": "Emo Todorov's talk, right before this one",
-        "url": "https://youtu.be/9GUS_z3hjGk",
-        "start": 74,
-        "end": 93
-      },
-      {
         "venue": "IROS 2012",
         "title": "MuJoCo",
         "label": "A physics engine for model-based control",
