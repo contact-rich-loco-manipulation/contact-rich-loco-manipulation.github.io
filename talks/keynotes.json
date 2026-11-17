@@ -308,8 +308,8 @@
     "affiliation": "Multiply Labs",
     "title": "How can we efficiently leverage coding agents for dexterous manipulation?",
     "summary": "Coding agents can solve dexterous manipulation when given the right tool: smoothed contact dynamics and linear MPC.",
-    "duration": 1393.067,
-    "youtube": "",
+    "duration": 1393.026,
+    "youtube": "JGJVYlvxS1Y",
     "chapters": [
       {
         "start": 0,
@@ -382,27 +382,75 @@
     ],
     "resources": [
       {
+        "venue": "Company",
+        "title": "Multiply Labs",
+        "label": "Robotic cell therapy manufacturing, where Tao works now",
+        "url": "https://www.multiplylabs.com/",
+        "start": 30,
+        "end": 59
+      },
+      {
+        "venue": "Institute",
+        "title": "RAI Institute",
+        "label": "Where Tao led dexterous manipulation before Multiply Labs",
+        "url": "https://rai-inst.com/",
+        "start": 60,
+        "end": 66
+      },
+      {
+        "venue": "Earlier talk",
+        "title": "Resurrecting Model-Based Control and Learning",
+        "label": "Emo Todorov's talk, right before this one",
+        "url": "https://youtu.be/9GUS_z3hjGk",
+        "start": 74,
+        "end": 93
+      },
+      {
         "venue": "IROS 2012",
         "title": "MuJoCo",
         "label": "A physics engine for model-based control",
         "url": "https://doi.org/10.1109/IROS.2012.6386109",
-        "start": 66,
-        "end": 101
+        "start": 80,
+        "end": 93
+      },
+      {
+        "venue": "arXiv 2026",
+        "title": "RAX",
+        "label": "Scaling online exploration for robot agents",
+        "url": "https://arxiv.org/abs/2610.22496",
+        "start": 123,
+        "end": 150
+      },
+      {
+        "venue": "Simulator",
+        "title": "Drake",
+        "label": "The simulator used for the experiment",
+        "url": "https://drake.mit.edu/",
+        "start": 277,
+        "end": 292
+      },
+      {
+        "venue": "IJRR 1986",
+        "title": "Mechanics of pushing",
+        "label": "Mechanics and planning of manipulator pushing operations (Mason)",
+        "url": "https://doi.org/10.1177/027836498600500303",
+        "start": 551,
+        "end": 566
       },
       {
         "venue": "WAFR 2016",
         "title": "Pusher-slider feedback control",
         "label": "A story of hybrid and underactuated contact dynamics (Hogan and Rodriguez)",
         "url": "https://arxiv.org/abs/1611.08268",
-        "start": 688,
-        "end": 734
+        "start": 718,
+        "end": 740
       },
       {
         "venue": "T-RO 2023",
         "title": "Local smoothing of quasi-dynamic contact models",
         "label": "Global planning for contact-rich manipulation",
         "url": "https://arxiv.org/abs/2206.10787",
-        "start": 780,
+        "start": 791,
         "end": 1022
       },
       {
@@ -416,9 +464,9 @@
       {
         "venue": "Company",
         "title": "Multiply Labs",
-        "label": "Robotic cell therapy manufacturing, where Tao works now",
+        "label": "Automating cell therapy, the long-tail tasks Tao works on now",
         "url": "https://www.multiplylabs.com/",
-        "start": 1214,
+        "start": 1211,
         "end": 1286
       }
     ]

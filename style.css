@@ -3022,47 +3022,6 @@ body {
 	}
 }
 
-.thanks-link {
-	text-decoration: none;
-}
-
-.thanks-link .thanks-last {
-	white-space: nowrap;
-	background-image: linear-gradient(90deg, var(--accent-500), var(--coral-400));
-	background-size: 0% 1.5px;
-	background-position: 0 100%;
-	background-repeat: no-repeat;
-	transition: background-size 0.3s ease, color 0.2s ease;
-}
-
-.thanks-link .thanks-last::after {
-	content: "\2197";
-	margin-left: 0.3rem;
-	font-size: 0.78em;
-	color: var(--teal-500);
-	opacity: 0.45;
-	transition: opacity 0.2s ease, transform 0.2s ease;
-	display: inline-block;
-}
-
-.thanks-link:hover .thanks-last,
-.thanks-link:focus-visible .thanks-last {
-	color: var(--accent-700);
-	background-size: 100% 1.5px;
-}
-
-.thanks-link:hover .thanks-last::after,
-.thanks-link:focus-visible .thanks-last::after {
-	opacity: 1;
-	transform: translate(1px, -1px);
-}
-
-.thanks-link:focus-visible {
-	outline: none;
-	border-radius: 4px;
-	box-shadow: 0 0 0 3px rgba(191, 87, 0, 0.22);
-}
-
 /* institutional thanks: the Minnesota Robotics Institute */
 .thanks-support {
 	position: relative;
