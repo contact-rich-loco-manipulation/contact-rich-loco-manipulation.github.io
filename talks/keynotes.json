@@ -430,6 +430,14 @@
         "end": 740
       },
       {
+        "venue": "RA-L 2022",
+        "title": "Bundled gradients through contact",
+        "label": "Randomized smoothing of contact dynamics (Suh, Pang, Tedrake)",
+        "url": "https://arxiv.org/abs/2109.05143",
+        "start": 791,
+        "end": 972
+      },
+      {
         "venue": "T-RO 2023",
         "title": "Local smoothing of quasi-dynamic contact models",
         "label": "Global planning for contact-rich manipulation",
